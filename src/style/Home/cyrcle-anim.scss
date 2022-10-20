@@ -1,0 +1,160 @@
+$heart-wrapper-size: 200px;
+$heart-size: 140px;
+$heart-small-size: 100px;
+$green-color: rgba(94, 224, 163, 0.8);
+$pink-color: rgba(232, 143, 201, 0.8);
+$blue-color: rgba(134, 193, 232, 0.8);
+$purple-color: rgba(189, 138, 234, 0.8);
+$yellow-color: rgba(234, 229, 131, 0.8);
+$orange-color: rgba(232, 158, 129, 0.8);
+$parent-animation: parent-anim 5s linear infinite;
+$parent-animation-2: parent-anim-2 5s linear infinite;
+$child-animation: child-anim 5s linear infinite;
+$child-animation-2: child-anim-2 5s linear infinite;
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+  @content;
+}
+  @-moz-keyframes #{$animation-name} {
+  @content;
+}
+  @-ms-keyframes #{$animation-name} {
+  @content;
+}
+  @-o-keyframes #{$animation-name} {
+  @content;
+}
+  @keyframes #{$animation-name} {
+  @content;
+}
+}
+
+body {
+  overflow: hidden;
+  .hearts_wrapper {
+    width: 400px;
+    height: 350px;
+    margin: 0 auto;
+    .heart {
+    text-decoration: none;
+    width: $heart-wrapper-size;
+    height: $heart-wrapper-size;
+    display: block;
+    position: relative;
+      &.green {
+        left: 50px;
+        animation: $parent-animation;
+        transform-origin: 50% 120px;
+        > img {
+          width:100px;
+          height: 100px;
+          border-radius: 50%;
+          color: $green-color;
+          animation: $child-animation;
+      }
+    }
+      &.pink {
+        left: 30px;
+        margin-top: -120px;
+        animation: $parent-animation-2;
+        transform-origin: 50% 125px;
+        > img {
+          width:100px;
+          height: 100px;
+          border-radius: 50%;
+          color: $pink-color;
+          animation: $child-animation-2;
+      }
+    }
+      &.blue {
+        margin-top: -240px;
+        left: 220px;
+        animation: $parent-animation;
+        transform-origin: 20% 120px;
+        > img {
+          width:100px;
+          height: 100px;
+          border-radius: 50%;
+          color: $blue-color;
+          animation: $child-animation;
+      }
+    }
+      &.purple {
+        margin-top: -280px;
+        left: 290px;
+        animation: $parent-animation;
+        transform-origin: 40% 150px;
+        > img {
+          width:100px;
+          height: 100px;
+          border-radius: 50%;
+          color: $purple-color;
+          animation: $child-animation;
+      }
+    }
+      &.small {
+        height: $heart-wrapper-size;
+        width: $heart-wrapper-size;
+        &.yellow {
+          margin-top: -90px;
+          left: 270px;
+          animation: $parent-animation;
+          transform-origin: 40% 150px;
+          > img {
+            width:100px;
+            height: 100px;
+            border-radius: 50%;
+            color: $yellow-color;
+            animation: $child-animation;
+        }
+      }
+        &.orange {
+          margin-top: -10px;
+          left: 180px;
+          animation: $parent-animation;
+          transform-origin: 40% 150px;
+          > img {
+            width:100px;
+            height: 100px;
+            border-radius: 50%;
+            color: $orange-color;
+            animation: $child-animation;
+        }
+      }
+    }
+  }
+}
+}
+
+@keyframes parent-anim {
+0% {
+transform: rotate(0);
+}
+100% {
+transform: rotate(360deg);
+}
+}
+@keyframes parent-anim-2 {
+0% {
+transform: rotate(0);
+}
+100% {
+transform: rotate(-360deg);
+}
+}
+@keyframes child-anim {
+0% {
+transform: rotate(0);
+}
+100% {
+transform: rotate(-360deg);
+}
+}
+@keyframes child-anim-2 {
+0% {
+transform: rotate(0);
+}
+100% {
+transform: rotate(360deg);
+}
+}

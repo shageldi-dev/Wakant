@@ -1,0 +1,191 @@
+body {
+    overflow-x: hidden;
+}
+.hearts_wrapper {
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    margin: 0 auto;
+    display: flex;
+    height: 400px;
+    overflow: inherit;
+}
+
+.heart {
+    text-decoration: none;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    position: relative;
+}
+
+.heart-cyrcle {
+    text-decoration: none;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    position: absolute;
+}
+
+.heart-cyrcle-1 {
+    left: 70%;
+    top:100px;
+    animation:  parent-anim 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-cyrcle-2 {
+    left: 60%;
+    top:100px;
+    animation:  parent-anim-2 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-cyrcle-3 {
+    left: 80%;
+    top:300px;
+    animation:  parent-anim 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-cyrcle-4 {
+    left: 60%;
+    top:400px;
+    animation:  parent-anim-2 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+
+.heart-1 {
+    left: 20%;
+    top:200px;
+    animation:  parent-anim 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-2 {
+    left: 50%;
+    top:100px;
+    animation:  parent-anim-2 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-3 {
+    left: 0;
+    top:0;
+    animation:  parent-anim 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+.heart-4 {
+    left: 30%;
+    top:250px;
+    animation:  parent-anim-2 5s linear infinite;
+    transform-origin: 50% 120px;
+}
+
+.heart-1  img  {
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: child-anim 5s linear infinite;
+}
+
+.heart-2  img  {
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: child-anim-2 5s linear infinite;
+}
+
+.heart-3  img  {
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: child-anim 5s linear infinite;
+}
+
+.heart-4  img  {
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: child-anim-2 5s linear infinite;
+}
+
+.center-logo {
+    position: absolute;
+    top: 200px;
+    left: 65%;
+}
+.center-logo img {
+    max-width: 250px;
+}
+
+@keyframes parent-anim {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes parent-anim-2 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes child-anim {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes child-anim-2 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.sponsor-image{
+    width: auto;
+    margin: 0;
+    padding: 0;
+    height: 65px;
+    object-fit: contain;
+}
+
+.slider-cat-item{
+    background-color: #1717171A;
+    color: #1717171A;
+    border: none;
+    border-radius: 50%;
+    width: 9px;
+    height: 9px;
+    padding: 2px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.slider-cat-item.active{
+    background-color: rgba(32, 88, 212, 0.7);
+    color: rgba(32, 88, 212, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    padding: 2px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.owl-dots-class{
+    margin-top: -30px;
+    width: 100%;
+    text-align: center;
+}
+.owl-dots-class2{
+    width: 100%;
+    text-align: center;
+}
+
