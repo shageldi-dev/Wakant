@@ -150,7 +150,8 @@ function App() {
   return (
     <AppContext.Provider value={{
       isMobile:isMobile,
-      t:t
+      t:t,
+      changeLanguage:changeLanguage
     }}>
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />

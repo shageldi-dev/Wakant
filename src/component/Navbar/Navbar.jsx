@@ -63,7 +63,7 @@ const navs = [
 
 
 const Navbar = (props) => {
-    const {t} = useContext(AppContext);
+    const {t,changeLanguage} = useContext(AppContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -92,6 +92,12 @@ const Navbar = (props) => {
 
     function changeRouter(path) {
         navigate(path);
+    }
+
+
+    function changeLang(ln){
+        changeLanguage(ln);
+        handleClose();
     }
 
 
@@ -174,7 +180,9 @@ const Navbar = (props) => {
                                 <Button variant={'contained'} color={'button'} sx={{
                                     color: 'custom.alwaysWhite',
                                     fontSize: matches ? '16px' : '12px', padding: "6px 20px",
-                                    fontFamily: Fonts.REGULAR, textTransform: "capitalize"
+                                    fontFamily: Fonts.REGULAR, textTransform: "capitalize",
+                                    height:'40px',
+                                    width:'100px'
                                 }}>
                                     {t('sign_in')}
                                 </Button>
@@ -200,8 +208,8 @@ const Navbar = (props) => {
                                         'aria-labelledby': 'basic-button',
                                     }}
                                 >
-                                    <MenuItem sx={{...regularButton}} onClick={handleClose}>{t('tm')}</MenuItem>
-                                    <MenuItem sx={{...regularButton}} onClick={handleClose}>{t('ru')}</MenuItem>
+                                    <MenuItem sx={{...regularButton}} onClick={()=>changeLang('tm')}>{t('tm')}</MenuItem>
+                                    <MenuItem sx={{...regularButton}} onClick={()=>changeLang('ru')}>{t('ru')}</MenuItem>
                                 </Menu>
 
 
