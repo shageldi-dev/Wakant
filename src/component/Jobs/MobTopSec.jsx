@@ -27,7 +27,7 @@ const MobTopSec = (props) => {
     };
     return (
         <div>
-            <Stack sx={{width:'100%',p:2,borderRadius:'5px',backgroundColor:isMobile?'custom.notActiveBlue':'transparent'}}
+            <Stack sx={{width:'100%',p:2,borderRadius:'5px',backgroundColor:'custom.notActiveBlue'}}
                    alignItems={'center'} direction={'row'} spacing={2}>
                 <img src={'/images/icon/location.svg'} alt={"category"} style={{width:'26px'}}/>
 
@@ -41,13 +41,14 @@ const MobTopSec = (props) => {
                 </select>
             </Stack>
 
-            <Stack sx={{mt:2,width:'100%',p:2,borderRadius:'5px',backgroundColor:isMobile?'custom.notActiveBlue':'transparent'}}
+            <Stack sx={{mt:2,width:'100%',p:2,borderRadius:'5px',backgroundColor:'custom.notActiveBlue'}}
                    alignItems={'center'} direction={'row'} spacing={2}  className="date-input">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider disableScrollLock={true} dateAdapter={AdapterDayjs}>
                 <MobileDatePicker
                     label="Date mobile"
                     inputFormat="MM/DD/YYYY"
                     value={value}
+                    disableScrollLock={true}
                     onChange={handleChange}
                     renderInput={(params) => <input {...params.inputProps} style={{...selectStyle}}/>}
                 />
