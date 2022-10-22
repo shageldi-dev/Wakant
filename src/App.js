@@ -10,6 +10,8 @@ import {useTranslation} from "react-i18next";
 import {Fonts} from "./common/fonts.mjs";
 import Jobs from "./page/Jobs/Jobs";
 import Workers from "./page/Jobs/Workers";
+import AddJob from "./page/Jobs/AddJob";
+import ViewJob from "./page/Jobs/ViewJob";
 
 const lightTheme = createTheme({
   components:{
@@ -127,6 +129,11 @@ export function useWidth() {
 }
 
 function App() {
+  console.log = () => {};
+  console.error = () => {};
+  console.warning = () => {};
+  console.warn = () => {};
+  console.info = () => {};
   const wwidth = useWidth();
   const checker = (w) => {
     return phoneSizes.includes(w);
@@ -165,7 +172,9 @@ function App() {
               <Route path={"/"} element={<Index/>}>
                 <Route index element={<Home/>}/>
                 <Route path={'/jobs'} element={<Jobs/>}/>
-                <Route path={'/workers'} element={<Workers/>}/>
+                <Route path={'/workers'} element={<Jobs/>}/>
+                <Route path={'/add-job'} element={<AddJob/>}/>
+                <Route path={'/view-job'} element={<ViewJob/>}/>
               </Route>
             </Routes>
           </BrowserRouter>

@@ -5,6 +5,10 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
 
 const Index = (props) => {
+    const location=useLocation();
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[location])
     return (
         <div>
             <Navbar />

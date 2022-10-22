@@ -134,7 +134,7 @@ export default function MobileDrawer() {
                     </Stack>
                     <br/>
                     <br/>
-                    <Text value={t("Регистрация")} color={''}
+                    <Text value={t("add_job")} color={''}
                           sx={{...passiveNavStyle, fontSize: '22px'}}
                           className={'nav-item'}/>
 

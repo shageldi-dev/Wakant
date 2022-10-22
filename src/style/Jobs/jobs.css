@@ -3,3 +3,7 @@
     display: none;
     -webkit-appearance: none;
 }
+
+.MuiPaper-root{
+    background-color: transparent;
+}

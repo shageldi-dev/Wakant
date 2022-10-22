@@ -147,7 +147,7 @@ const Navbar = (props) => {
                                            WebkitLineClamp: 1,
                                            my: 1,
                                            width: '100%'
-                                       }} alignItems={'flex-end'} justifyContent={'flex-end'}>
+                                       }} alignItems={'flex-end'} justifyContent={'space-evenly'}>
 
                                     {
                                         navs.map((item, i) => {
@@ -171,11 +171,15 @@ const Navbar = (props) => {
 
                             <Stack direction={'row'}
                                    spacing={4}
-                                   sx={{width: 'auto'}}
+                                   sx={{width:'auto'}}
                                    alignItems={'center'} justifyContent={'flex-end'}>
-                                <Text value={t("Регистрация")} color={''}
-                                      sx={{...passiveNavStyle, fontSize: matches ? '16px' : '12px'}}
-                                      className={'nav-item'}/>
+                                <Text onClick={() => changeRouter('/add-job')}
+                                      value={t('add_job')}
+                                      color={'/add-job' === location.pathname ? 'primary' : ''} sx={{
+                                    ...getStyle('/add-job'), fontSize: matches ? '16px' : '12px',
+                                    textUnderlineOffset: matches ? '27px' : '20px',
+                                    width:'100%'
+                                }} className={`nav-item`}/>
 
                                 <Button variant={'contained'} color={'button'} sx={{
                                     color: 'custom.alwaysWhite',
@@ -202,6 +206,7 @@ const Navbar = (props) => {
                                     id="basic-menu"
                                     anchorEl={anchorEl}
                                     open={open}
+                                    disableRipple={true}
                                     disableScrollLock={true}
                                     onClose={handleClose}
                                     MenuListProps={{

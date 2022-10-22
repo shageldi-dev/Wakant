@@ -11,6 +11,7 @@ const resources = {
             "find_jobs":"Свободные места",
             "find_worker":"Ищущие работу",
             "sign_up":"Регистрация",
+            "add_job":"Добавить заявка",
             "sign_in":"Войти",
             "ru":"Русский",
             "tm":"Turkmen",
@@ -76,8 +77,27 @@ const resources = {
             'sort':'организовать',
             'man_women':'Мужской / женский',
             'man':'Мужской',
-            'women':'Женщина'
+            'women':'Женщина',
+            'price_asc':'Цена по возрастанию',
+            'price_desc':'Цена по убыванию',
+            'newest_first':'Новички вперед',
+            'oldest_first':'Сначала старые',
             //  JOBS PAGE
+
+            // View job
+            'one_bt':'Разметка',
+            'about_job':'О работе',
+            'title_category':'Категория:',
+            'title_job_req':'Ищущие работу:',
+            'title_submit':'Возраст:',
+            'title_time':'Графика:',
+            'title_number':'Номер телефона:',
+            'title_address':'Адрес:',
+            'title_email':'Электронной почты:',
+            'similar':'Похожие посты',
+            'owner':'Работодатель',
+            'phone':'Телефон:'
+            // View job
         }
     },
 };
