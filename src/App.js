@@ -12,6 +12,9 @@ import Jobs from "./page/Jobs/Jobs";
 import Workers from "./page/Jobs/Workers";
 import AddJob from "./page/Jobs/AddJob";
 import ViewJob from "./page/Jobs/ViewJob";
+import {useSelector,useDispatch} from "react-redux";
+import {bindActionCreators} from 'redux'
+import {actionCreators} from './state/index'
 
 const lightTheme = createTheme({
   components:{
@@ -129,7 +132,7 @@ export function useWidth() {
 }
 
 function App() {
-  console.log = () => {};
+  // console.log = () => {};
   console.error = () => {};
   console.warning = () => {};
   console.warn = () => {};
@@ -151,6 +154,12 @@ function App() {
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
   };
+
+  const count=useSelector((state)=>state.counter);
+
+  const dispatch=useDispatch();
+  const {addCounter,minusCounter}=bindActionCreators(actionCreators,dispatch);
+
 
 
 
@@ -176,6 +185,7 @@ function App() {
                 <Route path={'/add-job'} element={<AddJob/>}/>
                 <Route path={'/view-job'} element={<ViewJob/>}/>
               </Route>
+
             </Routes>
           </BrowserRouter>
         </Box>
