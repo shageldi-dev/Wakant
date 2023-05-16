@@ -9,12 +9,12 @@ import Text, {Bold, SemiBold} from "./Text";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-import {convertTimeStampToDate} from "../../common/utils.mjs";
+import {convertTimeStampToDate, getImageFullUrl} from "../../common/utils.mjs";
 import {useNavigate} from "react-router-dom";
 
 
 const ItemDesktop = (props) => {
-    const {isMobile, t} = useContext(AppContext);
+    const {isMobile, t,appLanguage} = useContext(AppContext);
     const {item} = props;
     const [isHover, setIsHover] = useState(false);
 
@@ -41,43 +41,43 @@ const ItemDesktop = (props) => {
 
     return (
         <div style={{...cardStyle}} onMouseEnter={handleMouseEnter}
-             onMouseLeave={handleMouseLeave} onClick={()=>changeRoute('/view-job')}>
+             onMouseLeave={handleMouseLeave} onClick={()=>changeRoute(`/view-job/${item.uuid}`)}>
                 <Stack spacing={2}>
                     <Grid container sx={{width: '100%'}}>
                         <Grid item xs={1}>
                             <Image
                                 showLoading={<Skeleton sx={{width: '52px', height: '52px'}} variant={'rounded'}
                                                        animation={'wave'}/>}
-                                src={item.image}
+                                src={getImageFullUrl(item.imageUrl)}
                                 fit={'cover'}
                                 style={{width: '52px', height: '52px', borderRadius: '6px'}}
                                 wrapperStyle={{height: '52px', width: '52px'}}/>
                         </Grid>
                         <Grid item xs={11}>
-                            <SemiBold value={item.title} sx={{fontSize: '18px'}}/>
+                            <SemiBold value={appLanguage==='ru'?item.nameRu:item.name} sx={{fontSize: '18px'}}/>
                             <Stack direction={'row'} spacing={1} alignItems={'center'}>
                                 <LocationOnIcon sx={{width: '18px', color: 'custom.notActive'}}/>
-                                <Text value={item.location} sx={{fontSize: '16px', color: 'custom.notActive'}}/>
+                                <Text value={item.address} sx={{fontSize: '16px', color: 'custom.notActive'}}/>
                             </Stack>
                         </Grid>
                     </Grid>
 
-                    <Bold value={item.category} sx={{mt: 2, fontSize: '30px'}}/>
+                    <Bold value={appLanguage==='ru'?item.category.nameRu:item.category.name} sx={{mt: 2, fontSize: '30px'}}/>
 
                     <Stack direction={'row'} alignItems={'center'} spacing={4}>
                         <Stack direction={'row'} spacing={1} alignItems={'center'}>
                             <BusinessCenterIcon sx={{width: '18px', color: 'custom.notActive'}}/>
-                            <Text value={item.time} sx={{fontSize: '16px', color: 'custom.notActive'}}/>
+                            <Text value={item.workday_hours} sx={{fontSize: '16px', color: 'custom.notActive'}}/>
                         </Stack>
 
                         <Stack direction={'row'} spacing={1} alignItems={'center'}>
                             <AccessTimeFilledIcon sx={{width: '18px', color: 'custom.notActive'}}/>
-                            <Text value={convertTimeStampToDate(item.date)}
+                            <Text value={convertTimeStampToDate(item.createdAt)}
                                   sx={{fontSize: '16px', color: 'custom.notActive'}}/>
                         </Stack>
                     </Stack>
 
-                    <Text value={item.desc} sx={{fontSize: '16px', color: 'custom.notActive', height: '10px'}}/>
+                    <Text value={item.conditions} sx={{fontSize: '16px', color: 'custom.notActive', height: '10px'}}/>
 
                     <br/>
                     <Stack
@@ -87,7 +87,7 @@ const ItemDesktop = (props) => {
                         sx={{
                             width: '100%',mt:2
                         }}>
-                        <SemiBold value={item.price} sx={{fontSize: '20px', color: 'primary.main'}}/>
+                        <SemiBold value={item.salary} sx={{fontSize: '20px', color: 'primary.main'}}/>
                         <Button variant={'contained'} sx={{
                             ...regularButton,
                             color:'#FFFFFF'

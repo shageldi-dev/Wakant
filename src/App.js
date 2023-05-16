@@ -14,7 +14,11 @@ import AddJob from "./page/Jobs/AddJob";
 import ViewJob from "./page/Jobs/ViewJob";
 import {useSelector,useDispatch} from "react-redux";
 import {bindActionCreators} from 'redux'
-import {actionCreators} from './state/index'
+import {actionCreators} from './state/index';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Category from "./page/Category/Category";
+import {AxiosInstance} from "./api/AxiosInstance.mjs";
 
 const lightTheme = createTheme({
   components:{
@@ -142,6 +146,27 @@ function App() {
     return phoneSizes.includes(w);
   }
   const [isMobile, setIsMobile] = useState(checker(wwidth));
+  const [appLanguage,setLanguage] = useState('tm');
+  const [params,setParams] = useState();
+
+  function getParams(){
+    AxiosInstance.get(`/public/get-params`)
+        .then(response=>{
+          setParams(response.data);
+        })
+        .catch(err=>{
+
+        })
+  }
+
+  useEffect(()=>{
+    getParams()
+  },[])
+
+  function getNameById(){
+
+  }
+
   useEffect(() => {
     // try {
       setIsMobile(checker(wwidth));
@@ -150,6 +175,9 @@ function App() {
   }, [wwidth]);
 
   const { t, i18n } = useTranslation();
+
+  const [isLogin,setIsLogin]=useState(window.localStorage.getItem('token')!==null);
+
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
@@ -167,7 +195,10 @@ function App() {
     <AppContext.Provider value={{
       isMobile:isMobile,
       t:t,
-      changeLanguage:changeLanguage
+      changeLanguage:changeLanguage,
+      appLanguage: appLanguage,
+      isLogin: isLogin,
+      setIsLogin: setIsLogin
     }}>
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
@@ -176,6 +207,7 @@ function App() {
               fontFamily: 'AppBold',
             }}
         >
+          <ToastContainer />
           <BrowserRouter>
             <Routes>
               <Route path={"/"} element={<Index/>}>
@@ -183,7 +215,8 @@ function App() {
                 <Route path={'/jobs'} element={<Jobs/>}/>
                 <Route path={'/workers'} element={<Jobs/>}/>
                 <Route path={'/add-job'} element={<AddJob/>}/>
-                <Route path={'/view-job'} element={<ViewJob/>}/>
+                <Route path={'/view-job/:uuid'} element={<ViewJob/>}/>
+                <Route path={'/category'} element={<Category/>}/>
               </Route>
 
             </Routes>

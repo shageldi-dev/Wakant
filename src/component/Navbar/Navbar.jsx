@@ -23,6 +23,8 @@ import Divider from '@mui/material/Divider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useLocation, useNavigate} from "react-router-dom";
 import MobileDrawer from "./MobileDrawer";
+import MenuIcon from "../Icon/MenuIcon";
+import SignIn from "../User/SignIn";
 
 export const activeNavStyle = {
     fontFamily: Fonts.BOLD,
@@ -43,7 +45,7 @@ export const passiveNavStyle = {
     }
 };
 
-const navs = [
+export const navs = [
     {
         id: 0,
         link: '/',
@@ -56,21 +58,31 @@ const navs = [
     },
     {
         id: 3,
-        link: '/workers',
-        title: 'find_worker'
+        link: '/category',
+        title: 'categories'
     }
 ]
 
 
 const Navbar = (props) => {
-    const {t,changeLanguage} = useContext(AppContext);
+    const {t,changeLanguage,isLogin} = useContext(AppContext);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [signInState,setSignInState] = React.useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const open2 = Boolean(anchorEl2);
+    const handleClick2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
+    const handleClose2 = () => {
+        setAnchorEl2(null);
     };
 
     const {isMobile} = useContext(AppContext);
@@ -100,6 +112,22 @@ const Navbar = (props) => {
         handleClose();
     }
 
+    function showSignIn(){
+        setSignInState(true);
+        handleClose2();
+    }
+
+
+    function More(){
+        return(
+            <div>
+
+            </div>
+        )
+    }
+
+
+
 
 
     return (
@@ -117,16 +145,26 @@ const Navbar = (props) => {
                                        sx={{height: "50px", width: matches ? '137px' : '100px'}}/>}/>
 
                             <Stack direction={'row'} alignItems={'center'} spacing={2} justifyContent={'flex-end'}>
-                                <Button variant={'contained'} color={'button'} sx={{
+                                <Button
+                                    onClick={()=>{
+                                        if(isLogin){
+
+                                        } else {
+                                            showSignIn()
+                                        }
+                                    }}
+                                    variant={'contained'} color={'button'} sx={{
                                     color: 'custom.alwaysWhite',
-                                    fontSize: '18px', padding: "6px 20px",
-                                    fontFamily: Fonts.REGULAR, textTransform: "capitalize"
+                                    fontSize: matches ? '16px' : '12px', padding: "6px 20px",
+                                    fontFamily: Fonts.REGULAR, textTransform: "none",
+                                    height:'40px',
+                                    width:'auto'
                                 }}>
-                                    {t('sign_in')}
+                                    {isLogin?t('anceta'):t('sign_in')}
                                 </Button>
 
 
-                                <MobileDrawer/>
+                                <MobileDrawer more={<More/>} click={showSignIn}/>
                             </Stack>
                         </Stack>
 
@@ -173,22 +211,35 @@ const Navbar = (props) => {
                                    spacing={4}
                                    sx={{width:'auto'}}
                                    alignItems={'center'} justifyContent={'flex-end'}>
-                                <Text onClick={() => changeRouter('/add-job')}
-                                      value={t('add_job')}
-                                      color={'/add-job' === location.pathname ? 'primary' : ''} sx={{
-                                    ...getStyle('/add-job'), fontSize: matches ? '16px' : '12px',
-                                    textUnderlineOffset: matches ? '27px' : '20px',
-                                    width:'100%'
-                                }} className={`nav-item`}/>
+                                {
+                                    isLogin?
+                                        <Text onClick={() => changeRouter('/add-job')}
+                                              value={t('add_job')}
+                                              color={'/add-job' === location.pathname ? 'primary' : ''} sx={{
+                                            ...getStyle('/add-job'), fontSize: matches ? '16px' : '12px',
+                                            textUnderlineOffset: matches ? '27px' : '20px',
+                                            width: '35%'
+                                        }} className={`nav-item`}/>
+                                        :
+                                        null
+                                }
 
-                                <Button variant={'contained'} color={'button'} sx={{
+                                <Button
+                                    onClick={()=>{
+                                        if(isLogin){
+
+                                        } else {
+                                            showSignIn()
+                                        }
+                                    }}
+                                    variant={'contained'} color={'button'} sx={{
                                     color: 'custom.alwaysWhite',
                                     fontSize: matches ? '16px' : '12px', padding: "6px 20px",
-                                    fontFamily: Fonts.REGULAR, textTransform: "capitalize",
+                                    fontFamily: Fonts.REGULAR, textTransform: "none",
                                     height:'40px',
-                                    width:'100px'
+                                    width:'auto'
                                 }}>
-                                    {t('sign_in')}
+                                    {isLogin?t('anceta'):t('sign_in_2')}
                                 </Button>
 
                                 <Button
@@ -218,12 +269,43 @@ const Navbar = (props) => {
                                 </Menu>
 
 
+                                <IconButton   id="basic-button2"
+                                              aria-controls={open2 ? 'basic-menu2' : undefined}
+                                              aria-haspopup="true"
+                                              aria-expanded={open2 ? 'true' : undefined}
+                                              onClick={handleClick2}>
+                                    <MenuIcon/>
+                                </IconButton>
+
+                                <Menu
+                                    id="basic-menu2"
+                                    anchorEl={anchorEl2}
+                                    open={open2}
+                                    disableRipple={true}
+                                    disableScrollLock={true}
+                                    onClose={handleClose2}
+                                    MenuListProps={{
+                                        'aria-labelledby': 'basic-button2',
+                                    }}
+                                >
+                                    {
+                                        isLogin?null:<MenuItem onClick={showSignIn}>{t('sign_in')}</MenuItem>
+                                    }
+                                    <MenuItem onClick={handleClose2}>{t('events')}</MenuItem>
+                                    <MenuItem onClick={handleClose2}>{t('favs')}</MenuItem>
+                                </Menu>
+
                             </Stack>
 
 
                         </Stack>
                 }
             </Container>
+
+            <SignIn
+                open={signInState}
+                onClose={()=>setSignInState(false)}
+            />
         </Paper>
     )
 }

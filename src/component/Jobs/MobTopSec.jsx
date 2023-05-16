@@ -19,7 +19,7 @@ const selectStyle={
 }
 
 const MobTopSec = (props) => {
-    const {isMobile,t}=useContext(AppContext);
+    const {isMobile,t,appLanguage}=useContext(AppContext);
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
 
     const handleChange = (newValue) => {
@@ -33,28 +33,30 @@ const MobTopSec = (props) => {
 
                 <select style={{...selectStyle}}>
                     <option>{t('location')}</option>
-                    <option>Ashgabat</option>
-                    <option>Mary</option>
-                    <option>Dashoguz</option>
-                    <option>Balkan</option>
-                    <option>Lebap</option>
+                    {
+                        props.params?props.params.addressList.map((e,i)=>{
+                            return(
+                                <option value={e.id} key={`region-${i}`}>{appLanguage==='ru'?e.nameRu:e.name}</option>
+                            )
+                        }):null
+                    }
                 </select>
             </Stack>
 
-            <Stack sx={{mt:2,width:'100%',p:2,borderRadius:'5px',backgroundColor:'custom.notActiveBlue'}}
-                   alignItems={'center'} direction={'row'} spacing={2}  className="date-input">
-                <LocalizationProvider disableScrollLock={true} dateAdapter={AdapterDayjs}>
-                <MobileDatePicker
-                    label="Date mobile"
-                    inputFormat="MM/DD/YYYY"
-                    value={value}
-                    disableScrollLock={true}
-                    onChange={handleChange}
-                    renderInput={(params) => <input {...params.inputProps} style={{...selectStyle}}/>}
-                />
-                </LocalizationProvider>
-                <img src={'/images/icon/calendar.svg'} alt={"category"} style={{width:'26px'}}/>
-            </Stack>
+            {/*<Stack sx={{mt:2,width:'100%',p:2,borderRadius:'5px',backgroundColor:'custom.notActiveBlue'}}*/}
+            {/*       alignItems={'center'} direction={'row'} spacing={2}  className="date-input">*/}
+            {/*    <LocalizationProvider disableScrollLock={true} dateAdapter={AdapterDayjs}>*/}
+            {/*    <MobileDatePicker*/}
+            {/*        label="Date mobile"*/}
+            {/*        inputFormat="MM/DD/YYYY"*/}
+            {/*        value={value}*/}
+            {/*        disableScrollLock={true}*/}
+            {/*        onChange={handleChange}*/}
+            {/*        renderInput={(params) => <input {...params.inputProps} style={{...selectStyle}}/>}*/}
+            {/*    />*/}
+            {/*    </LocalizationProvider>*/}
+            {/*    <img src={'/images/icon/calendar.svg'} alt={"category"} style={{width:'26px'}}/>*/}
+            {/*</Stack>*/}
         </div>
     )
 }

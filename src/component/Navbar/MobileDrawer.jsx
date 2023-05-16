@@ -10,7 +10,7 @@ import Slide from '@mui/material/Slide';
 import {Box} from "@mui/system";
 import SyncIcon from '@mui/icons-material/Sync';
 import SearchBox from "../Home/SearchBox";
-import {Stack, useMediaQuery} from "@mui/material";
+import {Menu, MenuItem, Stack, useMediaQuery} from "@mui/material";
 import ImageLoading from "../State/Loading/ImageLoading";
 import Image from "mui-image";
 import ClearIcon from '@mui/icons-material/Clear';
@@ -20,32 +20,17 @@ import {regularButton} from "../../common/theme.mjs";
 import Text from "../App/Text";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {activeNavStyle, passiveNavStyle} from "./Navbar";
+import {activeNavStyle, navs, passiveNavStyle} from "./Navbar";
+import MenuIcon from "../Icon/MenuIcon";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const navs = [
-    {
-        id: 0,
-        link: '/',
-        title: 'home_page'
-    },
-    {
-        id: 2,
-        link: '/jobs',
-        title: 'find_jobs'
-    },
-    {
-        id: 3,
-        link: '/workers',
-        title: 'find_worker'
-    }
-]
 
 
-export default function MobileDrawer() {
+
+export default function MobileDrawer(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -58,7 +43,7 @@ export default function MobileDrawer() {
 
     const {t} = useContext(AppContext);
 
-    const {isMobile} = useContext(AppContext);
+    const {isMobile,isLogin} = useContext(AppContext);
 
 
     const matches = useMediaQuery('(min-width:1100px)');
@@ -80,6 +65,16 @@ export default function MobileDrawer() {
         handleClose()
     }
 
+
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const open2 = Boolean(anchorEl2);
+    const handleClick2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
+    const handleClose2 = () => {
+        setAnchorEl2(null);
+    };
+
     return (
         <div>
             <IconButton color={'primary'} onClick={handleClickOpen}>
@@ -87,13 +82,12 @@ export default function MobileDrawer() {
             </IconButton>
             <Dialog
                 fullScreen
-                sx={{zIndex:6000}}
                 open={open}
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
 
-                <Box sx={{p:3}}>
+                <Box sx={{position: "absolute", overflowY: "scroll", maxHeight: "80%",p:3}}>
                     <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} sx={{mb:4}}>
                         <Image src="/images/logo.svg"
                                style={{width: '100px'}}
@@ -117,6 +111,32 @@ export default function MobileDrawer() {
                                width: '100%'
                            }} alignItems={'flex-start'} justifyContent={'flex-end'}>
 
+                        <IconButton   id="basic-button2"
+                                      aria-controls={open2 ? 'basic-menu2' : undefined}
+                                      aria-haspopup="true"
+                                      aria-expanded={open2 ? 'true' : undefined}
+                                      onClick={handleClick2}>
+                            <MenuIcon/>
+                        </IconButton>
+
+                        <Menu
+                            id="basic-menu2"
+                            anchorEl={anchorEl2}
+                            open={open2}
+                            disableRipple={true}
+                            disableScrollLock={true}
+                            onClose={handleClose2}
+                            MenuListProps={{
+                                'aria-labelledby': 'basic-button2',
+                            }}
+                        >
+                            {
+                                isLogin?null:<MenuItem onClick={props.click}>{t('sign_in')}</MenuItem>
+                            }
+                            <MenuItem onClick={handleClose2}>{t('events')}</MenuItem>
+                            <MenuItem onClick={handleClose2}>{t('favs')}</MenuItem>
+                        </Menu>
+
                         {
                             navs.map((item, i) => {
                                 return (
@@ -134,9 +154,17 @@ export default function MobileDrawer() {
                     </Stack>
                     <br/>
                     <br/>
-                    <Text value={t("add_job")} color={''}
-                          sx={{...passiveNavStyle, fontSize: '22px'}}
-                          className={'nav-item'}/>
+                    {
+                        isLogin?
+                            <Text onClick={() => changeRouter('/add-job')}
+                                  value={t('add_job')}
+                                  color={'/add-job' === location.pathname ? 'primary' : ''} sx={{
+                                ...getStyle('/add-job'), fontSize: '22px',
+                                textUnderlineOffset: matches ? '27px' : '20px'
+                            }} className={`nav-item`}/>
+                            :
+                            null
+                    }
 
                     <br/>
                     <br/>

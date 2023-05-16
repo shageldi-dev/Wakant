@@ -7,19 +7,8 @@ import {AppContext} from "../../App";
 
 const JobsContainer = (props) => {
     const {isMobile}=useContext(AppContext);
-    let listLength=20;
-    const getRandomItem=(i)=>{
-        return{
-                id:i,
-                title:`Job-${i}`,
-                location:'Ashgabat',
-                category:'Web programming',
-                time:`Job-${i}`,
-                image:`https://picsum.photos/id/${parseInt(Math.random()*400*i)}/200/300`,
-                date:new Date(),
-                desc:'Лорем ипсум долор сит амет, ин еос м...'
-        }
-    }
+    let listLength=props.list?props.list.length:0;
+
     return (
         <>
             {
@@ -31,10 +20,10 @@ const JobsContainer = (props) => {
                                 return(
                                     <Grid key={`today-job-con-${index}`} container mt={3} mb={5} spacing={2}>
                                         {
-                                            new Array(listLength).fill(0).slice((k*2-2),k*2).map((item,i)=>{
+                                            props.list.slice((k*2-2),k*2).map((item,i)=>{
                                                 return(
                                                     <Grid key={`cat-${i}`} item xs={12} sm={12} md={6}>
-                                                        <ItemMobile item={getRandomItem(i)}/>
+                                                        <ItemMobile item={item}/>
                                                     </Grid>
                                                 )
                                             })
@@ -51,10 +40,10 @@ const JobsContainer = (props) => {
                                 return(
                                     <Grid key={`today-job-con-${index}`} container mt={3} mb={5} spacing={2}>
                                         {
-                                            new Array(listLength).fill(0).slice((k*4-4),k*4).map((item,i)=>{
+                                            props.list.slice((k*4-4),k*4).map((item,i)=>{
                                                 return(
                                                     <Grid key={`cat-${i}`} item xs={12} sm={12} md={6}>
-                                                        <ItemMobile item={getRandomItem(i)}/>
+                                                        <ItemMobile item={item}/>
                                                     </Grid>
                                                 )
                                             })

@@ -50,7 +50,7 @@ const ItemMobile = (props) => {
     }
     return (
         <div style={{...cardStyle}} onMouseEnter={handleMouseEnter}
-             onMouseLeave={handleMouseLeave} onClick={()=>changeRoute('/view-job')}>
+             onMouseLeave={handleMouseLeave} onClick={()=>changeRoute(`/view-job/${item.uuid}`)}>
                 <Stack spacing={1}>
                     <Grid container sx={{width:'100%'}}>
                         <Grid item xs={3}>
