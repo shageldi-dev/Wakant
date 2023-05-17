@@ -28,7 +28,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { colors } from "../../common/theme.mjs";
 
-const yupStyle = {
+export const yupStyle = {
   width: "100%",
   backgroundColor: `${colors.NOT_ACTIVE_BLUE}`,
   color: `${colors.TEXT_COLOR}`,
