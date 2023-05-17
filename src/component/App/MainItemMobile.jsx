@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { colors, regularButton } from "../../common/theme.mjs";
-import { useContext } from "react";
-import { AppContext } from "../../App";
-import { Button, Card, CardContent, Grid, Stack } from "@mui/material";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import Image from "mui-image";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React, { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Text, { Bold, SemiBold } from "./Text";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import { convertTimeStampToDate } from "../../common/utils.mjs";
+import { Button, Card, CardContent, Grid, Stack } from "@mui/material";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../App";
+import { colors, regularButton } from "../../common/theme.mjs";
+import { convertTimeStampToDate, getImageFullUrl } from "../../common/utils.mjs";
 
 const cardStyle = {
   background: colors.NOT_ACTIVE_BLUE,
@@ -21,7 +21,7 @@ const cardStyle = {
   },
 };
 const ItemMobile = (props) => {
-  const { isMobile, t } = useContext(AppContext);
+  const { isMobile, t, appLanguage } = useContext(AppContext);
   const { item } = props;
   const [isHover, setIsHover] = useState(false);
 
@@ -68,34 +68,34 @@ const ItemMobile = (props) => {
                   animation={"wave"}
                 />
               }
-              src={item.image}
+              src={getImageFullUrl(item.imageUrl)}
               fit={"cover"}
               style={{ width: "52px", height: "52px", borderRadius: "6px" }}
               wrapperStyle={{ height: "52px", width: "52px" }}
             />
           </Grid>
           <Grid item xs={9}>
-            <SemiBold value={item.title} sx={{ fontSize: "18px" }} />
+            <SemiBold value={appLanguage === "ru" ? item.nameRu : item.name} sx={{ fontSize: "18px" }} />
             <Stack direction={"row"} spacing={1} alignItems={"center"}>
               <LocationOnIcon
                 sx={{ width: "18px", color: "custom.notActive" }}
               />
               <Text
-                value={item.location}
+                value={item.address}
                 sx={{ fontSize: "16px", color: "custom.notActive" }}
               />
             </Stack>
           </Grid>
         </Grid>
 
-        <SemiBold value={item.category} sx={{ mt: 2, fontSize: "18px" }} />
+        <SemiBold value={appLanguage === "ru" ? item.category.nameRu : item.category.name} sx={{ mt: 2, fontSize: "18px" }} />
 
         <Stack direction={"row"} spacing={1} alignItems={"center"}>
           <BusinessCenterIcon
             sx={{ width: "18px", color: "custom.notActive" }}
           />
           <Text
-            value={item.time}
+            value={item.workday_hours}
             sx={{ fontSize: "16px", color: "custom.notActive" }}
           />
         </Stack>
@@ -105,13 +105,13 @@ const ItemMobile = (props) => {
             sx={{ width: "18px", color: "custom.notActive" }}
           />
           <Text
-            value={convertTimeStampToDate(item.date)}
+            value={convertTimeStampToDate(item.createdAt)}
             sx={{ fontSize: "16px", color: "custom.notActive" }}
           />
         </Stack>
 
         <Text
-          value={item.desc}
+          value={item.conditions}
           sx={{ fontSize: "16px", color: "custom.notActive", height: "10px" }}
         />
         <br />
@@ -125,7 +125,7 @@ const ItemMobile = (props) => {
           }}
         >
           <SemiBold
-            value={item.price}
+            value={item.salary}
             sx={{
               fontSize: "20px",
               color: "primary.main",

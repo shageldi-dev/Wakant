@@ -1,4 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import "../../style/Navbar/navbar.css";
+import Divider from "@mui/material/Divider";
+import Image from "mui-image";
+import ImageLoading from "../State/Loading/ImageLoading";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "../Icon/MenuIcon";
+import MobileDrawer from "./MobileDrawer";
+import React, { useContext, useEffect, useState } from "react";
+import SignIn from "../User/SignIn";
+import Text from "../App/Text";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AppContext } from "../../App";
+import { Fonts } from "../../common/fonts.mjs";
+import { colors, regularButton } from "../../common/theme.mjs";
+
 import {
   Box,
   Button,
@@ -14,20 +29,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import Image from "mui-image";
-import ImageLoading from "../State/Loading/ImageLoading";
-import Text from "../App/Text";
-import { AppContext } from "../../App";
-import { Fonts } from "../../common/fonts.mjs";
-import "../../style/Navbar/navbar.css";
-import { colors, regularButton } from "../../common/theme.mjs";
-import Divider from "@mui/material/Divider";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useLocation, useNavigate } from "react-router-dom";
-import MobileDrawer from "./MobileDrawer";
-import MenuIcon from "../Icon/MenuIcon";
-import SignIn from "../User/SignIn";
-import LogoutIcon from "@mui/icons-material/Logout";
 
 export const activeNavStyle = {
   fontFamily: Fonts.BOLD,
@@ -93,7 +94,7 @@ const Navbar = (props) => {
 
   const location = useLocation();
 
-  useEffect(() => {}, [location]);
+  useEffect(() => { }, [location]);
 
   function getStyle(link) {
     return link === location.pathname ? activeNavStyle : passiveNavStyle;
@@ -157,6 +158,7 @@ const Navbar = (props) => {
               <Button
                 onClick={() => {
                   if (isLogin) {
+                    changeRouter("/profile");
                   } else {
                     showSignIn();
                   }

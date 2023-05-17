@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a2902b2d.css",
-    "main.js": "/static/js/main.8d2c12b4.js",
+    "main.css": "/static/css/main.0da6c31d.css",
+    "main.js": "/static/js/main.130efaad.js",
     "static/media/SegoeUI.ttf": "/static/media/SegoeUI.ef1c00b65a5fd5bae3bb.ttf",
     "static/media/SegoeUI-Bold.ttf": "/static/media/SegoeUI-Bold.62f56c089745418bb373.ttf",
     "static/media/SegoeUI-SemiBold.ttf": "/static/media/SegoeUI-SemiBold.d3ebb785eab2e77c2144.ttf",
@@ -9,11 +9,11 @@
     "static/media/SegoeUI-Italic.ttf": "/static/media/SegoeUI-Italic.cf4e19a73b8512765a43.ttf",
     "static/media/SegoeUI-Light.ttf": "/static/media/SegoeUI-Light.a4cb537856834f0a73b1.ttf",
     "index.html": "/index.html",
-    "main.a2902b2d.css.map": "/static/css/main.a2902b2d.css.map",
-    "main.8d2c12b4.js.map": "/static/js/main.8d2c12b4.js.map"
+    "main.0da6c31d.css.map": "/static/css/main.0da6c31d.css.map",
+    "main.130efaad.js.map": "/static/js/main.130efaad.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2902b2d.css",
-    "static/js/main.8d2c12b4.js"
+    "static/css/main.0da6c31d.css",
+    "static/js/main.130efaad.js"
   ]
 }

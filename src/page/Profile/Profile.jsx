@@ -1,3 +1,8 @@
+import ProfileContent from "../../component/Profile/ProfileContent.jsx";
+import React from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Fonts } from "../../common/fonts.mjs";
+
 import {
   Box,
   Button,
@@ -7,11 +12,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { Fonts } from "../../common/fonts.mjs";
 
-import ProfileContent from "../../component/Profile/ProfileContent.jsx";
-import { Outlet, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const Profile = () => {
             <Stack spacing={2}>
               <Button
                 variant="contained"
+                onClick={() => changeRoute('/profile')}
                 sx={{
                   textTransform: "none",
                   fontFamily: Fonts.REGULAR,
@@ -103,6 +105,12 @@ const Profile = () => {
             <Outlet />
           </Grid>
         </Grid>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </Box>
     </>
   );
