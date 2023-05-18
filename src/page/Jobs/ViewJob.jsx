@@ -32,6 +32,7 @@ import {
   convertTimeStampToDate,
   getImageFullUrl,
 } from "../../common/utils.mjs";
+import JobComment from "./JobComment.jsx";
 
 const ViewJob = (props) => {
   const { t, isMobile, appLanguage } = useContext(AppContext);
@@ -40,6 +41,12 @@ const ViewJob = (props) => {
   const { uuid } = useParams();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+
+  const [showComment, setShowComment] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowComment(true);
+  };
 
   function getData() {
     setLoading(true);
@@ -494,13 +501,12 @@ const ViewJob = (props) => {
             <Grid item xs={12} sm={12} md={8}>
               <Stack direction="row" justifyContent="flex-end" spacing={2}>
                 <Button
-                  // onClick={() => changeRoute("/profile")}
+                  onClick={handleButtonClick}
                   sx={{ textTransform: "none", color: "#2058D4" }}
                 >
                   Teswirler
                 </Button>
                 <IconButton
-                  // onClick={() => changeRoute("/profile")}
                   sx={{
                     color: "custom.textColor",
                     backgroundColor: "custom.notActiveBlue",
@@ -511,6 +517,7 @@ const ViewJob = (props) => {
               </Stack>
             </Grid>
           </Grid>
+          {showComment && <JobComment />}
           <Stack
             direction={"row"}
             sx={{ mb: 3 }}

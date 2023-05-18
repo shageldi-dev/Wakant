@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import { AppSelect, AppTextArea } from "../../component/Common/AppComponent";
 import { Fonts } from "../../common/fonts.mjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const stepTitle = {
   color: "rgba(0, 0, 0, 0.54)",
@@ -704,10 +705,15 @@ const ProfileStepper = () => {
             </StepLabel>
             <StepContent>
               <Stack spacing={2}>
-                <AppSelect>
-                  <option>{t("job_place_document")}</option>
-                  <option>{t("job_place_document")}</option>
-                </AppSelect>
+                <Button
+                  sx={yupStyle}
+                  startIcon={<AddPhotoAlternateIcon />}
+                  variant="contained"
+                  component="label"
+                >
+                  <input hidden accept="image/*" multiple type="file" />
+                </Button>
+                <input type="file" />
               </Stack>
               {/* <Typography>{step.description}</Typography> */}
               <Box sx={{ mb: 2 }}>
