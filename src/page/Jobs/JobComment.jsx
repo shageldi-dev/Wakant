@@ -5,6 +5,7 @@ import {
   Divider,
   IconButton,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -18,9 +19,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const JobComment = () => {
   const [showAnswer, setShowAnswer] = useState(false);
 
+  const [addComment, setAddComment] = useState(false);
+
+  const handleClick = () => {
+    setAddComment(!addComment);
+  };
+
   const handleButtonClick = () => {
     setShowAnswer(!showAnswer);
   };
+
   return (
     <>
       <Box
@@ -31,7 +39,7 @@ const JobComment = () => {
           mt: 3,
         }}
       >
-        <Stack direction="row" mt={3}>
+        <Stack direction="row" justifyContent="space-between" mt={3}>
           <Typography
             sx={{
               color: colors.BLACK,
@@ -39,9 +47,64 @@ const JobComment = () => {
               fontWeight: "600",
             }}
           >
-            123 comment
+            123 teswir
           </Typography>
+          <Button
+            onClick={handleClick}
+            sx={{
+              textTransform: "none",
+              fontFamily: Fonts.REGULAR,
+              fontWeight: "600",
+              color: "#fff",
+            }}
+            variant="contained"
+          >
+            Teswir gosmak
+          </Button>
         </Stack>
+        {addComment && (
+          <>
+            <Stack width="50%" mt={2} mb={2}>
+              <TextField
+                fullWidth
+                id="outlined-multiline-static"
+                label="Teswir gosmak"
+                multiline
+                rows={4}
+              />
+              <Stack
+                direction="row"
+                mt={2}
+                spacing={2}
+                justifyContent="flex-end"
+              >
+                <Button
+                  onClick={handleClick}
+                  sx={{
+                    textTransform: "none",
+                    fontFamily: Fonts.REGULAR,
+                    fontWeight: "600",
+                    color: colors.TEXT_COLOR,
+                  }}
+                  variant="outlined"
+                >
+                  Yatyrmak
+                </Button>
+                <Button
+                  sx={{
+                    textTransform: "none",
+                    fontFamily: Fonts.REGULAR,
+                    fontWeight: "600",
+                    color: "#fff",
+                  }}
+                  variant="contained"
+                >
+                  Gosmak
+                </Button>
+              </Stack>
+            </Stack>
+          </>
+        )}
         <Divider sx={{ marginBottom: "30px", marginTop: "5px" }} />
         <Stack direction="row" spacing={4}>
           <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUNhsanZkJgCLmoyeX9auEbmxDcq0olt5xw&usqp=CAU" />
