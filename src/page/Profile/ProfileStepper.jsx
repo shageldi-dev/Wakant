@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -12,6 +12,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  IconButton,
   Radio,
   RadioGroup,
   Stack,
@@ -26,6 +27,7 @@ import { Fonts } from "../../common/fonts.mjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { colors } from "../../common/theme.mjs";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 const stepTitle = {
   color: "rgba(0, 0, 0, 0.54)",
@@ -128,6 +130,19 @@ const ProfileStepper = () => {
       resetForm();
     },
   });
+
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (e) => {
+    const files = e.target.files;
+    // Handle the selected files here
+    console.log(files);
+  };
+
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+
   return (
     <>
       <Box sx={{ maxWidth: 700 }}>
@@ -706,15 +721,151 @@ const ProfileStepper = () => {
               <Typography sx={stepTitle}>Diplom sertifikat we s.m</Typography>
             </StepLabel>
             <StepContent>
-              <Stack spacing={2}>
-                <Button
-                  sx={yupStyle}
-                  startIcon={<AddPhotoAlternateIcon />}
-                  variant="contained"
-                  component="label"
+              <Stack spacing={2} mt={3}>
+                <Box
+                  p={1}
+                  pl={2}
+                  pr={2}
+                  sx={{
+                    background: "rgba(32, 88, 212, 0.05)",
+                    boxShadow: "0px 0px 4px #000000",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClick}
                 >
-                  <input hidden accept="image/*" multiple type="file" />
-                </Button>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                    />
+                    <IconButton>
+                      <AddAPhotoIcon />
+                    </IconButton>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background: "rgba(32, 88, 212, 0.05)",
+                        textTransform: "none",
+                        boxShadow: "0px 0px 4px #000000",
+                        color: "#007AFF",
+                        borderRadius: "90px",
+                        p: 0,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: "600",
+
+                        "&:hover": {
+                          background: "rgba(32, 88, 212, 0.05)",
+                        },
+                      }}
+                    >
+                      Saýlamak
+                    </Button>
+                  </Stack>
+                </Box>
+                <Box
+                  p={1}
+                  pl={2}
+                  pr={2}
+                  sx={{
+                    background: "rgba(32, 88, 212, 0.05)",
+                    boxShadow: "0px 0px 4px #000000",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClick}
+                >
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                    />
+                    <IconButton>
+                      <AddAPhotoIcon />
+                    </IconButton>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background: "rgba(32, 88, 212, 0.05)",
+                        textTransform: "none",
+                        boxShadow: "0px 0px 4px #000000",
+                        color: "#007AFF",
+                        borderRadius: "90px",
+                        p: 0,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: "600",
+
+                        "&:hover": {
+                          background: "rgba(32, 88, 212, 0.05)",
+                        },
+                      }}
+                    >
+                      Saýlamak
+                    </Button>
+                  </Stack>
+                </Box>
+                <Box
+                  p={1}
+                  pl={2}
+                  pr={2}
+                  sx={{
+                    background: "rgba(32, 88, 212, 0.05)",
+                    boxShadow: "0px 0px 4px #000000",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClick}
+                >
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleFileUpload}
+                    />
+                    <IconButton>
+                      <AddAPhotoIcon />
+                    </IconButton>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        background: "rgba(32, 88, 212, 0.05)",
+                        textTransform: "none",
+                        boxShadow: "0px 0px 4px #000000",
+                        color: "#007AFF",
+                        borderRadius: "90px",
+                        p: 0,
+                        pl: 1,
+                        pr: 1,
+                        fontWeight: "600",
+
+                        "&:hover": {
+                          background: "rgba(32, 88, 212, 0.05)",
+                        },
+                      }}
+                    >
+                      Saýlamak
+                    </Button>
+                  </Stack>
+                </Box>
                 <Stack
                   direction="row"
                   justifyContent="space-between"
@@ -748,26 +899,19 @@ const ProfileStepper = () => {
                   <Checkbox />
                 </Stack>
               </Stack>
-              {/* <Typography>{step.description}</Typography> */}
               <Box sx={{ mb: 2 }}>
                 <div>
-                  <Stack direction="row" justifyContent="flex-end">
+                  <Stack mt={3}>
                     <Button
-                      onClick={handleNext}
-                      sx={{ ...nextButton, mt: 1, mr: 1 }}
-                      endIcon={<ArrowForwardIosIcon sx={{ width: "10px" }} />}
+                      variant="contained"
+                      sx={{
+                        background: " rgba(32, 88, 212, 0.7)",
+                        color: "#fff",
+                      }}
                     >
-                      Indiki
-                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      ANKETA DÖRETMEK
                     </Button>
                   </Stack>
-                  {/* <Button
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button> */}
                 </div>
               </Box>
             </StepContent>

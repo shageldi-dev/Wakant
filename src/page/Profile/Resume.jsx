@@ -38,11 +38,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 4,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === "#414141"],
+    backgroundColor: "#F2F2F2",
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    backgroundColor: theme.palette.mode === "#414141",
+    backgroundColor: "#414141",
   },
 }));
 
@@ -133,8 +133,13 @@ const Resume = () => {
                     </Typography>
                   </Box>
                 </Stack>
-                <Box sx={{ background: "#7cb8dd", height: "100%" }}>
-                  <Stack pt={7} pl={5} spacing={2}>
+                <Box
+                  sx={{
+                    background: "#7cb8dd",
+                    height: "100%",
+                  }}
+                >
+                  <Stack pt={7} pl={3} spacing={2}>
                     <Stack direction="row" spacing={2} alignItems="center">
                       <IconButton
                         sx={{
@@ -184,7 +189,7 @@ const Resume = () => {
                       </Typography>
                     </Box>
                   </Stack>
-                  <Stack pt={7} pl={5} spacing={2}>
+                  <Stack pt={7} pl={3} spacing={2}>
                     <Stack direction="row" spacing={2} alignItems="center">
                       <IconButton
                         sx={{
@@ -236,7 +241,7 @@ const Resume = () => {
                   </Stack>
                   <Stack
                     alignItems="center"
-                    height={"60vh"}
+                    height="100%"
                     justifyContent="flex-end"
                   >
                     <img
