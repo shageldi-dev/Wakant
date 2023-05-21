@@ -27,6 +27,7 @@ import { Fonts } from "../../common/fonts.mjs";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { colors } from "../../common/theme.mjs";
+import AddJobCard from "./AddJobCard";
 
 export const yupStyle = {
   width: "100%",
@@ -112,7 +113,8 @@ const AddJob = (props) => {
   return (
     <div>
       <Stack sx={{ mt: 12, mb: 4 }}></Stack>
-      <Stack direction="row" justifyContent="flex-end">
+      <AddJobCard />
+      <Stack direction="row" mt={3} justifyContent="flex-end">
         <Button
           onClick={handleClick}
           sx={{ textTransform: "none", fontFamily: Fonts.BOLD }}
