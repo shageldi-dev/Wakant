@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import {
+  Checkbox,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -24,6 +25,7 @@ import { AppSelect, AppTextArea } from "../../component/Common/AppComponent";
 import { Fonts } from "../../common/fonts.mjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { colors } from "../../common/theme.mjs";
 
 const stepTitle = {
   color: "rgba(0, 0, 0, 0.54)",
@@ -713,7 +715,38 @@ const ProfileStepper = () => {
                 >
                   <input hidden accept="image/*" multiple type="file" />
                 </Button>
-                <input type="file" />
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: Fonts.REGULAR,
+                      fontWeight: "400",
+                      color: colors.TEXT_COLOR,
+                    }}
+                  >
+                    Duzgunnamany okadym we kabul etdim
+                  </Typography>
+                  <Checkbox />
+                </Stack>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: Fonts.REGULAR,
+                      fontWeight: "400",
+                      color: colors.TEXT_COLOR,
+                    }}
+                  >
+                    Maglumatlarym gaytadan islenip bilner
+                  </Typography>
+                  <Checkbox />
+                </Stack>
               </Stack>
               {/* <Typography>{step.description}</Typography> */}
               <Box sx={{ mb: 2 }}>

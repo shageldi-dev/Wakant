@@ -3,6 +3,7 @@ import React from "react";
 import { Fonts } from "../../common/fonts.mjs";
 import MaleIcon from "@mui/icons-material/Male";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Resume from "../../page/Profile/Resume.jsx";
 
 const ProfileContent = () => {
   return (
@@ -115,15 +116,7 @@ const ProfileContent = () => {
               </Typography>
             </Stack>
             <Stack direction="row" mt={"22vh"} justifyContent="flex-end">
-              <Button
-                sx={{
-                  textTransform: "none",
-                  color: "#2058D4",
-                  fontFamily: Fonts.REGULAR,
-                }}
-              >
-                Doly gorkezmek
-              </Button>
+              <Resume />
             </Stack>
           </Grid>
         </Grid>
