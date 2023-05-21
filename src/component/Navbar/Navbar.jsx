@@ -94,7 +94,7 @@ const Navbar = (props) => {
 
   const location = useLocation();
 
-  useEffect(() => { }, [location]);
+  useEffect(() => {}, [location]);
 
   function getStyle(link) {
     return link === location.pathname ? activeNavStyle : passiveNavStyle;
@@ -296,7 +296,7 @@ const Navbar = (props) => {
                 sx={{ ...regularButton, fontSize: matches ? "16px" : "12px" }}
                 endIcon={<KeyboardArrowDownIcon />}
               >
-                {t("ru")}
+                {changeLang === "tm" ? t("tm") : t("ru")}
               </Button>
               <Menu
                 id="basic-menu"
@@ -347,7 +347,9 @@ const Navbar = (props) => {
                 {isLogin ? null : (
                   <MenuItem onClick={showSignIn}>{t("sign_in")}</MenuItem>
                 )}
-                <MenuItem onClick={handleClose2}>{t("events")}</MenuItem>
+                <MenuItem onClick={() => changeRouter("/events")}>
+                  {t("events")}
+                </MenuItem>
                 <MenuItem onClick={handleClose2}>{t("favs")}</MenuItem>
                 <MenuItem onClick={handleClose2}>
                   <Button
