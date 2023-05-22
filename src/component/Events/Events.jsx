@@ -83,7 +83,7 @@ const Events = () => {
               color: colors.TEXT_COLOR,
               fontWeight: "400",
               fontFamily: Fonts.REGULAR,
-              width: "50%",
+              width: { md: "50%", sm: "70%", xs: "90%" },
               textAlign: "center",
             }}
           >
@@ -99,12 +99,19 @@ const Events = () => {
           alignItems="center"
           spacing={5}
         >
-          <img
-            style={{ width: "170px" }}
-            src="/images/dfa1erc1uncnl1po7l2v7yawd 1.png"
-            alt="dfa1erc1uncnl1po7l2v7yawd 1.png"
-          />
-          <Box sx={searchContainer}>
+          <Box sx={{ width: "170px" }}>
+            <img
+              style={{ width: "100%" }}
+              src="/images/dfa1erc1uncnl1po7l2v7yawd 1.png"
+              alt="dfa1erc1uncnl1po7l2v7yawd 1.png"
+            />
+          </Box>
+          <Box
+            sx={{
+              ...searchContainer,
+              display: { md: "flex", sm: "none", xs: "none" },
+            }}
+          >
             <TextField
               sx={{ "& fieldset": { border: "none" } }}
               variant="outlined"
@@ -119,12 +126,35 @@ const Events = () => {
               }}
             />
           </Box>
-          <img
-            style={{ width: "235px" }}
-            src="/images/dxf91zhqd2z6b0bwg85ktm5s4 1.png"
-            alt="dxf91zhqd2z6b0bwg85ktm5s4 1.png"
-          />
+          <Box sx={{ width: "235px" }}>
+            <img
+              style={{ width: "100%" }}
+              src="/images/dxf91zhqd2z6b0bwg85ktm5s4 1.png"
+              alt="dxf91zhqd2z6b0bwg85ktm5s4 1.png"
+            />
+          </Box>
         </Stack>
+        <Box
+          sx={{
+            ...searchContainer,
+            display: { md: "none", sm: "flex", xs: "flex" },
+            mb: 3,
+          }}
+        >
+          <TextField
+            sx={{ "& fieldset": { border: "none" } }}
+            variant="outlined"
+            placeholder="Şu ýerde gözle"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
       </div>
       <Stack mt={2} mb={2} spacing={1}>
         <Typography
@@ -139,7 +169,6 @@ const Events = () => {
         </Typography>
         <img src="/images/Rectangle 331.png" alt="Rectangle 331.png" />
       </Stack>
-      <EventsCard />
       <EventsCard />
     </>
   );
