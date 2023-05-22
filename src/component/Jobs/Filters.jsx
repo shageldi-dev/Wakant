@@ -24,7 +24,7 @@ const Filters = (props) => {
       .then((response) => {
         setParams(response.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
     await AxiosInstance.get("web/agencies").then((response) => {
       setAgents(response.data.data);
     });
@@ -56,7 +56,7 @@ const Filters = (props) => {
         props.getData(filter);
         // console.log(filter);
       }
-    } catch (err) {}
+    } catch (err) { }
   }
 
   function removeFilter(id, item) {
@@ -69,7 +69,7 @@ const Filters = (props) => {
         props.getData(filter);
         // console.log(filter);
       }
-    } catch (err) {}
+    } catch (err) { }
   }
 
   function isChecked(id, item) {
@@ -105,7 +105,7 @@ const Filters = (props) => {
         </div>
       )}
 
-      {isMobile ? null : <MobTopSec params={params} />}
+      {isMobile ? null : <MobTopSec onSelectChange={e => props.onSelectChange(e)} params={params} />}
 
       <Bold
         value={t("category")}

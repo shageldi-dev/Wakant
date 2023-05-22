@@ -23,6 +23,7 @@ const Jobs = (props) => {
     const [open, setOpen] = useState(false)
     const [bottomSheetType, setType] = useState('filter')
     const [jobs, setJobs] = useState();
+    const [params, setParams] = useState();
     const [filterJob, setFilterJob] = useState({
         genders: [],
         locationIds: [],
@@ -35,6 +36,14 @@ const Jobs = (props) => {
     const bottomSheetClose = () => {
         setOpen(false)
     }
+
+    useEffect(() => {
+        AxiosInstance.get("public/get-params")
+            .then((response) => {
+                setParams(response.data);
+            })
+            .catch((err) => { });
+    }, [])
 
     function getData(fl) {
         let url = `public/jobs?`;
@@ -90,6 +99,23 @@ const Jobs = (props) => {
             price: `${parseInt(Math.random() * 400 * i)} TMT`
         }
     }
+
+    const onSelectChange = (e) => {
+        try {
+            if (e != 0) {
+                let f = filterJob;
+                f.locationIds = [];
+                f.locationIds.push(e);
+                setFilterJob(f);
+                getData(f);
+            } else {
+                let f = filterJob;
+                f.locationIds = [];
+                setFilterJob(f);
+                getData(f);
+            }
+        } catch (err) { }
+    }
     return (
         <div>
             {
@@ -98,7 +124,7 @@ const Jobs = (props) => {
                         {
                             isMobile ?
                                 <Stack spacing={3}>
-                                    <MobTopSec />
+                                    <MobTopSec params={params} onSelectChange={e => onSelectChange(e)} />
                                     <Stack direction={'row'} spacing={2}>
                                         <Button
                                             onClick={() => {
@@ -113,7 +139,7 @@ const Jobs = (props) => {
                                                 color: colors.WHITE,
                                                 textTransform: 'none'
                                             }}>{t('filter')}</Button>
-                                        <Button
+                                        {/* <Button
                                             startIcon={<img src={'/images/icon/sort.svg'} alt={'sort'} />}
                                             fullWidth={true}
                                             onClick={() => {
@@ -125,7 +151,7 @@ const Jobs = (props) => {
                                                 fontSize: '18px',
                                                 color: colors.WHITE,
                                                 textTransform: 'none'
-                                            }}>{t('sort')}</Button>
+                                            }}>{t('sort')}</Button> */}
                                     </Stack>
                                 </Stack>
                                 :
@@ -136,7 +162,7 @@ const Jobs = (props) => {
                             <Grid item xs={12} sm={12} md={3}>
                                 {
                                     isMobile ? null :
-                                        <Filters filterJob={filterJob} getData={getData} setFilterJob={setFilterJob} />
+                                        <Filters onSelectChange={e => onSelectChange(e)} filterJob={filterJob} getData={getData} setFilterJob={setFilterJob} />
                                 }
                             </Grid>
                             <Grid item xs={12} sm={12} md={9}>
@@ -185,7 +211,7 @@ const Jobs = (props) => {
                                 </Stack>
 
                                 {
-                                    bottomSheetType === 'filter' ? <Filters /> : <Sort />
+                                    bottomSheetType === 'filter' ? <Filters onSelectChange={e => onSelectChange(e)} filterJob={filterJob} getData={getData} setFilterJob={setFilterJob} /> : <Sort />
                                 }
 
                             </Stack>
