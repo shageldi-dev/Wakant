@@ -30,6 +30,7 @@ import Profile from "./page/Profile/Profile";
 import ProfileContent from "./component/Profile/ProfileContent";
 import ProfileStepper from "./page/Profile/ProfileStepper";
 import Events from "./component/Events/Events";
+import NewCardAddJob from "./page/Jobs/NewCardAddJob";
 
 const lightTheme = createTheme({
   components: {
@@ -225,6 +226,7 @@ function App() {
                 <Route path={"/jobs"} element={<Jobs />} />
                 <Route path={"/workers"} element={<Jobs />} />
                 <Route path={"/add-job"} element={<AddJob />} />
+                <Route path={"/add-job-new-card"} element={<NewCardAddJob />} />
                 <Route path={"/view-job/:uuid"} element={<ViewJob />} />
                 <Route path={"/category"} element={<Category />} />
                 <Route path={"/events"} element={<Events />} />
