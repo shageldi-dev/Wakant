@@ -6,7 +6,7 @@ import Comment from "../../component/Home/Comment";
 import Divider from "@mui/material/Divider";
 import Feature from "../../component/Home/Feature";
 import Image from "mui-image";
-import ImageLoading from "../../component/State/Loading/ImageLoading";
+// import ImageLoading from "../../component/State/Loading/ImageLoading";
 import JobsContainer from "../../container/Home/JobsContainer";
 import OwlCarousel from "react-owl-carousel";
 import Placeholder from "../../component/State/Loading/Placeholder";
@@ -65,21 +65,21 @@ const Home = (props) => {
     getData();
   }, []);
   const tJobsRef = useRef();
-  const getImageSize = () => {
-    try {
-      let height = tJobsRef.current.height;
-      let width = tJobsRef.current.width;
-      return {
-        width: width,
-        height: height,
-      };
-    } catch (err) {
-      return {
-        width: "600px",
-        height: "600px",
-      };
-    }
-  };
+  // const getImageSize = () => {
+  //   try {
+  //     let height = tJobsRef.current.height;
+  //     let width = tJobsRef.current.width;
+  //     return {
+  //       width: width,
+  //       height: height,
+  //     };
+  //   } catch (err) {
+  //     return {
+  //       width: "600px",
+  //       height: "600px",
+  //     };
+  //   }
+  // };
   return (
     <div>
       {loading ? (
@@ -135,7 +135,7 @@ const Home = (props) => {
                         return (
                           <SwiperSlide key={`slide-agency-${i}`}>
                             <img
-                              alt={"slide-image"}
+                              alt={"slide-imagee"}
                               src={getImageFullUrl(item.imageUrl)}
                               className={"sponsor-image"}
                             />

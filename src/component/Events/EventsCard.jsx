@@ -114,12 +114,13 @@ const EventsCard = () => {
           </Typography>
         </Stack>
         <Typography
-          pr={50}
+          pr={{ md: 50, xs: 0 }}
           sx={{
             color: "#2058D4",
             fontFamily: Fonts.REGULAR,
             fontWeight: "600",
             fontSize: "14px",
+            display: { md: "block", xs: "none" },
           }}
         >
           Ýörite-orta bilimli
@@ -130,6 +131,19 @@ const EventsCard = () => {
           </IconButton>
         </Stack>
       </Stack>
+      <Typography
+        pr={{ md: 50, xs: 0 }}
+        sx={{
+          color: "#2058D4",
+          fontFamily: Fonts.REGULAR,
+          fontWeight: "600",
+          fontSize: "14px",
+          marginTop: 1,
+          display: { md: "none", xs: "block" },
+        }}
+      >
+        Ýörite-orta bilimli
+      </Typography>
       <Typography
         pt={2}
         sx={{
