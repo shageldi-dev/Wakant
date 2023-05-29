@@ -108,6 +108,12 @@ const resources = {
       // View job
       sponseredByText:
         "Программа «Поддержка совершенствования системы государственного управления», финансируемая USAID и реализуемая ООО «QED Group», оказывает консультационную и техническую поддержку государственным органам Туркменистана. Мы также хотели бы поблагодарить QED Group за их поддержку в течение этого периода.",
+      // Profile
+
+      profile: "Профиль",
+      fullDisplay: "Полное отображение",
+      salesConsultant: "консультант по продажам",
+      personalInformation: "ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ",
     },
   },
   tm: {
@@ -261,6 +267,11 @@ const resources = {
       back: "Yza dolan",
       sponseredByText:
         "IDUSAID tarapyndan maliýeleşdirilýän we QED Group LLC tarapyndan durmuşa geçirilýän Döwlet dolandyryşyny gowulandyrmak üçin goldaw, Türkmenistanyň döwlet edaralaryna maslahat we tehniki goldaw berýär. Şeýle hem, bu döwürde beren goldawlary üçin QED toparyna sag bolsun aýdýarys.",
+      // Profil
+      profile: "Profil",
+      fullDisplay: "Doly görkezmek",
+      salesConsultant: "satyjy konsultant",
+      personalInformation: "ŞAHSY MAGLUMAT",
     },
   },
 };

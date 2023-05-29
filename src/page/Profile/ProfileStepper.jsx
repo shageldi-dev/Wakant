@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -22,10 +22,9 @@ import { yupStyle } from "../Jobs/AddJob";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
-import { AppSelect, AppTextArea } from "../../component/Common/AppComponent";
+import { AppSelect } from "../../component/Common/AppComponent";
 import { Fonts } from "../../common/fonts.mjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { colors } from "../../common/theme.mjs";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
@@ -458,7 +457,10 @@ const ProfileStepper = () => {
               <Typography sx={stepTitle}>Bilim</Typography>
             </StepLabel>
             <StepContent>
-              <Stack direction="row" spacing={4}>
+              <Stack
+                direction={{ md: "row", sm: "row", xs: "column" }}
+                spacing={4}
+              >
                 <Stack spacing={2} width="100%">
                   <AppSelect>
                     <option>Derejaniz</option>

@@ -1,35 +1,35 @@
 @font-face {
-    font-family: AppBold;
-    src: url("./assets/fonts/SegoeUI-Bold.ttf");
-    font-display: swap;
+  font-family: AppBold;
+  src: url("./assets/fonts/SegoeUI-Bold.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: AppBoldItalic;
-    src: url("./assets/fonts/SegoeUI-BoldItalic.ttf");
-    font-display: swap;
+  font-family: AppBoldItalic;
+  src: url("./assets/fonts/SegoeUI-BoldItalic.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: AppLight;
-    src: url("./assets/fonts/SegoeUI-Light.ttf");
-    font-display: swap;
+  font-family: AppLight;
+  src: url("./assets/fonts/SegoeUI-Light.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: AppRegular;
-    src: url("./assets/fonts/SegoeUI.ttf");
-    font-display: swap;
+  font-family: AppRegular;
+  src: url("./assets/fonts/SegoeUI.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: AppSemibold;
-    src: url("./assets/fonts/SegoeUI-SemiBold.ttf");
-    font-display: swap;
+  font-family: AppSemibold;
+  src: url("./assets/fonts/SegoeUI-SemiBold.ttf");
+  font-display: swap;
 }
 
 @font-face {
-    font-family: AppItalic;
-    src: url("./assets/fonts/SegoeUI-Italic.ttf");
-    font-display: swap;
+  font-family: AppItalic;
+  src: url("./assets/fonts/SegoeUI-Italic.ttf");
+  font-display: swap;
 }

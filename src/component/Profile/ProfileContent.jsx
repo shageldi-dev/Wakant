@@ -14,7 +14,7 @@ const ProfileContent = () => {
             color: "rgba(0, 0, 0, 0.87)",
             fontFamily: Fonts.REGULAR,
             fontWeight: "700",
-            fontSize: "28px",
+            fontSize: { md: "28px", xs: "24px" },
           }}
         >
           Begenc Yazlyyev
@@ -83,7 +83,7 @@ const ProfileContent = () => {
               direction="row"
               justifyContent="flex-end"
               spacing={2}
-              mt={"17vh"}
+              mt={{ md: "17vh", xs: "5vh" }}
             >
               <Button
                 variant="contained"
@@ -110,12 +110,21 @@ const ProfileContent = () => {
             </Stack>
           </Grid>
           <Grid item md={4} xs={12}>
-            <Stack direction="row" justifyContent="flex-end">
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              mt={{ md: 0, xs: 2 }}
+            >
               <Typography sx={{ color: "#199F17", fontFamily: Fonts.REGULAR }}>
                 Aktiw
               </Typography>
             </Stack>
-            <Stack direction="row" mt={"22vh"} justifyContent="flex-end">
+            <Stack
+              direction="row"
+              mt={{ md: "22vh", xs: 0 }}
+              mb={{ md: 0, xs: 3 }}
+              justifyContent="flex-end"
+            >
               <Resume />
             </Stack>
           </Grid>

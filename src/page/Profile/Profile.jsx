@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 
-
 const Profile = () => {
   const navigate = useNavigate();
   function changeRoute(path) {
@@ -27,14 +26,20 @@ const Profile = () => {
           src="/images/Frame 3183495.png"
           alt="Frame 3183495.png"
         />
-        <Stack mt={-6} ml={7} mb={3}>
-          <img
-            style={{ width: "90px" }}
-            src="/images/Frame 3183604.png"
-            alt="Frame 3183604.png"
-          />
+        <Stack mt={-6} ml={{ md: 7, xs: 3 }} mb={3}>
+          <Box sx={{ width: { md: "90px", sm: "60px", xs: "60px" } }}>
+            <img
+              style={{ width: "100%" }}
+              src="/images/Frame 3183604.png"
+              alt="Frame 3183604.png"
+            />
+          </Box>
           <Typography
-            sx={{ color: "rgba(0, 0, 0, 0.87)", fontFamily: Fonts.REGULAR }}
+            sx={{
+              color: "rgba(0, 0, 0, 0.87)",
+              fontFamily: Fonts.REGULAR,
+              fontSize: { md: "16px", xs: "12px" },
+            }}
           >
             ALH377
           </Typography>
@@ -46,7 +51,7 @@ const Profile = () => {
             <Stack spacing={2}>
               <Button
                 variant="contained"
-                onClick={() => changeRoute('/profile')}
+                onClick={() => changeRoute("/profile")}
                 sx={{
                   textTransform: "none",
                   fontFamily: Fonts.REGULAR,
