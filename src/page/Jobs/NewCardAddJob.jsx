@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Stack,
@@ -26,6 +26,8 @@ import { Fonts } from "../../common/fonts.mjs";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { colors } from "../../common/theme.mjs";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { showError, showSuccess } from "../../component/Common/Alert";
 
 export const yupStyle = {
   width: "100%",
@@ -59,7 +61,161 @@ function valuetext(value) {
 }
 
 const NewCardAddJob = () => {
-  const { t } = useTranslation();
+  const [profession, setProfession] = useState("");
+  const [gender, setGender] = useState(0);
+  const [minAge, setMinAge] = useState(0);
+  const [maxAge, setMaxAge] = useState(0);
+  const [workday_hours, setWorkdayHours] = useState("");
+  const [saturday_hours, setSaturdayHours] = useState("");
+  const [sunday_hours, setSundayHours] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [e_mail, setEmail] = useState("");
+  const [conditions, setConditions] = useState("");
+  const [conditionsRu, setConditionsRu] = useState("");
+  const [experience, setExperience] = useState("");
+  const [anotherExperienceText, setAnotherExperienceText] = useState("");
+  const [registrationPlace, setRegistrationPlace] = useState("");
+  const [about_employer, setAboutEmployer] = useState("");
+  const [salary, setSalary] = useState(0);
+  const [phone_number_visible, setPhoneNumberVisible] = useState(true);
+  const [locationId, setLocationId] = useState(5);
+  const [comments, setComments] = useState(true);
+  const [categoryId, setCategoryId] = useState(48);
+  const [agenstwoId, setAgenstwoId] = useState(null);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
+  const [experienceList, setExperienceList] = useState([]);
+  const [addressList, setAddressList] = useState([]);
+  const [genderList, setGenderList] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const clearInput = () => {
+    setWorkdayHours("");
+    setSaturdayHours("");
+    setSundayHours("");
+    setPhoneNumber("");
+    setAddress("");
+    setEmail("");
+    setConditions("");
+    setConditionsRu("");
+    setExperience("");
+    setAboutEmployer("");
+    setSalary("");
+    setPhoneNumberVisible("");
+    setLocationId("");
+    setComments("");
+    setCategoryId("");
+    setStartTime("");
+    setEndTime("");
+  };
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+  };
+
+  const fetchCategories = () => {
+    AxiosInstance.get("public/categories")
+      .then((response) => {
+        setCategoryList(response.data.data);
+        const categoList = response.data.data;
+        console.log(categoList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchExperienceList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      setExperienceList(response.data.experienceList);
+      const expoList = response.data.experienceList;
+      console.log(expoList);
+    });
+  };
+
+  useEffect(() => {
+    fetchExperienceList();
+  }, []);
+
+  const fetchAddressList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      setAddressList(response.data.addressList);
+      const addrList = response.data.addressList;
+      console.log(addrList);
+    });
+  };
+
+  useEffect(() => {
+    fetchAddressList();
+  }, []);
+
+  const fetchGenderList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      setGenderList(response.data.genderList);
+      const genList = response.data.genderList;
+      console.log(genList);
+    });
+  };
+
+  useEffect(() => {
+    fetchGenderList();
+  }, []);
+
+  function addData() {
+    const body = {
+      profession: profession,
+      gender: gender,
+      minAge: minAge,
+      maxAge: maxAge,
+      workday_hours: workday_hours,
+      saturday_hours: saturday_hours,
+      sunday_hours: sunday_hours,
+      phone_number: phone_number,
+      address: address,
+      e_mail: e_mail,
+      conditions: conditions,
+      conditionsRu: conditionsRu,
+      experience: experience,
+      anotherExperienceText: anotherExperienceText,
+      registrationPlace: registrationPlace,
+      about_employer: about_employer,
+      salary: salary,
+      phone_number_visible: phone_number_visible,
+      locationId: locationId,
+      comments: comments,
+      categoryId: categoryId,
+      agenstwoId: agenstwoId,
+    };
+    AxiosInstance.post("users/jobs/add", body)
+      .then((response) => {
+        if (!response.data.error) {
+          showSuccess("Successfully added  new job");
+          clearInput();
+        } else {
+          showError("something went wrong");
+        }
+      })
+      .catch((error) => {
+        showError(error + "error");
+      });
+  }
+
+  const handleButtonClick = () => {
+    if (!isChecked) {
+      // Checkbox not checked, do something (e.g., show an error message)
+      showError("Please check the checkbox before clicking the button");
+      return;
+    }
+    addData();
+  };
+
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const handleOpen = (type) => {
     setOpen(true);
@@ -76,6 +232,43 @@ const NewCardAddJob = () => {
       return "job_times_saturday";
     } else if (jobTimeType === JobTimeType.SUNDAY) {
       return "job_times_sunday";
+    }
+  }
+
+  function splitHours(hours) {
+    try {
+      let splitted = hours.split("-");
+      if (splitted.length === 1) {
+        return {
+          start: splitted[0],
+          end: "00:00",
+        };
+      } else if (splitted.length > 1) {
+        return {
+          start: splitted[0],
+          end: splitted[1],
+        };
+      } else {
+        return {
+          start: "00:00",
+          end: "00:00",
+        };
+      }
+    } catch (e) {
+      return {
+        start: "00:00",
+        end: "00:00",
+      };
+    }
+  }
+
+  function getJobTimeValue() {
+    if (jobTimeType === JobTimeType.OTHER) {
+      return splitHours(workday_hours);
+    } else if (jobTimeType === JobTimeType.SATURDAY) {
+      return splitHours(saturday_hours);
+    } else if (jobTimeType === JobTimeType.SUNDAY) {
+      return splitHours(sunday_hours);
     }
   }
 
@@ -102,19 +295,49 @@ const NewCardAddJob = () => {
       resetForm();
     },
   });
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={3} mt={12} mb={4}>
           <Grid item xs={12} sm={6} md={4}>
-            <AppSelect>
-              <option>{t("job_category")}</option>
-              <option>{t("job_category")}</option>
-            </AppSelect>
+            {i18n.language === "tm" ? (
+              <>
+                <AppSelect
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                >
+                  {categoryList.map((item, i) => {
+                    return (
+                      <option value={item.id} key={`get_category_id_${i}`}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+                </AppSelect>
+              </>
+            ) : (
+              <>
+                <AppSelect
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                >
+                  {categoryList.map((item, i) => {
+                    return (
+                      <option value={item.id} key={`get_category_id_${i}`}>
+                        {item.nameRu}
+                      </option>
+                    );
+                  })}
+                </AppSelect>
+              </>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <AppTextField
+              value={saturday_hours}
+              onChange={(e) => setSaturdayHours(e.target.value)}
               placeholder={t("job_times_saturday")}
               onClick={() => {
                 handleOpen(JobTimeType.SATURDAY);
@@ -123,20 +346,18 @@ const NewCardAddJob = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppTextField placeholder={t("job_mail")} type={"email"} />
+            <AppTextField
+              value={e_mail}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t("job_mail")}
+              type={"email"}
+            />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <TextField
-              sx={{ ...yupStyle, "& fieldset": { border: "none" } }}
-              name="email"
-              label={t("job_name_add")}
-              id="login"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+            <AppTextField
+              value={profession}
+              onChange={(e) => setProfession(e.target.value)}
               placeholder={t("job_name_add")}
               type={"text"}
             />
@@ -144,6 +365,8 @@ const NewCardAddJob = () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <AppTextField
+              value={sunday_hours}
+              onChange={(e) => setSundayHours(e.target.value)}
               placeholder={t("job_times_sunday")}
               onClick={() => {
                 handleOpen(JobTimeType.SUNDAY);
@@ -152,10 +375,33 @@ const NewCardAddJob = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppSelect>
-              <option>{t("job_expreience")}</option>
-              <option>{t("job_expreience")}</option>
-            </AppSelect>
+            {i18n.language === "tm" ? (
+              <AppSelect
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+              >
+                {experienceList.map((item, i) => {
+                  return (
+                    <option value={item.id} key={`experince_list_key${i}`}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </AppSelect>
+            ) : (
+              <AppSelect
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+              >
+                {experienceList.map((item, i) => {
+                  return (
+                    <option value={item.id} key={`experince_list_key${i}`}>
+                      {item.nameRu}
+                    </option>
+                  );
+                })}
+              </AppSelect>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
@@ -170,18 +416,48 @@ const NewCardAddJob = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppTextField placeholder={t("job_phone")} type={"phone"} />
+            <AppTextField
+              placeholder={t("job_phone")}
+              value={phone_number}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              type={"phone"}
+            />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppSelect>
-              <option>{t("job_place_document")}</option>
-              <option>{t("job_place_document")}</option>
-            </AppSelect>
+            {i18n.language === "tm" ? (
+              <AppSelect
+                value={locationId}
+                onChange={(e) => setLocationId(e.target.value)}
+              >
+                {addressList.map((item, i) => {
+                  return (
+                    <option value={item.id} key={`address_list_key${i}`}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </AppSelect>
+            ) : (
+              <AppSelect
+                value={locationId}
+                onChange={(e) => setLocationId(e.target.value)}
+              >
+                {addressList.map((item, i) => {
+                  return (
+                    <option value={item.id} key={`address_list_key${i}`}>
+                      {item.nameRu}
+                    </option>
+                  );
+                })}
+              </AppSelect>
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <AppTextField
+              value={workday_hours}
+              onChange={(e) => setWorkdayHours(e.target.value)}
               placeholder={t("job_hours")}
               onClick={() => {
                 handleOpen(JobTimeType.OTHER);
@@ -190,11 +466,21 @@ const NewCardAddJob = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppTextField placeholder={t("job_address")} type={"text"} />
+            <AppTextField
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder={t("job_address")}
+              type={"text"}
+            />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppTextField placeholder={t("job_salary")} type={"number"} />
+            <AppTextField
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              placeholder={t("job_salary")}
+              type={"number"}
+            />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
@@ -210,60 +496,107 @@ const NewCardAddJob = () => {
                 defaultValue="female"
                 name="radio-buttons-group"
               >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-                <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label="Other"
-                />
+                {i18n.language === "tm" ? (
+                  <>
+                    {genderList.map((item, i) => {
+                      return (
+                        <FormControlLabel
+                          key={`gender_lest_key${i}`}
+                          value={item.id}
+                          control={<Radio />}
+                          label={item.name}
+                        />
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    {genderList.map((item, i) => {
+                      return (
+                        <FormControlLabel
+                          key={`gender_lest_key${i}`}
+                          value={item.id}
+                          control={<Radio />}
+                          label={item.nameRu}
+                        />
+                      );
+                    })}
+                  </>
+                )}
               </RadioGroup>
             </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <AppTextArea
-              style={{
-                maxWidth: "100%",
-                minWidth: "100%",
-                height: "150px",
-              }}
-              placeholder={t("job_condition")}
-              type={"number"}
-            />
+            {i18n.language === "tm" ? (
+              <AppTextArea
+                value={conditions}
+                onChange={(e) => setConditions(e.target.value)}
+                style={{
+                  maxWidth: "100%",
+                  minWidth: "100%",
+                  height: "150px",
+                }}
+                placeholder={t("job_condition")}
+                type={"text"}
+              />
+            ) : (
+              <AppTextArea
+                value={conditionsRu}
+                onChange={(e) => setConditionsRu(e.target.value)}
+                style={{
+                  maxWidth: "100%",
+                  minWidth: "100%",
+                  height: "150px",
+                }}
+                placeholder={t("job_condition")}
+                type={"text"}
+              />
+            )}
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <AppTextArea
+              value={about_employer}
+              onChange={(e) => setAboutEmployer(e.target.value)}
               style={{
                 maxWidth: "100%",
                 minWidth: "100%",
                 height: "150px",
               }}
               placeholder={t("job_about")}
-              type={"number"}
+              type={"text"}
             />
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
+              control={
+                <Checkbox
+                  defaultChecked={false}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label={t("job_read_1")}
             />
             <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
+              control={
+                <Checkbox
+                  value={phone_number_visible}
+                  onChange={(e) => setPhoneNumberVisible(e.target.value)}
+                  defaultChecked={false}
+                />
+              }
               label={t("job_read_2")}
             />
             <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
+              control={
+                <Checkbox
+                  defaultChecked={false}
+                  value={comments}
+                  onChange={(e) => setComments(e.target.value)}
+                />
+              }
               label={t("job_read_3")}
             />
           </Grid>
@@ -272,6 +605,7 @@ const NewCardAddJob = () => {
           fullWidth
           variant={"contained"}
           sx={{ color: "white", mt: 2, mb: 2 }}
+          onClick={handleButtonClick}
         >
           {t("add_job_button")}
         </LoadingButton>
@@ -289,17 +623,52 @@ const NewCardAddJob = () => {
             </Typography>
             <Stack spacing={1} sx={{ mt: 2 }}>
               <Typography>{t("start_date")}</Typography>
-              <AppTextField type={"time"} />
+              <AppTextField
+                type={"time"}
+                onChange={(e) => {
+                  setStartTime(e.target.value);
+                }}
+              />
               <Typography>{t("end_date")}</Typography>
-              <AppTextField type={"time"} />
+              <AppTextField
+                type={"time"}
+                onChange={(e) => {
+                  setEndTime(e.target.value);
+                }}
+              />
             </Stack>
             <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
+              control={
+                <Checkbox
+                  defaultChecked={false}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      if (jobTimeType === JobTimeType.SUNDAY) {
+                        setSundayHours("Dync");
+                      } else if (jobTimeType === JobTimeType.SATURDAY) {
+                        setSaturdayHours("Dync");
+                      } else if (jobTimeType === JobTimeType.OTHER) {
+                        setWorkdayHours("Dync");
+                      }
+                      handleClose();
+                    }
+                  }}
+                />
+              }
               label={t("no_job")}
             />
             <Button
               fullWidth
-              onClick={handleClose}
+              onClick={() => {
+                if (jobTimeType === JobTimeType.SUNDAY) {
+                  setSundayHours(`${startTime}-${endTime}`);
+                } else if (jobTimeType === JobTimeType.SATURDAY) {
+                  setSaturdayHours(`${startTime}-${endTime}`);
+                } else if (jobTimeType === JobTimeType.OTHER) {
+                  setWorkdayHours(`${startTime}-${endTime}`);
+                }
+                handleClose();
+              }}
               variant={"contained"}
               sx={{ mt: 2, color: "white" }}
             >
