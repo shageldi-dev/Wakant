@@ -8,18 +8,21 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { colors } from "../../common/theme.mjs";
 import { Fonts } from "../../common/fonts.mjs";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
 
 const JobComment = () => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const [addComment, setAddComment] = useState(false);
+
+  const [commentList, setCommentList] = useState([]);
 
   const handleClick = () => {
     setAddComment(!addComment);
@@ -28,6 +31,18 @@ const JobComment = () => {
   const handleButtonClick = () => {
     setShowAnswer(!showAnswer);
   };
+
+  const getComments = () => {
+    AxiosInstance.get("users/comments/my-comments").then((response) => {
+      setCommentList(response.data.comments);
+      const expoList = response.data.comments;
+      console.log(expoList);
+    });
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   return (
     <>

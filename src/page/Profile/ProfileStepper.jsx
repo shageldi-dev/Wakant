@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -27,6 +27,7 @@ import { Fonts } from "../../common/fonts.mjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { colors } from "../../common/theme.mjs";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
 
 const stepTitle = {
   color: "rgba(0, 0, 0, 0.54)",
@@ -75,8 +76,23 @@ const steps = [
 ];
 
 const ProfileStepper = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [languageLabelsList, setLanguageLabelList] = useState([]);
+  const [languagesList, setlanguagesList] = useState([]);
+  const [educationList, seteducationList] = useState([]);
+
+  const fetcheducationListList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      seteducationList(response.data.educationList);
+      const langLabelList = response.data.educationList;
+      console.log(langLabelList);
+    });
+  };
+
+  useEffect(() => {
+    fetcheducationListList();
+  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -142,6 +158,29 @@ const ProfileStepper = () => {
     fileInputRef.current.click();
   };
 
+  const fetchlanguageLabelsList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      setLanguageLabelList(response.data.languageLabels);
+      const langLabelList = response.data.languageLabels;
+      console.log(langLabelList);
+    });
+  };
+
+  useEffect(() => {
+    fetchlanguageLabelsList();
+  }, []);
+
+  const fetchlanguagesListList = () => {
+    AxiosInstance.get("public/get-params").then((response) => {
+      setlanguagesList(response.data.languagesList);
+      const langsList = response.data.languagesList;
+      console.log(langsList);
+    });
+  };
+
+  useEffect(() => {
+    fetchlanguagesListList();
+  }, []);
   return (
     <>
       <Box sx={{ maxWidth: 700 }}>
@@ -405,21 +444,72 @@ const ProfileStepper = () => {
             </StepLabel>
             <StepContent>
               <Stack spacing={2} direction="row">
-                <AppSelect>
-                  <option>Ispan dili</option>
-                  <option>Rus dili</option>
-                  <option>Turk dili</option>
-                  <option>Inlis dili dili</option>
-                  <option>Hytay dili</option>
-                </AppSelect>
-                <AppSelect>
-                  <option>Saylanan</option>
-                  <option>Saylanmadyk</option>
-                  <option>Kanagatlanarly</option>
-                  <option>Gowy</option>
-                  <option>Oran gowy</option>
-                  <option>Ene dili</option>
-                </AppSelect>
+                {i18n.language === "tm" ? (
+                  <>
+                    <AppSelect value={languagesList.id}>
+                      <option>Dil saylan</option>
+                      {languagesList.map((item, i) => {
+                        return (
+                          <option
+                            key={`language_label_list_key${i}`}
+                            value={item.id}
+                          >
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </AppSelect>
+                  </>
+                ) : (
+                  <>
+                    <AppSelect value={languagesList.id}>
+                      <option>Dil saylan</option>
+                      {languagesList.map((item, i) => {
+                        return (
+                          <option
+                            key={`language_label_list_key${i}`}
+                            value={item.id}
+                          >
+                            {item.nameRu}
+                          </option>
+                        );
+                      })}
+                    </AppSelect>
+                  </>
+                )}
+                {i18n.language === "tm" ? (
+                  <>
+                    <AppSelect value={languageLabelsList.id}>
+                      <option>Derejanizi saylan</option>
+                      {languageLabelsList.map((item, i) => {
+                        return (
+                          <option
+                            key={`language_label_list_key${i}`}
+                            value={item.id}
+                          >
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </AppSelect>
+                  </>
+                ) : (
+                  <>
+                    <AppSelect value={languageLabelsList.id}>
+                      <option>Derejanizi saylan</option>
+                      {languageLabelsList.map((item, i) => {
+                        return (
+                          <option
+                            key={`language_label_list_key${i}`}
+                            value={item.id}
+                          >
+                            {item.nameRu}
+                          </option>
+                        );
+                      })}
+                    </AppSelect>
+                  </>
+                )}
               </Stack>
               {/* <Typography>{step.description}</Typography> */}
               <Box sx={{ mb: 2 }}>
@@ -462,12 +552,39 @@ const ProfileStepper = () => {
                 spacing={4}
               >
                 <Stack spacing={2} width="100%">
-                  <AppSelect>
-                    <option>Derejaniz</option>
-                    <option>Orta</option>
-                    <option>Yorite orta</option>
-                    <option>Yokary</option>
-                  </AppSelect>
+                  {i18n.language === "tm" ? (
+                    <>
+                      <AppSelect value={educationList.id}>
+                        <option>Derejaniz</option>
+                        {educationList.map((item, i) => {
+                          return (
+                            <option
+                              key={`language_label_list_key${i}`}
+                              value={item.id}
+                            >
+                              {item.name}
+                            </option>
+                          );
+                        })}
+                      </AppSelect>
+                    </>
+                  ) : (
+                    <>
+                      <AppSelect value={educationList.id}>
+                        <option>Ureven</option>
+                        {educationList.map((item, i) => {
+                          return (
+                            <option
+                              key={`language_label_list_key${i}`}
+                              value={item.id}
+                            >
+                              {item.nameRu}
+                            </option>
+                          );
+                        })}
+                      </AppSelect>
+                    </>
+                  )}
                   <TextField
                     sx={{ ...yupStyle, "& fieldset": { border: "none" } }}
                     name="yourJob"
