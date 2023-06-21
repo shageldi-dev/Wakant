@@ -1,4 +1,27 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Comment from "../../component/Home/Comment";
+import Divider from "@mui/material/Divider";
+import Image from "mui-image";
+import JobComment from "./JobComment.jsx";
+import Loading from "../../component/State/Loading/Loading";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import MainItemMobile from "../../component/App/MainItemMobile";
+import OwlCarousel from "react-owl-carousel";
+import PaidIcon from "@mui/icons-material/Paid";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Skeleton from "@mui/material/Skeleton";
+import Text, { Bold, SemiBold } from "../../component/App/Text";
+import i18n from "../../common/i18n.mjs";
+import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../../App";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { Fonts } from "../../common/fonts.mjs";
+import { colors } from "../../common/theme.mjs";
+
 import {
   Box,
   Button,
@@ -8,34 +31,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import { Fonts } from "../../common/fonts.mjs";
-import Text, { Bold, SemiBold } from "../../component/App/Text";
-import PaidIcon from "@mui/icons-material/Paid";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import Divider from "@mui/material/Divider";
-import { colors } from "../../common/theme.mjs";
-import { AppContext } from "../../App";
-import Image from "mui-image";
-import Skeleton from "@mui/material/Skeleton";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useNavigate, useParams } from "react-router-dom";
-import Comment from "../../component/Home/Comment";
-import OwlCarousel from "react-owl-carousel";
-import MainItemMobile from "../../component/App/MainItemMobile";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { AxiosInstance } from "../../api/AxiosInstance.mjs";
-import Loading from "../../component/State/Loading/Loading";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import {
   convertTimeStampToDate,
   getImageFullUrl,
+  getLanguageValue,
 } from "../../common/utils.mjs";
-import JobComment from "./JobComment.jsx";
 
 const ViewJob = (props) => {
-  const { t, isMobile, appLanguage } = useContext(AppContext);
+  const { t, isMobile, appLanguage, getGenderById, getAddressById } = useContext(AppContext);
   const carousel = useRef();
   const navigate = useNavigate();
   const { uuid } = useParams();
@@ -237,7 +240,7 @@ const ViewJob = (props) => {
                       </Grid>
                       <Grid xs={6}>
                         <Text
-                          value={"Мужской женский"}
+                          value={getGenderById(data.gender)}
                           sx={{
                             fontSize: "18px",
                             textAlign: "end",
@@ -291,15 +294,13 @@ const ViewJob = (props) => {
                         <Text
                           value={`${data.workday_hours}, ${t(
                             "job_times_saturday"
-                          )} ${
-                            data.saturday_hours == null
-                              ? "---"
-                              : data.saturday_hours
-                          }, ${t("job_times_sunday")} ${
-                            data.sunday_hours == null
+                          )} ${data.saturday_hours == null
+                            ? "---"
+                            : data.saturday_hours
+                            }, ${t("job_times_sunday")} ${data.sunday_hours == null
                               ? "---"
                               : data.sunday_hours
-                          }`}
+                            }`}
                           sx={{
                             fontSize: "18px",
                             textAlign: "end",
@@ -351,7 +352,7 @@ const ViewJob = (props) => {
                       </Grid>
                       <Grid xs={6}>
                         <Text
-                          value={"Ашхабад"}
+                          value={getAddressById(data.locationId)}
                           sx={{
                             fontSize: "18px",
                             textAlign: "end",
@@ -392,9 +393,7 @@ const ViewJob = (props) => {
                 </Grid>
                 <Divider color={colors.PRIMARY} sx={{ mt: 2 }} />
                 <Text
-                  value={
-                    appLanguage === "ru" ? data.conditionsRu : data.conditions
-                  }
+                  value={getLanguageValue('conditions', data, i18n.language)}
                   sx={{
                     mt: 2,
                     fontSize: "18px",
@@ -440,25 +439,25 @@ const ViewJob = (props) => {
                     <Grid item xs={9.5}>
                       <SemiBold
                         value={
-                          appLanguage === "ru"
-                            ? data.agenstwo.nameRu
-                            : data.agenstwo.name
+                          getLanguageValue('name', data.agenstwo, i18n.language)
                         }
                         sx={{ fontSize: "18px" }}
                       />
-                      <Stack
-                        direction={"row"}
-                        spacing={1}
-                        alignItems={"center"}
-                      >
-                        <LocationOnIcon
-                          sx={{ width: "18px", color: "custom.notActive" }}
-                        />
-                        <Text
-                          value={"Ашхабадский велаят"}
-                          sx={{ fontSize: "16px", color: "custom.notActive" }}
-                        />
-                      </Stack>
+                      {
+                        data.agenstwo !== null && <Stack
+                          direction={"row"}
+                          spacing={1}
+                          alignItems={"center"}
+                        >
+                          <LocationOnIcon
+                            sx={{ width: "18px", color: "custom.notActive" }}
+                          />
+                          <Text
+                            value={getAddressById(data.agenstwo.location)}
+                            sx={{ fontSize: "16px", color: "custom.notActive" }}
+                          />
+                        </Stack>
+                      }
                     </Grid>
                   </Grid>
 
@@ -480,18 +479,18 @@ const ViewJob = (props) => {
                   <ul>
                     <li>
                       <Text
-                        value={
-                          "Адрес: Ашхабад, Копетдагский этрап, улица Сейитназара Сейди, улица Сейитназара Сейди, 4/2."
-                        }
+                        value={getLanguageValue('about_employer', data, i18n.language)}
                         sx={{ fontSize: "16px" }}
                       />
                     </li>
-                    <li>
-                      <Text
-                        value={`Телефон: ${data.agenstwo.phone_number}`}
-                        sx={{ fontSize: "16px" }}
-                      />
-                    </li>
+                    {
+                      data.agenstwo !== null && <li>
+                        <Text
+                          value={`Телефон: ${data.agenstwo.phone_number}`}
+                          sx={{ fontSize: "16px" }}
+                        />
+                      </li>
+                    }
                   </ul>
                 </Stack>
               </Box>
@@ -504,7 +503,7 @@ const ViewJob = (props) => {
                   onClick={handleButtonClick}
                   sx={{ textTransform: "none", color: "#2058D4" }}
                 >
-                  Teswirler
+                  {t('comments')}
                 </Button>
                 <IconButton
                   sx={{
@@ -518,7 +517,7 @@ const ViewJob = (props) => {
             </Grid>
           </Grid>
           {showComment && <JobComment />}
-          <Stack
+          {/* <Stack
             direction={"row"}
             sx={{ mb: 3 }}
             alignItems={"center"}
@@ -549,9 +548,9 @@ const ViewJob = (props) => {
                 <ArrowForwardIcon />
               </IconButton>
             </Stack>
-          </Stack>
+          </Stack> */}
 
-          <OwlCarousel
+          {/* <OwlCarousel
             ref={carousel}
             className="owl-theme"
             margin={20}
@@ -571,7 +570,7 @@ const ViewJob = (props) => {
                 />
               );
             })}
-          </OwlCarousel>
+          </OwlCarousel> */}
         </div>
       )}
     </Box>

@@ -1,30 +1,31 @@
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import "swiper/css";
 import "../../style/Home/home.css";
 import CategoryContainer from "../../container/Home/CategoryContainer";
 import Comment from "../../component/Home/Comment";
 import Divider from "@mui/material/Divider";
 import Feature from "../../component/Home/Feature";
 import Image from "mui-image";
-// import ImageLoading from "../../component/State/Loading/ImageLoading";
 import JobsContainer from "../../container/Home/JobsContainer";
+import Loading from "../../component/State/Loading/Loading";
 import OwlCarousel from "react-owl-carousel";
 import Placeholder from "../../component/State/Loading/Placeholder";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import SearchBox from "../../component/Home/SearchBox";
 import Text, { Bold, Light, SemiBold } from "../../component/App/Text";
+import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { AppContext } from "../../App";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
 import { Fonts } from "../../common/fonts.mjs";
 import { colors, regularButton } from "../../common/theme.mjs";
-import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
-import { AxiosInstance } from "../../api/AxiosInstance.mjs";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper";
+import { getImageFullUrl } from "../../common/utils.mjs";
+
+// import ImageLoading from "../../component/State/Loading/ImageLoading";
 
 // Import Swiper styles
-import "swiper/css";
-import { getImageFullUrl } from "../../common/utils.mjs";
-import Loading from "../../component/State/Loading/Loading";
 
 const inputStyle = {
   width: "100%",
@@ -132,16 +133,16 @@ const Home = (props) => {
                 >
                   {data
                     ? data.agencyList.map((item, i) => {
-                        return (
-                          <SwiperSlide key={`slide-agency-${i}`}>
-                            <img
-                              alt={"slide-imagee"}
-                              src={getImageFullUrl(item.imageUrl)}
-                              className={"sponsor-image"}
-                            />
-                          </SwiperSlide>
-                        );
-                      })
+                      return (
+                        <SwiperSlide key={`slide-agency-${i}`}>
+                          <img
+                            alt={"slide-imagee"}
+                            src={getImageFullUrl(item.imageUrl)}
+                            className={"sponsor-image"}
+                          />
+                        </SwiperSlide>
+                      );
+                    })
                     : null}
                 </Swiper>
               </Stack>
@@ -447,7 +448,7 @@ const Home = (props) => {
           {/* Features */}
 
           {/* Sponsered By ............................................................ */}
-          <Stack direction="row" justifyContent="center">
+          {/* <Stack direction="row" justifyContent="center">
             <Stack spacing={2} alignItems="center">
               <Typography
                 sx={{
@@ -480,7 +481,7 @@ const Home = (props) => {
             }}
           >
             {t("sponseredByText")}
-          </Typography>
+          </Typography>*/}
           <br />
           <br />
           <br />

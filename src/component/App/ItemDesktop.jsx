@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { colors, regularButton } from "../../common/theme.mjs";
-import { useContext } from "react";
-import { AppContext } from "../../App";
-import { Button, Card, CardContent, Grid, Stack } from "@mui/material";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import Image from "mui-image";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React, { useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Text, { Bold, SemiBold } from "./Text";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { Button, Card, CardContent, Grid, Stack } from "@mui/material";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../App";
+import { colors, regularButton } from "../../common/theme.mjs";
+
 import {
   convertTimeStampToDate,
   getImageFullUrl,
 } from "../../common/utils.mjs";
-import { useNavigate } from "react-router-dom";
 
 const ItemDesktop = (props) => {
-  const { isMobile, t, appLanguage } = useContext(AppContext);
+  const { isMobile, t, appLanguage, getAddressById } = useContext(AppContext);
   const { item } = props;
   const [isHover, setIsHover] = useState(false);
 
@@ -76,7 +77,7 @@ const ItemDesktop = (props) => {
                 sx={{ width: "18px", color: "custom.notActive" }}
               />
               <Text
-                value={item.address}
+                value={getAddressById(item.locationId)}
                 sx={{ fontSize: "16px", color: "custom.notActive" }}
               />
             </Stack>

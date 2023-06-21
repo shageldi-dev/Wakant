@@ -1,4 +1,20 @@
+import * as Yup from "yup";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Modal from "@mui/material/Modal";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import React, { useEffect, useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { Fonts } from "../../common/fonts.mjs";
+import { colors } from "../../common/theme.mjs";
+import { showError, showSuccess } from "../../component/Common/Alert";
+
 import {
   Grid,
   Stack,
@@ -13,21 +29,6 @@ import {
   AppTextArea,
   AppTextField,
 } from "../../component/Common/AppComponent";
-import { useTranslation } from "react-i18next";
-import Modal from "@mui/material/Modal";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { LoadingButton } from "@mui/lab";
-import { Fonts } from "../../common/fonts.mjs";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { colors } from "../../common/theme.mjs";
-import { AxiosInstance } from "../../api/AxiosInstance.mjs";
-import { showError, showSuccess } from "../../component/Common/Alert";
 
 export const yupStyle = {
   width: "100%",
@@ -83,6 +84,7 @@ const NewCardAddJob = () => {
   const [comments, setComments] = useState(true);
   const [categoryId, setCategoryId] = useState(48);
   const [agenstwoId, setAgenstwoId] = useState(null);
+  const [agency, setAgency] = useState([]);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [categoryList, setCategoryList] = useState([]);
@@ -134,38 +136,24 @@ const NewCardAddJob = () => {
   const fetchExperienceList = () => {
     AxiosInstance.get("public/get-params").then((response) => {
       setExperienceList(response.data.experienceList);
-      const expoList = response.data.experienceList;
-      console.log(expoList);
+      setGenderList(response.data.genderList);
+      setAddressList(response.data.addressList);
     });
   };
+
+  const fetchAgencyList = () => {
+    AxiosInstance.get('web/agencies')
+      .then(response => {
+        setAgency(response.data.data);
+      })
+  }
 
   useEffect(() => {
     fetchExperienceList();
+    fetchAgencyList();
   }, []);
 
-  const fetchAddressList = () => {
-    AxiosInstance.get("public/get-params").then((response) => {
-      setAddressList(response.data.addressList);
-      const addrList = response.data.addressList;
-      console.log(addrList);
-    });
-  };
 
-  useEffect(() => {
-    fetchAddressList();
-  }, []);
-
-  const fetchGenderList = () => {
-    AxiosInstance.get("public/get-params").then((response) => {
-      setGenderList(response.data.genderList);
-      const genList = response.data.genderList;
-      console.log(genList);
-    });
-  };
-
-  useEffect(() => {
-    fetchGenderList();
-  }, []);
 
   function addData() {
     const body = {
@@ -276,6 +264,8 @@ const NewCardAddJob = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setMinAge(newValue[0]);
+    setMaxAge(newValue[1]);
   };
 
   //   Yup form
@@ -484,47 +474,21 @@ const NewCardAddJob = () => {
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <FormControl>
-              <FormLabel
-                id="demo-radio-buttons-group-label"
-                sx={{ color: "primary.main" }}
-              >
-                {t("job_gender_add")}
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
-              >
-                {i18n.language === "tm" ? (
-                  <>
-                    {genderList.map((item, i) => {
-                      return (
-                        <FormControlLabel
-                          key={`gender_lest_key${i}`}
-                          value={item.id}
-                          control={<Radio />}
-                          label={item.name}
-                        />
-                      );
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {genderList.map((item, i) => {
-                      return (
-                        <FormControlLabel
-                          key={`gender_lest_key${i}`}
-                          value={item.id}
-                          control={<Radio />}
-                          label={item.nameRu}
-                        />
-                      );
-                    })}
-                  </>
-                )}
-              </RadioGroup>
-            </FormControl>
+            <AppSelect
+              value={agenstwoId}
+              onChange={(e) => setAgenstwoId(e.target.value)}
+            >
+              <option value={null}>
+                {t('no_selection')}
+              </option>
+              {agency.map((item, i) => {
+                return (
+                  <option value={item.id} key={`agency_list_key${i}`}>
+                    {i18n.language === 'ru' ? item.nameRu : item.name}
+                  </option>
+                );
+              })}
+            </AppSelect>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
@@ -567,6 +531,51 @@ const NewCardAddJob = () => {
               placeholder={t("job_about")}
               type={"text"}
             />
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl>
+              <FormLabel
+                id="demo-radio-buttons-group-label"
+                sx={{ color: "primary.main" }}
+              >
+                {t("job_gender_add")}
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+                onChange={e => setGender(e.target.value)}
+              >
+                {i18n.language === "tm" ? (
+                  <>
+                    {genderList.map((item, i) => {
+                      return (
+                        <FormControlLabel
+                          key={`gender_lest_key${i}`}
+                          value={item.id}
+                          control={<Radio />}
+                          label={i18n.language === 'ru' ? item.nameRu : item.name}
+                        />
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    {genderList.map((item, i) => {
+                      return (
+                        <FormControlLabel
+                          key={`gender_lest_key${i}`}
+                          value={item.id}
+                          control={<Radio />}
+                          label={item.nameRu}
+                        />
+                      );
+                    })}
+                  </>
+                )}
+              </RadioGroup>
+            </FormControl>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>

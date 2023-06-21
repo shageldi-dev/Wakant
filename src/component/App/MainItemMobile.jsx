@@ -21,7 +21,7 @@ const cardStyle = {
   },
 };
 const ItemMobile = (props) => {
-  const { isMobile, t, appLanguage } = useContext(AppContext);
+  const { isMobile, t, appLanguage, getAddressById } = useContext(AppContext);
   const { item } = props;
   const [isHover, setIsHover] = useState(false);
 
@@ -81,7 +81,7 @@ const ItemMobile = (props) => {
                 sx={{ width: "18px", color: "custom.notActive" }}
               />
               <Text
-                value={item.address}
+                value={getAddressById(item.locationId)}
                 sx={{ fontSize: "16px", color: "custom.notActive" }}
               />
             </Stack>

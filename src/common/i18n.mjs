@@ -219,6 +219,7 @@ const resources = {
       similar: "Похожие посты",
       owner: "Работодатель",
       phone: "Телефон:",
+      comments:"Teswirler",
       // add job
       job_category: "Iş kategoriýasy",
       job_times_saturday: "Iş sagatlary: Şenbe ",
@@ -244,6 +245,7 @@ const resources = {
       end_date: "Gutarýan wagty",
       ok: "OK",
       no_job: "Dynç",
+      no_selection: "Hiçisi",
 
       // sign page
       sign_in_to: "Ulagama girmek",

@@ -27,3 +27,31 @@ export const getRegionById=(list,id)=>{
         }
     }
 }
+
+export const setMaxLengthLines=(count)=>{
+    return {
+         overflow: "hidden",
+        display: "-webkit-box",
+        lineClamp: "2",
+        WebkitBoxOrient: "vertical",
+    }
+}
+
+export function getLanguageValue(key, item, language){
+    try{
+        if(!item || typeof item === "undefined" || item==null){
+            return "";
+        }
+        if(language==='ru'){
+            let value = item[`${key}Ru`];
+            if(value && typeof value !== 'undefined' && value!=null){
+                return value;
+            } else {
+                return item[`${key}`];
+            }
+        }
+        return item[`${key}`];
+    } catch(err){
+        return "";
+    }
+}

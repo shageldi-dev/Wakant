@@ -1,4 +1,29 @@
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import AddJob from "./page/Jobs/AddJob";
+import Category from "./page/Category/Category";
+import Events from "./component/Events/Events";
+import Home from "./page/Home/Home";
+import Index from "./page/Index/Index";
+import Jobs from "./page/Jobs/Jobs";
+import NewCardAddJob from "./page/Jobs/NewCardAddJob";
+import Profile from "./page/Profile/Profile";
+import ProfileContent from "./component/Profile/ProfileContent";
+import ProfileStepper from "./page/Profile/ProfileStepper";
+import ViewJob from "./page/Jobs/ViewJob";
+import Workers from "./page/Jobs/Workers";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { bindActionCreators } from "redux";
+import { AxiosInstance } from "./api/AxiosInstance.mjs";
+import { Fonts } from "./common/fonts.mjs";
+import { phoneSizes } from "./common/size.mjs";
+import { colors } from "./common/theme.mjs";
+import { actionCreators } from "./state/index";
+
 import {
   Box,
   createTheme,
@@ -7,30 +32,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { colors } from "./common/theme.mjs";
-import { createContext, useEffect, useLayoutEffect, useState } from "react";
-import { phoneSizes } from "./common/size.mjs";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Index from "./page/Index/Index";
-import Home from "./page/Home/Home";
-import { useTranslation } from "react-i18next";
-import { Fonts } from "./common/fonts.mjs";
-import Jobs from "./page/Jobs/Jobs";
-import Workers from "./page/Jobs/Workers";
-import AddJob from "./page/Jobs/AddJob";
-import ViewJob from "./page/Jobs/ViewJob";
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "./state/index";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Category from "./page/Category/Category";
-import { AxiosInstance } from "./api/AxiosInstance.mjs";
-import Profile from "./page/Profile/Profile";
-import ProfileContent from "./component/Profile/ProfileContent";
-import ProfileStepper from "./page/Profile/ProfileStepper";
-import Events from "./component/Events/Events";
-import NewCardAddJob from "./page/Jobs/NewCardAddJob";
 
 const lightTheme = createTheme({
   components: {
@@ -173,7 +174,29 @@ function App() {
     getParams();
   }, []);
 
-  function getNameById() {}
+   function getAddressById(id) {
+    try{
+      let found = params.addressList.find(it=>it.id == id);
+      if(appLanguage=='ru'){
+        return found.nameRu;
+      }
+      return found.name;
+    } catch(err){
+      return "";
+    }
+  }
+
+  function getGenderById(id) {
+    try{
+      let found = params.genderList.find(it=>it.id == id);
+      if(appLanguage=='ru'){
+        return found.nameRu;
+      }
+      return found.name;
+    } catch(err){
+      return "";
+    }
+  }
 
   useEffect(() => {
     // try {
@@ -190,6 +213,7 @@ function App() {
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    setLanguage(lng);
   };
 
   const count = useSelector((state) => state.counter);
@@ -209,6 +233,9 @@ function App() {
         appLanguage: appLanguage,
         isLogin: isLogin,
         setIsLogin: setIsLogin,
+        getAddressById: getAddressById,
+        getGenderById: getGenderById,
+        setLanguage: setLanguage,
       }}
     >
       <ThemeProvider theme={lightTheme}>

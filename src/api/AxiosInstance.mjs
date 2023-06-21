@@ -6,6 +6,7 @@ const AxiosInstance = axios.create({
   timeout: 100000,
   headers: {
     "Content-Type": "application/json",
+    'Authorization':`Bearer ${window.localStorage.getItem('token')}`
   },
 });
 // http://216.250.8.128:6425/getpost

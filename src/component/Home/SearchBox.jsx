@@ -1,65 +1,64 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {Button, Grid, InputBase, InputLabel, MenuItem, Select, Stack, TextField, Typography} from "@mui/material";
-import {AppContext} from "../../App";
-import SearchIcon from '@mui/icons-material/Search';
-import {Fonts} from "../../common/fonts.mjs";
-import Divider from "@mui/material/Divider";
-import {colors, regularButton} from "../../common/theme.mjs";
 import Autocomplete from "@mui/material/Autocomplete";
-import InputAdornment from '@mui/material/InputAdornment';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
-import { styled } from '@mui/system';
-import {AxiosInstance} from "../../api/AxiosInstance.mjs";
+import Divider from "@mui/material/Divider";
+import InputAdornment from "@mui/material/InputAdornment";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Loading from "../State/Loading/Loading";
-import {getImageFullUrl} from "../../common/utils.mjs";
+import React, { useContext, useEffect, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { Button, Grid, InputBase, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { styled } from "@mui/system";
+import { AppContext } from "../../App";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { Fonts } from "../../common/fonts.mjs";
+import { colors, regularButton } from "../../common/theme.mjs";
+import { getImageFullUrl } from "../../common/utils.mjs";
 
-const inputStyle={
-    fontFamily:Fonts.REGULAR,fontSize:'18px'
+const inputStyle = {
+    fontFamily: Fonts.REGULAR, fontSize: '18px'
 }
 
-const selectStyle={
-    fontFamily:Fonts.REGULAR,fontSize:'18px',
-    width:'100%',
-    border:'none',
-    outline:'none',
-    background:'transparent',
-    color:colors.NOT_ACTIVE
+const selectStyle = {
+    fontFamily: Fonts.REGULAR, fontSize: '18px',
+    width: '100%',
+    border: 'none',
+    outline: 'none',
+    background: 'transparent',
+    color: colors.NOT_ACTIVE
 }
 
 
 
 const SearchBox = (props) => {
-    const {t,isMobile,appLanguage}=useContext(AppContext);
-    const [params,setParams] = useState();
-    const [category,setCategory] = useState();
-    const [loading,setLoading] = useState(true);
-    const [selectedCategory,setSelectedCategory] = useState(null);
-    async function getData(){
+    const { t, isMobile, appLanguage } = useContext(AppContext);
+    const [params, setParams] = useState();
+    const [category, setCategory] = useState();
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    async function getData() {
         setLoading(true);
         await AxiosInstance.get('public/get-params')
-            .then(response=>{
+            .then(response => {
                 setParams(response.data);
             })
-            .catch(err=>{})
+            .catch(err => { })
         await AxiosInstance.get('public/categories')
-            .then(response=>{
+            .then(response => {
                 setCategory(response.data);
                 setLoading(false)
             })
-            .catch(err=>{
+            .catch(err => {
                 setLoading(false);
             })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getData()
-    },[])
-    const getDivider=()=>{
-        if(!isMobile){
-            return(
+    }, [])
+    const getDivider = () => {
+        if (!isMobile) {
+            return (
                 <Divider orientation={'vertical'} color={colors.PRIMARY} flexItem
-                        />
+                />
             )
         }
         return null;
@@ -68,16 +67,16 @@ const SearchBox = (props) => {
     return (
         <div>
             {
-                loading?
-                    <Loading/>
+                loading ?
+                    <Loading />
                     :
                     <Grid container spacing={3} alignItems={'center'}>
                         <Grid item xs={12} sm={12} md={4}>
-                            <Stack sx={{width:'100%',p:2,borderRadius:'5px',backgroundColor:isMobile?'custom.notActiveBlue':'transparent'}}
-                                   alignItems={'center'} direction={'row'} spacing={2}>
-                                <img src={'/images/icon/category.svg'} alt={"category"} style={{width:'26px'}}/>
+                            <Stack sx={{ width: '100%', p: 2, borderRadius: '5px', backgroundColor: isMobile ? 'custom.notActiveBlue' : 'transparent' }}
+                                alignItems={'center'} direction={'row'} spacing={2}>
+                                <img src={'/images/icon/category.svg'} alt={"category"} style={{ width: '26px' }} />
                                 <InputBase
-                                    sx={{...inputStyle}}
+                                    sx={{ ...inputStyle }}
                                     color={'custom.notActive'}
                                     placeholder={t('job_name')}
                                 />
@@ -89,19 +88,19 @@ const SearchBox = (props) => {
 
 
                         <Grid item xs={12} sm={12} md={3}>
-                            <Stack sx={{width:'100%',p:2,borderRadius:'5px',backgroundColor:isMobile?'custom.notActiveBlue':'transparent'}}
-                                   alignItems={'center'} direction={'row'} spacing={2}>
+                            <Stack sx={{ width: '100%', p: 2, borderRadius: '5px', backgroundColor: isMobile ? 'custom.notActiveBlue' : 'transparent' }}
+                                alignItems={'center'} direction={'row'} spacing={2}>
                                 {
                                     getDivider()
                                 }
-                                <img src={'/images/icon/location.svg'} alt={"category"} style={{width:'26px'}}/>
+                                <img src={'/images/icon/location.svg'} alt={"category"} style={{ width: '26px' }} />
 
-                                <select style={{...selectStyle}}>
+                                <select style={{ ...selectStyle }}>
                                     <option>{t('location')}</option>
                                     {
-                                        params.addressList.map((e,i)=>{
-                                            return(
-                                                <option value={e.id} key={`region-${i}`}>{appLanguage==='ru'?e.nameRu:e.name}</option>
+                                        params.addressList.map((e, i) => {
+                                            return (
+                                                <option value={e.id} key={`region-${i}`}>{appLanguage === 'ru' ? e.nameRu : e.name}</option>
                                             )
                                         })
                                     }
@@ -113,22 +112,22 @@ const SearchBox = (props) => {
 
 
                         <Grid item xs={12} sm={12} md={3}>
-                            <Stack sx={{width:'100%',p:2,borderRadius:'5px',backgroundColor:isMobile?'custom.notActiveBlue':'transparent'}}
-                                   alignItems={'center'} direction={'row'} spacing={2}>
+                            <Stack sx={{ width: '100%', p: 2, borderRadius: '5px', backgroundColor: isMobile ? 'custom.notActiveBlue' : 'transparent' }}
+                                alignItems={'center'} direction={'row'} spacing={2}>
                                 {
                                     getDivider()
                                 }
-                                <img src={selectedCategory==null?'/images/icon/bag.svg':getImageFullUrl(selectedCategory.image)} alt={"category"} style={{width:'26px'}}/>
+                                <img src={selectedCategory == null ? '/images/icon/bag.svg' : getImageFullUrl(selectedCategory.image)} alt={"category"} style={{ width: '26px' }} />
 
 
-                                <select style={{...selectStyle}} onChange={e=>{
-                                        setSelectedCategory(category.data.find(c=>c.id == e.target.value))
-                                    }
+                                <select style={{ ...selectStyle }} onChange={e => {
+                                    setSelectedCategory(category.data.find(c => c.id == e.target.value))
+                                }
                                 }>
                                     {
-                                        category.data.map((e,i)=>{
-                                            return(
-                                                <option value={e.id} key={`category-${i}`}>{appLanguage==='ru'?e.nameRu:e.name}</option>
+                                        category.data.map((e, i) => {
+                                            return (
+                                                <option value={e.id} key={`category-${i}`}>{appLanguage === 'ru' ? e.nameRu : e.name}</option>
                                             )
                                         })
                                     }
@@ -138,16 +137,16 @@ const SearchBox = (props) => {
                             </Stack>
                         </Grid>
                         <Grid item xs={12} sm={12} md={2}>
-                            <Stack sx={{width:'100%'}} alignItems={'flex-end'}>
+                            <Stack sx={{ width: '100%' }} alignItems={'flex-end'}>
                                 <Button
                                     variant={'contained'}
                                     fullWidth
-                                    startIcon={<SearchIcon/>}
+                                    startIcon={<SearchIcon />}
                                     sx={{
                                         ...regularButton,
                                         color: 'custom.alwaysWhite',
-                                        height:50,
-                                        fontSize:'16px',
+                                        height: 50,
+                                        fontSize: '16px',
                                     }}>{t('search')}</Button>
                             </Stack>
                         </Grid>
