@@ -246,6 +246,7 @@ const resources = {
       ok: "OK",
       no_job: "Dynç",
       no_selection: "Hiçisi",
+      add_job:"Iş goşmak",
 
       // sign page
       sign_in_to: "Ulagama girmek",

@@ -4,6 +4,7 @@ import ItemDesktop from "../../component/App/ItemDesktop";
 import MainItemMobile from "../../component/App/MainItemMobile";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Stack } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import { AxiosInstance } from "../../api/AxiosInstance.mjs";
@@ -24,6 +25,8 @@ const AddJob = (props) => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState();
   const { isMobile } = useContext(AppContext);
+
+  const { t } = useTranslation();
 
   function changeRoute(path) {
     navigate(path);
@@ -66,7 +69,7 @@ const AddJob = (props) => {
           }}
           startIcon={<AddCircleOutlineIcon />}
         >
-          Add job
+          {t('add_job')}
         </Button>
       </Stack>
 
