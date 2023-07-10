@@ -64,6 +64,7 @@ const Home = (props) => {
   }
   useEffect(() => {
     getData();
+    console.log('tester');
   }, []);
   const tJobsRef = useRef();
   // const getImageSize = () => {
