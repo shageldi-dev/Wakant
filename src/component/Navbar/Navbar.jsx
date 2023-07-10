@@ -106,8 +106,8 @@ const Navbar = (props) => {
     navigate(path);
   }
 
-  function changeLang(ln) {
-    changeLanguage(ln);
+  function changeLang(lng) {
+    changeLanguage(lng);
     handleClose();
   }
 
@@ -296,7 +296,8 @@ const Navbar = (props) => {
                 sx={{ ...regularButton, fontSize: matches ? "16px" : "12px" }}
                 endIcon={<KeyboardArrowDownIcon />}
               >
-                {changeLang === "tm" ? t("tm") : t("ru")}
+                {/* {changeLang === "tm" ? t("ru") : t("tm")} */}
+                {t('lng')}
               </Button>
               <Menu
                 id="basic-menu"

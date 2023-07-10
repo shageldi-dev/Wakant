@@ -83,8 +83,17 @@ const Resume = ({ orientation }) => {
         <Fade in={open}>
           <Box sx={style}>
             <div ref={componentRef}>
-              <Grid container spacing={5}>
-                <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid
+                container
+                spacing={5}
+              >
+                <Grid
+                  item
+                  lg={4}
+                  md={4}
+                  sm={6}
+                  xs={12}
+                >
                   <Stack alignItems="center">
                     <img
                       style={{ width: "84px" }}
@@ -111,8 +120,14 @@ const Resume = ({ orientation }) => {
                     >
                       SAPAROW
                     </Typography>
-                    <Stack mt={1} mb={1}>
-                      <img src="images/Line 1.png" alt="Line 1" />
+                    <Stack
+                      mt={1}
+                      mb={1}
+                    >
+                      <img
+                        src="images/Line 1.png"
+                        alt="Line 1"
+                      />
                     </Stack>
                     <Typography
                       sx={{
@@ -124,7 +139,10 @@ const Resume = ({ orientation }) => {
                       {t("salesConsultant")}
                     </Typography>
                   </Stack>
-                  <Stack alignItems="center" mt={3}>
+                  <Stack
+                    alignItems="center"
+                    mt={3}
+                  >
                     <Box
                       sx={{ background: "#d9d9d9", p: 1, width: "74%", mb: -3 }}
                     >
@@ -147,8 +165,16 @@ const Resume = ({ orientation }) => {
                       pb: 45,
                     }}
                   >
-                    <Stack pt={7} pl={3} spacing={2}>
-                      <Stack direction="row" spacing={2} alignItems="center">
+                    <Stack
+                      pt={7}
+                      pl={3}
+                      spacing={2}
+                    >
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        alignItems="center"
+                      >
                         <IconButton
                           sx={{
                             background: "#fff",
@@ -166,7 +192,11 @@ const Resume = ({ orientation }) => {
                           Erkek
                         </Typography>
                       </Stack>
-                      <Stack direction="row" spacing={2} alignItems="center">
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        alignItems="center"
+                      >
                         <IconButton
                           sx={{
                             background: "#fff",
@@ -185,7 +215,10 @@ const Resume = ({ orientation }) => {
                         </Typography>
                       </Stack>
                     </Stack>
-                    <Stack alignItems="center" mt={4}>
+                    <Stack
+                      alignItems="center"
+                      mt={4}
+                    >
                       <Box
                         sx={{
                           background: "#d9d9d9",
@@ -206,8 +239,16 @@ const Resume = ({ orientation }) => {
                         </Typography>
                       </Box>
                     </Stack>
-                    <Stack pt={7} pl={3} spacing={2}>
-                      <Stack direction="row" spacing={2} alignItems="center">
+                    <Stack
+                      pt={7}
+                      pl={3}
+                      spacing={2}
+                    >
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        alignItems="center"
+                      >
                         <IconButton
                           sx={{
                             background: "#fff",
@@ -225,7 +266,11 @@ const Resume = ({ orientation }) => {
                           Asgabat
                         </Typography>
                       </Stack>
-                      <Stack direction="row" spacing={2} alignItems="center">
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        alignItems="center"
+                      >
                         <IconButton
                           sx={{
                             background: "#fff",
@@ -243,7 +288,11 @@ const Resume = ({ orientation }) => {
                           +993 00 000000
                         </Typography>
                       </Stack>
-                      <Stack direction="row" spacing={2} alignItems="center">
+                      <Stack
+                        direction="row"
+                        spacing={2}
+                        alignItems="center"
+                      >
                         <IconButton
                           sx={{
                             background: "#fff",
@@ -275,7 +324,14 @@ const Resume = ({ orientation }) => {
                     </Stack>
                   </Box>
                 </Grid>
-                <Grid item lg={8} md={8} sm={8} xs={12} width="100%">
+                <Grid
+                  item
+                  lg={8}
+                  md={8}
+                  sm={8}
+                  xs={12}
+                  width="100%"
+                >
                   <Stack
                     direction="row"
                     spacing={2}
@@ -297,7 +353,10 @@ const Resume = ({ orientation }) => {
                       >
                         gosmaca
                       </Typography>
-                      <img src="/images/Line 2.png" alt="Line 2" />
+                      <img
+                        src="/images/Line 2.png"
+                        alt="Line 2"
+                      />
                     </Stack>
                   </Stack>
                   <Stack mt={2}>
@@ -334,7 +393,10 @@ const Resume = ({ orientation }) => {
                         >
                           bilim
                         </Typography>
-                        <img src="/images/Line 2.png" alt="Line 2" />
+                        <img
+                          src="/images/Line 2.png"
+                          alt="Line 2"
+                        />
                       </Stack>
                     </Stack>
                     <Stack mt={2}>
@@ -468,7 +530,10 @@ const Resume = ({ orientation }) => {
                         >
                           iş tejribe
                         </Typography>
-                        <img src="/images/Line 2.png" alt="Line 2" />
+                        <img
+                          src="/images/Line 2.png"
+                          alt="Line 2"
+                        />
                       </Stack>
                     </Stack>
                     <Stack mt={2}>
@@ -585,12 +650,22 @@ const Resume = ({ orientation }) => {
                         >
                           Daşary ýurt dilleri
                         </Typography>
-                        <img src="/images/Line 2.png" alt="Line 2" />
+                        <img
+                          src="/images/Line 2.png"
+                          alt="Line 2"
+                        />
                       </Stack>
                     </Stack>
                   </Stack>
-                  <Grid mt={3} container alignItems="center">
-                    <Grid item md={2}>
+                  <Grid
+                    mt={3}
+                    container
+                    alignItems="center"
+                  >
+                    <Grid
+                      item
+                      md={2}
+                    >
                       <Typography
                         sx={{
                           fontWeight: "300",
@@ -601,8 +676,14 @@ const Resume = ({ orientation }) => {
                         Fransuz dili
                       </Typography>
                     </Grid>
-                    <Grid item md={5}>
-                      <Stack direction="row" justifyContent="flex-start">
+                    <Grid
+                      item
+                      md={5}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                      >
                         <Box sx={{ width: "100%" }}>
                           <BorderLinearProgress
                             variant="determinate"
@@ -611,8 +692,14 @@ const Resume = ({ orientation }) => {
                         </Box>
                       </Stack>
                     </Grid>
-                    <Grid item md={5}>
-                      <Stack direction="row" justifyContent="flex-end">
+                    <Grid
+                      item
+                      md={5}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-end"
+                      >
                         <Typography
                           sx={{
                             fontWeight: "300",
@@ -624,7 +711,11 @@ const Resume = ({ orientation }) => {
                         </Typography>
                       </Stack>
                     </Grid>
-                    <Grid item md={2} mt={2}>
+                    <Grid
+                      item
+                      md={2}
+                      mt={2}
+                    >
                       <Typography
                         sx={{
                           fontWeight: "300",
@@ -635,8 +726,15 @@ const Resume = ({ orientation }) => {
                         Ispan dili
                       </Typography>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-start">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                      >
                         <Box sx={{ width: "100%" }}>
                           <BorderLinearProgress
                             variant="determinate"
@@ -645,8 +743,15 @@ const Resume = ({ orientation }) => {
                         </Box>
                       </Stack>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-end">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-end"
+                      >
                         <Typography
                           sx={{
                             fontWeight: "300",
@@ -658,7 +763,11 @@ const Resume = ({ orientation }) => {
                         </Typography>
                       </Stack>
                     </Grid>
-                    <Grid item md={2} mt={2}>
+                    <Grid
+                      item
+                      md={2}
+                      mt={2}
+                    >
                       <Typography
                         sx={{
                           fontWeight: "300",
@@ -669,8 +778,15 @@ const Resume = ({ orientation }) => {
                         Inlis dili
                       </Typography>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-start">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                      >
                         <Box sx={{ width: "100%" }}>
                           <BorderLinearProgress
                             variant="determinate"
@@ -679,8 +795,15 @@ const Resume = ({ orientation }) => {
                         </Box>
                       </Stack>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-end">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-end"
+                      >
                         <Typography
                           sx={{
                             fontWeight: "300",
@@ -692,7 +815,11 @@ const Resume = ({ orientation }) => {
                         </Typography>
                       </Stack>
                     </Grid>
-                    <Grid item md={2} mt={2}>
+                    <Grid
+                      item
+                      md={2}
+                      mt={2}
+                    >
                       <Typography
                         sx={{
                           fontWeight: "300",
@@ -703,8 +830,15 @@ const Resume = ({ orientation }) => {
                         Rus dili
                       </Typography>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-start">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-start"
+                      >
                         <Box sx={{ width: "100%" }}>
                           <BorderLinearProgress
                             variant="determinate"
@@ -713,8 +847,15 @@ const Resume = ({ orientation }) => {
                         </Box>
                       </Stack>
                     </Grid>
-                    <Grid item md={5} mt={2}>
-                      <Stack direction="row" justifyContent="flex-end">
+                    <Grid
+                      item
+                      md={5}
+                      mt={2}
+                    >
+                      <Stack
+                        direction="row"
+                        justifyContent="flex-end"
+                      >
                         <Typography
                           sx={{
                             fontWeight: "300",
@@ -727,7 +868,11 @@ const Resume = ({ orientation }) => {
                       </Stack>
                     </Grid>
                   </Grid>
-                  <Stack direction="row" mt={5} justifyContent="flex-end">
+                  <Stack
+                    direction="row"
+                    mt={5}
+                    justifyContent="flex-end"
+                  >
                     <ReactToPrint
                       pageStyle={`@page { size: A4 ${orientation}; margin: 1cm; }`}
                       trigger={() => (

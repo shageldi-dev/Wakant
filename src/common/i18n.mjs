@@ -12,9 +12,13 @@ const resources = {
       find_worker: "Ищущие работу",
       sign_up: "Регистрация",
       add_job: "Добавить заявка",
+      events: "действия",
+      favs: "избранные",
       sign_in: "Войти",
       ru: "Русский",
-      tm: "Turkmen",
+      tm: "Türkmençe",
+      lng: 'Русский',
+      categories: "Категория",
       home_title: "Найти работу, Нанять креативщиков",
       home_desc:
         "Каждый месяц более 3 миллионов соискателей обращаются к веб-сайту в поисках работы, ежедневно подавая более 140 000 заявок.",
@@ -114,6 +118,9 @@ const resources = {
       fullDisplay: "Полное отображение",
       salesConsultant: "консультант по продажам",
       personalInformation: "ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ",
+
+      // sign_in page
+      sign_in_2: "Войти",
     },
   },
   tm: {
@@ -130,6 +137,7 @@ const resources = {
       categories: "Kategoriýalar",
       ru: "Русский",
       tm: "Türkmençe",
+      lng: 'Türkmençe',
       home_title: "Iş orny tapmak. Tejribeli \n" + "hünärmenleri saýlamak",
       home_desc:
         "Iş maksatlaryňyz üçin uzak möhletli üstünlik gazanmagyň çalt we ygtybarly usuly. Shu wagt. \n" +
@@ -192,7 +200,7 @@ const resources = {
       per_filter: "Giňişleýin filtirlemek",
       page: "Sahypa",
       all: "Ählisi",
-      category: "Kategoriýalar",
+      categories: "Kategoriýalar",
       job_price: "Iş haky aralygyny saýlamak",
       job_gender: "Işe soralýan",
       job_firm: "Agenstwolar",
@@ -270,7 +278,7 @@ const resources = {
       back: "Yza dolan",
       sponseredByText:
         "IDUSAID tarapyndan maliýeleşdirilýän we QED Group LLC tarapyndan durmuşa geçirilýän Döwlet dolandyryşyny gowulandyrmak üçin goldaw, Türkmenistanyň döwlet edaralaryna maslahat we tehniki goldaw berýär. Şeýle hem, bu döwürde beren goldawlary üçin QED toparyna sag bolsun aýdýarys.",
-      // Profil
+      // Profile
       profile: "Profil",
       fullDisplay: "Doly görkezmek",
       salesConsultant: "satyjy konsultant",
@@ -283,12 +291,10 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: "tm", // language to use, more information here: https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
-    // you can use the i18n.changeLanguage function to change the language manually: https://www.i18next.com/overview/api#changelanguage
-    // if you're using a language detector, do not define the lng option
+    lng: "tm",
 
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false, 
     },
   });
 

@@ -92,14 +92,25 @@ const Home = (props) => {
             alignItems={"flex-start"}
             justifyContent={"space-between"}
           >
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+            >
               <Stack
                 spacing={4}
                 direction={"column"}
                 sx={{ mt: isMobile ? 5 : 8 }}
               >
-                <Bold value={t("home_title")} sx={{ fontSize: "35px" }} />
-                <Text value={t("home_desc")} sx={{ fontSize: "18px" }} />
+                <Bold
+                  value={t("home_title")}
+                  sx={{ fontSize: "35px" }}
+                />
+                <Text
+                  value={t("home_desc")}
+                  sx={{ fontSize: "18px" }}
+                />
                 <Button
                   variant={"contained"}
                   sx={{
@@ -133,21 +144,26 @@ const Home = (props) => {
                 >
                   {data
                     ? data.agencyList.map((item, i) => {
-                      return (
-                        <SwiperSlide key={`slide-agency-${i}`}>
-                          <img
-                            alt={"slide-imagee"}
-                            src={getImageFullUrl(item.imageUrl)}
-                            className={"sponsor-image"}
-                          />
-                        </SwiperSlide>
-                      );
-                    })
+                        return (
+                          <SwiperSlide key={`slide-agency-${i}`}>
+                            <img
+                              alt={"slide-imagee"}
+                              src={getImageFullUrl(item.imageUrl)}
+                              className={"sponsor-image"}
+                            />
+                          </SwiperSlide>
+                        );
+                      })
                     : null}
                 </Swiper>
               </Stack>
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+            >
               {isMobile ? null : (
                 <div className="hearts_wrapper">
                   <div className="heart-cyrcle heart-cyrcle-1">
@@ -180,13 +196,22 @@ const Home = (props) => {
                   </div>
 
                   <div className="heart heart-1">
-                    <img src="/images/avatar/one.png" alt="app icon" />
+                    <img
+                      src="/images/avatar/one.png"
+                      alt="app icon"
+                    />
                   </div>
                   <div className="heart heart-2">
-                    <img src="/images/avatar/two.png" alt="blockchain icon" />
+                    <img
+                      src="/images/avatar/two.png"
+                      alt="blockchain icon"
+                    />
                   </div>
                   <div className="heart heart-3">
-                    <img src="/images/avatar/three.png" alt="ar-vr icon" />
+                    <img
+                      src="/images/avatar/three.png"
+                      alt="ar-vr icon"
+                    />
                   </div>
                   <div className="heart heart-4">
                     <img
@@ -196,7 +221,10 @@ const Home = (props) => {
                   </div>
 
                   <div className="center-logo">
-                    <img src="/images/avatar/main.png" alt="logo" />
+                    <img
+                      src="/images/avatar/main.png"
+                      alt="logo"
+                    />
                   </div>
                 </div>
               )}
@@ -254,9 +282,21 @@ const Home = (props) => {
           </Box>
           {/* Category section */}
           {/* Jobs today section */}
-          <Box mt={top} mb={bottom}>
-            <Grid container alignItems={"flex-start"} spacing={4}>
-              <Grid item xs={12} sm={12} md={5.5}>
+          <Box
+            mt={top}
+            mb={bottom}
+          >
+            <Grid
+              container
+              alignItems={"flex-start"}
+              spacing={4}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={5.5}
+              >
                 {isMobile ? null : (
                   <Image
                     style={{ width: "100%", borderRadius: "10px" }}
@@ -265,8 +305,17 @@ const Home = (props) => {
                   />
                 )}
               </Grid>
-              <Grid item ref={tJobsRef} xs={12} sm={12} md={6.5}>
-                <Stack sx={{ width: "100%" }} justifyContent={"space-between"}>
+              <Grid
+                item
+                ref={tJobsRef}
+                xs={12}
+                sm={12}
+                md={6.5}
+              >
+                <Stack
+                  sx={{ width: "100%" }}
+                  justifyContent={"space-between"}
+                >
                   <Stack>
                     <Bold
                       value={t("today_jobs")}
@@ -300,9 +349,20 @@ const Home = (props) => {
           </Box>
           {/*  Jobs today section  */}
           {/*  Apps section  */}
-          <Box mt={top} mb={bottom}>
-            <Grid container spacing={6}>
-              <Grid item xs={12} sm={12} md={6}>
+          <Box
+            mt={top}
+            mb={bottom}
+          >
+            <Grid
+              container
+              spacing={6}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+              >
                 <Stack spacing={4}>
                   <Bold
                     value={t("app_title")}
@@ -352,7 +412,12 @@ const Home = (props) => {
                   </Stack>
                 </Stack>
               </Grid>
-              <Grid item xs={12} sm={12} md={6}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+              >
                 {isMobile ? null : (
                   <Image
                     style={{ width: "100%" }}
@@ -367,10 +432,26 @@ const Home = (props) => {
           </Box>
           {/*  Apps section  */}
           {/* Jobs section */}
-          <Box mt={top} mb={bottom}>
-            <Grid container alignItems={"flex-start"} spacing={4}>
-              <Grid item ref={tJobsRef} xs={12} sm={12} md={6.5}>
-                <Stack sx={{ width: "100%" }} justifyContent={"space-between"}>
+          <Box
+            mt={top}
+            mb={bottom}
+          >
+            <Grid
+              container
+              alignItems={"flex-start"}
+              spacing={4}
+            >
+              <Grid
+                item
+                ref={tJobsRef}
+                xs={12}
+                sm={12}
+                md={6.5}
+              >
+                <Stack
+                  sx={{ width: "100%" }}
+                  justifyContent={"space-between"}
+                >
                   <Stack>
                     <Bold
                       value={t("immediately")}
@@ -392,7 +473,12 @@ const Home = (props) => {
                   </Button>
                 </Stack>
               </Grid>
-              <Grid item xs={12} sm={12} md={5.5}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={5.5}
+              >
                 {isMobile ? null : (
                   <Image
                     style={{ width: "100%", borderRadius: "10px" }}
@@ -406,7 +492,10 @@ const Home = (props) => {
           {/*  Jobs section  */}
           {/* Features */}
           {isMobile ? null : (
-            <Box mt={top} mb={bottom}>
+            <Box
+              mt={top}
+              mb={bottom}
+            >
               <div>
                 {/*<img src={'/images/line.svg'} alt={'line'} style={{*/}
                 {/*    position:'absolute',maxWidth:'100%',zIndex:"-9",*/}
@@ -490,7 +579,10 @@ const Home = (props) => {
 
           {/*  Comments  */}
           <Box mb={bottom}>
-            <Stack spacing={3} alignItems={"center"}>
+            <Stack
+              spacing={3}
+              alignItems={"center"}
+            >
               <Bold
                 value={t("user_comment")}
                 sx={{
@@ -526,7 +618,10 @@ const Home = (props) => {
           </Box>
           {/*  Comments  */}
           {/*  Contact us  */}
-          <Box mt={top} mb={bottom}>
+          <Box
+            mt={top}
+            mb={bottom}
+          >
             <Stack spacing={4}>
               <Bold
                 value={t("contact")}
@@ -540,39 +635,78 @@ const Home = (props) => {
                 }}
               />
 
-              <Grid container spacing={0}>
-                <Grid item xs={12} sm={12} md={7}>
-                  <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} sm={12} md={6}>
+              <Grid
+                container
+                spacing={0}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  md={7}
+                >
+                  <Grid
+                    item
+                    xs={12}
+                  >
+                    <Grid
+                      container
+                      spacing={2}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={6}
+                      >
                         <input
                           placeholder={t("fullname")}
                           type={"text"}
                           style={{ ...inputStyle }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={6}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={6}
+                      >
                         <input
                           placeholder={t("company")}
                           type={"text"}
                           style={{ ...inputStyle }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={6}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={6}
+                      >
                         <input
                           placeholder={t("email")}
                           type={"email"}
                           style={{ ...inputStyle }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={6}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={6}
+                      >
                         <input
                           placeholder={t("phone_number")}
                           type={"phone"}
                           style={{ ...inputStyle }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={12}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={12}
+                      >
                         <textarea
                           placeholder={t("your_message")}
                           type={"text"}
@@ -584,7 +718,12 @@ const Home = (props) => {
                           }}
                         />
                       </Grid>
-                      <Grid item xs={12} sm={12} md={12}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={12}
+                      >
                         <Button
                           variant="contained"
                           sx={{
@@ -601,7 +740,12 @@ const Home = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} sm={12} md={5}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  md={5}
+                >
                   <Stack
                     spacing={6}
                     mt={isMobile ? 10 : 0}
@@ -630,7 +774,10 @@ const Home = (props) => {
                     </Stack>
 
                     <Stack spacing={2}>
-                      <SemiBold value={t("number")} sx={{ fontSize: "18px" }} />
+                      <SemiBold
+                        value={t("number")}
+                        sx={{ fontSize: "18px" }}
+                      />
                       <Light
                         value={t("our_numbers").split(",")[0]}
                         sx={{ fontSize: "16px", ...linkStyle }}
