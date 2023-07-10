@@ -361,7 +361,7 @@ const Navbar = (props) => {
                     }}
                     startIcon={<LogoutIcon />}
                   >
-                    Logout
+                    Logout1
                   </Button>
                 </MenuItem>
               </Menu>
