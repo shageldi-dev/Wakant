@@ -32,7 +32,7 @@ export const setMaxLengthLines=(count)=>{
     return {
          overflow: "hidden",
         display: "-webkit-box",
-        lineClamp: "2",
+        // lineClamp: '2',
         WebkitBoxOrient: "vertical",
     }
 }

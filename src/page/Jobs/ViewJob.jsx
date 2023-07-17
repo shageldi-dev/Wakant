@@ -38,7 +38,8 @@ import {
 } from "../../common/utils.mjs";
 
 const ViewJob = (props) => {
-  const { t, isMobile, appLanguage, getGenderById, getAddressById } = useContext(AppContext);
+  const { t, isMobile, appLanguage, getGenderById, getAddressById } =
+    useContext(AppContext);
   const carousel = useRef();
   const navigate = useNavigate();
   const { uuid } = useParams();
@@ -48,9 +49,12 @@ const ViewJob = (props) => {
   const [showComment, setShowComment] = useState(false);
 
   const handleButtonClick = () => {
-    setShowComment(true);
+    setShowComment(!showComment);
   };
 
+  // function getDetail() {
+  //   return listOfItems.find((item) => item.id == id);
+  // }
   function getData() {
     setLoading(true);
     AxiosInstance.get(`/web/jobs/get/${uuid}`)
@@ -79,7 +83,7 @@ const ViewJob = (props) => {
       category: "Web programming",
       time: `Job-${i}`,
       image: `https://picsum.photos/id/${parseInt(
-        Math.random() * 400 * i
+        Math.random() * 400 * i,
       )}/200/300`,
       date: new Date(),
       desc: "Лорем ипсум долор сит амет, ин еос м...",
@@ -96,8 +100,16 @@ const ViewJob = (props) => {
     >
       Jobs
     </Link>,
-    <Typography sx={{ fontSize: "18px" }} key="3" color="custom.textColor">
-      UI/UX Designer
+    <Typography
+      sx={{ fontSize: "18px" }}
+      key="3"
+      color="custom.textColor"
+    >
+      {loading
+        ? " "
+        : appLanguage === "ru"
+        ? data.category.nameRu
+        : data.category.name}
     </Typography>,
   ];
   return (
@@ -112,8 +124,16 @@ const ViewJob = (props) => {
         </Stack>
       ) : (
         <div>
-          <Grid container alignItems={"center"}>
-            <Grid item xs={12} sm={12} md={8}>
+          <Grid
+            container
+            alignItems={"center"}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={8}
+            >
               <Breadcrumbs
                 separator="›"
                 color={"primary"}
@@ -127,8 +147,17 @@ const ViewJob = (props) => {
                 }
                 sx={{ fontSize: "32px" }}
               />
-              <Stack direction={"row"} mt={1} spacing={3} alignItems={"center"}>
-                <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <Stack
+                direction={"row"}
+                mt={1}
+                spacing={3}
+                alignItems={"center"}
+              >
+                <Stack
+                  direction={"row"}
+                  spacing={1}
+                  alignItems={"center"}
+                >
                   <PaidIcon sx={{ width: "22px", color: "custom.notActive" }} />
                   <Text
                     value={`${data.salary} TMT`}
@@ -136,7 +165,11 @@ const ViewJob = (props) => {
                   />
                 </Stack>
 
-                <Stack direction={"row"} spacing={1} alignItems={"center"}>
+                <Stack
+                  direction={"row"}
+                  spacing={1}
+                  alignItems={"center"}
+                >
                   <AccessTimeFilledIcon
                     sx={{ width: "22px", color: "custom.notActive" }}
                   />
@@ -147,7 +180,12 @@ const ViewJob = (props) => {
                 </Stack>
               </Stack>
             </Grid>
-            <Grid item xs={12} sm={12} md={4}>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={4}
+            >
               <Stack
                 direction={"row"}
                 justifyContent={isMobile ? "space-between" : "flex-end"}
@@ -164,7 +202,7 @@ const ViewJob = (props) => {
                     textTransform: "none",
                   }}
                 >
-                  {t("one_bt")}
+                  {t("submit_job")}
                 </Button>
                 <Button
                   variant={"contained"}
@@ -176,14 +214,25 @@ const ViewJob = (props) => {
                     textTransform: "none",
                   }}
                 >
-                  {t("submit_job")}
+                  {t("one_bt")}
                 </Button>
               </Stack>
             </Grid>
           </Grid>
-          <Divider color={colors.PRIMARY} sx={{ mt: 2 }} />
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={12} md={8}>
+          <Divider
+            color={colors.PRIMARY}
+            sx={{ mt: 2 }}
+          />
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={8}
+            >
               <Box
                 sx={{
                   backgroundColor: "custom.notActiveBlue",
@@ -192,11 +241,26 @@ const ViewJob = (props) => {
                   mt: 3,
                 }}
               >
-                <SemiBold value={t("about_job")} sx={{ fontSize: "25px" }} />
-                <Divider color={colors.PRIMARY} sx={{ mt: 2 }} />
+                <SemiBold
+                  value={t("about_job")}
+                  sx={{ fontSize: "25px" }}
+                />
+                <Divider
+                  color={colors.PRIMARY}
+                  sx={{ mt: 2 }}
+                />
 
-                <Grid container mt={1} spacing={3}>
-                  <Grid item xs={12} sm={12} md={6}>
+                <Grid
+                  container
+                  mt={1}
+                  spacing={3}
+                >
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={6}
+                  >
                     <Grid
                       container
                       alignItems={"center"}
@@ -292,15 +356,16 @@ const ViewJob = (props) => {
                       </Grid>
                       <Grid xs={6}>
                         <Text
-                          value={`${data.workday_hours}, ${t(
-                            "job_times_saturday"
-                          )} ${data.saturday_hours == null
-                            ? "---"
-                            : data.saturday_hours
-                            }, ${t("job_times_sunday")} ${data.sunday_hours == null
+                          value={`${data.workday_hours},
+                          ${t("job_times_saturday")} ${
+                            data.saturday_hours == null
+                              ? "---"
+                              : data.saturday_hours
+                          }, ${t("job_times_sunday")} ${
+                            data.sunday_hours == null
                               ? "---"
                               : data.sunday_hours
-                            }`}
+                          }`}
                           sx={{
                             fontSize: "18px",
                             textAlign: "end",
@@ -312,7 +377,13 @@ const ViewJob = (props) => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={6} sx={{ maxWidth: "100%" }}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    sx={{ maxWidth: "100%" }}
+                  >
                     <Grid
                       container
                       alignItems={"center"}
@@ -391,9 +462,12 @@ const ViewJob = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Divider color={colors.PRIMARY} sx={{ mt: 2 }} />
+                <Divider
+                  color={colors.PRIMARY}
+                  sx={{ mt: 2 }}
+                />
                 <Text
-                  value={getLanguageValue('conditions', data, i18n.language)}
+                  value={getLanguageValue("conditions", data, i18n.language)}
                   sx={{
                     mt: 2,
                     fontSize: "18px",
@@ -405,8 +479,16 @@ const ViewJob = (props) => {
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={12} md={4}>
-              <Bold value={t("owner")} sx={{ fontSize: "24px", mt: 3 }} />
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={4}
+            >
+              <Bold
+                value={t("owner")}
+                sx={{ fontSize: "24px", mt: 3 }}
+              />
               <Box
                 sx={{
                   backgroundColor: "custom.notActiveBlue",
@@ -416,8 +498,14 @@ const ViewJob = (props) => {
                 }}
               >
                 <Stack spacing={3}>
-                  <Grid container sx={{ width: "100%" }}>
-                    <Grid item xs={2.5}>
+                  <Grid
+                    container
+                    sx={{ width: "100%" }}
+                  >
+                    <Grid
+                      item
+                      xs={2.5}
+                    >
                       <Image
                         showLoading={
                           <Skeleton
@@ -436,15 +524,20 @@ const ViewJob = (props) => {
                         wrapperStyle={{ height: "52px", width: "52px" }}
                       />
                     </Grid>
-                    <Grid item xs={9.5}>
+                    <Grid
+                      item
+                      xs={9.5}
+                    >
                       <SemiBold
-                        value={
-                          getLanguageValue('name', data.agenstwo, i18n.language)
-                        }
+                        value={getLanguageValue(
+                          "name",
+                          data.agenstwo,
+                          i18n.language,
+                        )}
                         sx={{ fontSize: "18px" }}
                       />
-                      {
-                        data.agenstwo !== null && <Stack
+                      {data.agenstwo !== null && (
+                        <Stack
                           direction={"row"}
                           spacing={1}
                           alignItems={"center"}
@@ -457,11 +550,14 @@ const ViewJob = (props) => {
                             sx={{ fontSize: "16px", color: "custom.notActive" }}
                           />
                         </Stack>
-                      }
+                      )}
                     </Grid>
                   </Grid>
 
-                  <Divider color={colors.PRIMARY} sx={{ mt: 2 }} />
+                  <Divider
+                    color={colors.PRIMARY}
+                    sx={{ mt: 2 }}
+                  />
 
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25180.571186993187!2d58.35082411766056!3d37.91707964980214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f70020b1b15c45f%3A0x41bd73daa974168!2zwqtCYWd0ecO9YXJseWvCuyBzw7Z3ZGEtZHluw6cgYWx5xZ8gbWVya2V6aQ!5e0!3m2!1sen!2s!4v1666470040031!5m2!1sen!2s"
@@ -479,33 +575,50 @@ const ViewJob = (props) => {
                   <ul>
                     <li>
                       <Text
-                        value={getLanguageValue('about_employer', data, i18n.language)}
+                        value={getLanguageValue(
+                          "about_employer",
+                          data,
+                          i18n.language,
+                        )}
                         sx={{ fontSize: "16px" }}
                       />
                     </li>
-                    {
-                      data.agenstwo !== null && <li>
+                    {data.agenstwo !== null && (
+                      <li>
                         <Text
-                          value={`Телефон: ${data.agenstwo.phone_number}`}
+                          value={`${t("phone")}: ${data.agenstwo.phone_number}`}
                           sx={{ fontSize: "16px" }}
                         />
                       </li>
-                    }
+                    )}
                   </ul>
                 </Stack>
               </Box>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={12} md={8}>
-              <Stack direction="row" justifyContent="flex-end" spacing={2}>
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={8}
+            >
+              <Stack
+                direction="row"
+                justifyContent="flex-end"
+                spacing={2}
+              >
                 <Button
                   onClick={handleButtonClick}
                   sx={{ textTransform: "none", color: "#2058D4" }}
                 >
-                  {t('comments')}
+                  {t("comments")}
                 </Button>
                 <IconButton
+                  onClick={handleButtonClick}
                   sx={{
                     color: "custom.textColor",
                     backgroundColor: "custom.notActiveBlue",

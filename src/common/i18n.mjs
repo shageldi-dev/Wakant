@@ -14,6 +14,7 @@ const resources = {
       add_job: "Добавить заявка",
       events: "действия",
       favs: "избранные",
+      anceta: "Анкета",
       sign_in: "Войти",
       ru: "Русский",
       tm: "Türkmençe",
@@ -29,7 +30,7 @@ const resources = {
       search: "Поиск",
       search_by_category: "Поиск по категориям",
       see_all: "Показать все",
-      see_more: "Заполните информацию",
+      see_more: "Количество уведомлений",
       today_jobs: "Вакансии сегодня",
       more: "Подробнее",
       left_minute: " минуты назад",
@@ -48,7 +49,7 @@ const resources = {
       state_3_title: "Работа",
       state_3_desc:
         "С легкостью найдите работу, которую вы ищете, и подайте заявку на работу по вашему выбору",
-      user_comment: "См. некоторые слова",
+      user_comment: "Комментарии пользователей",
       user_comment_desc:
         "Тысячи сотрудников получают идеальную работу и вернитесь к нам!",
       contact: "Связаться",
@@ -71,12 +72,13 @@ const resources = {
       terms_of_comment: "Соглашение о комментариях",
       all_rights: "Copyright © 2022 Все права защищены",
       mobile_apps: "Мобильное проложение",
-      "lorem ipsum":
-        "Лорем ипсум долор сит амет, ин еос мелиус бонорум молестиае, еос ан деленити цонституам. Ад хомеро сцрипторем усу. Ет яуем солута вулпутате еам, вих ад пробатус партиендо ассуеверит. Меи ат сапиентем елояуентиам.",
+      "home_contact_desc":
+        "Ваши положительные отзывы о нас помогают другим людям быть уверенными в своем выборе профессии. Можете ли вы выделить 60 секунд, чтобы поделиться своим успехом? Мы будем вечно благодарны за вашу помощь.",
 
       //  JOBS PAGE
       jobb: "вакансии",
       av_jobs: "доступны сейчас",
+      jobb_desc: "Каждый день здесь собираются частные предприятия и работодатели из разных секторов, чтобы сделать большую работу.",
       per_filter: "Расширенный фильтр",
       page: "Страницы",
       all: "Все",
@@ -94,7 +96,11 @@ const resources = {
       price_desc: "Цена по убыванию",
       newest_first: "Новички вперед",
       oldest_first: "Сначала старые",
+      jobs_count: "Общее количество рабочих мест:",
       //  JOBS PAGE
+
+
+
 
       // View job
       one_bt: "Разметка",
@@ -108,10 +114,21 @@ const resources = {
       title_email: "Электронной почты:",
       similar: "Похожие посты",
       owner: "Работодатель",
-      phone: "Телефон:",
+      phone: "Телефон",
+      comments: "Комментарии",
       // View job
       sponseredByText:
         "Программа «Поддержка совершенствования системы государственного управления», финансируемая USAID и реализуемая ООО «QED Group», оказывает консультационную и техническую поддержку государственным органам Туркменистана. Мы также хотели бы поблагодарить QED Group за их поддержку в течение этого периода.",
+      // ADD JOB
+      job_times_saturday: "Суббота: ",
+      job_times_sunday: "Воскресенье: ",
+      add_comment: 'Добавить комментарий',
+      remove_comment: 'Oтменить',
+      just_add_comment: 'Добавить',
+      response_comment: 'Отвечать',
+      // ADD JOB
+
+
       // Profile
 
       profile: "Профиль",
@@ -142,7 +159,7 @@ const resources = {
       home_desc:
         "Iş maksatlaryňyz üçin uzak möhletli üstünlik gazanmagyň çalt we ygtybarly usuly. Shu wagt. \n" +
         "Edil şu ýerde.",
-      start: "Gözleg",
+      start: "Başla",
       sponsors: "Biziň hyzmatdaşlarymyz",
       job_name: "Iş ornunyň ady",
       location: "Ýerleşýän ýeri",
@@ -190,17 +207,19 @@ const resources = {
       privacy_policy: "Işe girmek düwmesi",
       terms_of_comment: "Teswir ýazmagyň düzgünleri",
       all_rights: "Copyright © 2022 Все права защищены",
-      mobile_apps: "Telefon belgiler",
-      "lorem ipsum":
-        "Лорем ипсум долор сит амет, ин еос мелиус бонорум молестиае, еос ан деленити цонституам. Ад хомеро сцрипторем усу. Ет яуем солута вулпутате еам, вих ад пробатус партиендо ассуеверит. Меи ат сапиентем елояуентиам.",
+      mobile_apps: "Telefon programmasy",
+      "home_contact_desc":
+        "Siziň biz hakyndaky oňyn teswirleriňiz beýleki adamlara öz saýlajak kärinde ynamly bolmaga kömek edýär. Üstünligiňizi paýlaşmak üçin 60 sekunt sarp edip bilersiňizmi? Siziň kömegiňiz üçin biziň minnetdarlygymyz baky bolar.",
 
       //  JOBS PAGE
-      jobb: " bildiriş şu gün täze goýlan",
-      av_jobs: "",
+      jobb: " bildiriş ",
+      av_jobs: "şu gün täze goýlan",
+      jobb_desc: "Her gün dürli ulgamlardaky Hususy Kärhanalar we iş beriji Telekeçiler \n" +
+        "ajaýyp işleri ýerine ýetirmek uçin bu ýere ýygnanýarlar",
       per_filter: "Giňişleýin filtirlemek",
       page: "Sahypa",
       all: "Ählisi",
-      categories: "Kategoriýalar",
+      category: "Kategoriýalar",
       job_price: "Iş haky aralygyny saýlamak",
       job_gender: "Işe soralýan",
       job_firm: "Agenstwolar",
@@ -215,23 +234,27 @@ const resources = {
       //  JOBS PAGE
 
       // View job
-      one_bt: "Разметка",
-      about_job: "О работе",
-      title_category: "Категория:",
-      title_job_req: "Ищущие работу:",
-      title_submit: "Возраст:",
-      title_time: "Графика:",
+      one_bt: "Ýatda saklamak",
+      about_job: "Iş şertleri",
+      title_category: "Kategoriýasy",
+      title_job_req: "Işe soralýan",
+      title_submit: "Ýaşy:",
+      title_time: "Grafik:",
       title_number: "Номер телефона:",
-      title_address: "Адрес:",
-      title_email: "Электронной почты:",
+      title_address: "Adresi",
+      title_email: "Mail adresi",
       similar: "Похожие посты",
-      owner: "Работодатель",
-      phone: "Телефон:",
-      comments:"Teswirler",
+      owner: "Iş beriji",
+      phone: "Telefon",
+      comments: "Teswirler",
+      add_comment: 'Teswir goşmak',
+      remove_comment: 'Ýatyrmak',
+      just_add_comment: 'Goşmak',
+      response_comment: 'Jogaplamak',
       // add job
       job_category: "Iş kategoriýasy",
-      job_times_saturday: "Iş sagatlary: Şenbe ",
-      job_times_sunday: "Iş sagatlary: Ýekşenbe",
+      job_times_saturday: "Şenbe:  ",
+      job_times_sunday: "Ýekşenbe: ",
       job_mail: "Mail adresi",
       job_name_add: "Işiň ady",
       job_hours: "Iş sagatlary: Hepde içi",
@@ -254,7 +277,7 @@ const resources = {
       ok: "OK",
       no_job: "Dynç",
       no_selection: "Hiçisi",
-      add_job:"Iş goşmak",
+      add_job: "Iş goşmak",
 
       // sign page
       sign_in_to: "Ulagama girmek",
@@ -294,7 +317,7 @@ i18n
     lng: "tm",
 
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
   });
 

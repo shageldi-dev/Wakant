@@ -48,10 +48,10 @@ const ItemDesktop = (props) => {
       style={{ ...cardStyle }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => changeRoute(`/view-job/${item.uuid}`)}
+      onClick={() => changeRoute(`/view-job/${item.uuid}`)}  
     >
       <Stack spacing={2}>
-        <Grid container sx={{ width: "100%" }}>
+        <Grid container sx={{ width: "100%",}}>
           <Grid item xs={1}>
             <Image
               showLoading={
@@ -115,7 +115,7 @@ const ItemDesktop = (props) => {
 
         <Text
           value={item.conditions}
-          sx={{ fontSize: "16px", color: "custom.notActive", height: "10px" }}
+          sx={{ fontSize: "16px", color: "custom.notActive", height: "100%", }}
         />
 
         <br />

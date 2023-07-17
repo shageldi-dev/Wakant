@@ -244,10 +244,10 @@ const Navbar = (props) => {
 
             <Stack
               direction={"row"}
-              spacing={4}
+              spacing={6}
               sx={{ width: "auto" }}
               alignItems={"center"}
-              justifyContent={"flex-end"}
+              justifyContent={"space-between"}
             >
               {isLogin ? (
                 <Text
@@ -258,7 +258,7 @@ const Navbar = (props) => {
                     ...getStyle("/add-job"),
                     fontSize: matches ? "16px" : "12px",
                     textUnderlineOffset: matches ? "27px" : "20px",
-                    width: "35%",
+                    width: "100%",
                   }}
                   className={`nav-item`}
                 />
@@ -277,7 +277,7 @@ const Navbar = (props) => {
                 sx={{
                   color: "custom.alwaysWhite",
                   fontSize: matches ? "16px" : "12px",
-                  padding: "6px 20px",
+                  padding: "6px 30px",
                   fontFamily: Fonts.REGULAR,
                   textTransform: "none",
                   height: "40px",

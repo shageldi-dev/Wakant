@@ -22,6 +22,10 @@ import { AxiosInstance } from "../../api/AxiosInstance.mjs";
 import { Fonts } from "../../common/fonts.mjs";
 import { colors, regularButton } from "../../common/theme.mjs";
 import { getImageFullUrl } from "../../common/utils.mjs";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import SignIn from "../../component/User/SignIn";
+import { useNavigate } from "react-router-dom";
 
 // import ImageLoading from "../../component/State/Loading/ImageLoading";
 
@@ -48,9 +52,17 @@ const linkStyle = {
 const Home = (props) => {
   const top = 15;
   const bottom = 15;
-  const { t, isMobile } = useContext(AppContext);
+  const { t, isMobile, isLogin } = useContext(AppContext);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+
+  const [signInState, setSignInState] = React.useState(false);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+
+  const navigate = useNavigate()
+
+
+
   function getData() {
     setLoading(true);
     AxiosInstance.get("web/get-home")
@@ -64,7 +76,6 @@ const Home = (props) => {
   }
   useEffect(() => {
     getData();
-    console.log('tester');
   }, []);
   const tJobsRef = useRef();
   // const getImageSize = () => {
@@ -82,6 +93,31 @@ const Home = (props) => {
   //     };
   //   }
   // };
+
+  // Formik
+  const formik = useFormik({
+    initialValues: {
+      fullName: "",
+      companyName: "",
+      email: "",
+      phoneNumber: "",
+    },
+    validationSchema: Yup.object({
+      fullName: Yup.string().required("Hökmany.."),
+      phoneNumber: Yup.number().required("Hökmany..").min(6, "Nädogry belgi"),
+      email: Yup.string().email("Nädogry email adress..").required("Hökmany.."),
+    }),
+  });
+
+  function showSignIn() {
+    setSignInState(true);
+    handleClose2();
+  }
+
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
+
   return (
     <div>
       {loading ? (
@@ -112,17 +148,22 @@ const Home = (props) => {
                   value={t("home_desc")}
                   sx={{ fontSize: "18px" }}
                 />
-                <Button
-                  variant={"contained"}
-                  sx={{
-                    ...regularButton,
-                    color: "custom.alwaysWhite",
-                    width: 150,
-                    fontSize: "16px",
-                  }}
-                >
-                  {t("start")}
-                </Button>
+                {!isLogin && (
+                  <Button
+                    variant={"contained"}
+                    sx={{
+                      ...regularButton,
+                      color: "custom.alwaysWhite",
+                      width: 150,
+                      fontSize: "16px",
+                    }}
+                    onClick={() => {
+                      showSignIn();
+                    }}
+                  >
+                    {t("start")}
+                  </Button>
+                )}
 
                 <Typography
                   color={"custom.notActive"}
@@ -140,8 +181,8 @@ const Home = (props) => {
                     disableOnInteraction: false,
                   }}
                   modules={[Autoplay, Pagination, Navigation]}
-                  onSlideChange={() => console.log("slide change")}
-                  onSwiper={(swiper) => console.log(swiper)}
+                  // onSlideChange={() => console.log("slide change header")}
+                  // onSwiper={(swiper) => console.log(swiper)}
                 >
                   {data
                     ? data.agencyList.map((item, i) => {
@@ -159,6 +200,7 @@ const Home = (props) => {
                 </Swiper>
               </Stack>
             </Grid>
+
             <Grid
               item
               xs={12}
@@ -231,6 +273,7 @@ const Home = (props) => {
               )}
             </Grid>
           </Grid>
+
           {isMobile ? null : (
             <Paper
               elevation={2}
@@ -245,7 +288,8 @@ const Home = (props) => {
               <SearchBox />
             </Paper>
           )}
-          {/* Category section */}
+
+          {/* ----------------Category section start---------------- */}
           <Box mt={top}>
             <Stack
               sx={{ width: "100%" }}
@@ -271,7 +315,7 @@ const Home = (props) => {
                 alignItems={"center"}
                 justifyContent={"flex-end"}
               >
-                <Button sx={{ ...regularButton, color: "primary" }}>
+                <Button sx={{ ...regularButton, color: "primary" }} onClick={() => navigate('/category')}>
                   {t("see_all")}
                 </Button>
               </Stack>
@@ -281,8 +325,9 @@ const Home = (props) => {
               list={data ? (data.bigCategories ? data.bigCategories : []) : []}
             />
           </Box>
-          {/* Category section */}
-          {/* Jobs today section */}
+          {/* ----------------Category section end---------------- */}
+
+          {/* ---------------------------Jobs today section start---------------------------*/}
           <Box
             mt={top}
             mb={bottom}
@@ -322,7 +367,7 @@ const Home = (props) => {
                       value={t("today_jobs")}
                       sx={{ fontSize: isMobile ? "25px" : "34px" }}
                     />
-                    <JobsContainer
+                    <JobsContainer //list props gidipdir
                       list={
                         data
                           ? data.submittedToday
@@ -332,6 +377,7 @@ const Home = (props) => {
                       }
                     />
                   </Stack>
+                  {/* ------------------------------------------------------------------------- */}
                   <Button
                     variant={"contained"}
                     sx={{
@@ -344,12 +390,14 @@ const Home = (props) => {
                   >
                     {t("more")}
                   </Button>
+                  {/* ------------------------------------------------------------------------- */}
                 </Stack>
               </Grid>
             </Grid>
           </Box>
-          {/*  Jobs today section  */}
-          {/*  Apps section  */}
+          {/* ---------------------------Jobs today section end---------------------------*/}
+
+          {/*  ---------------------------Apps section start--------------------------- */}
           <Box
             mt={top}
             mb={bottom}
@@ -398,21 +446,29 @@ const Home = (props) => {
                     alignItems={"center"}
                     justifyContent={"center"}
                   >
-                    <Image
-                      style={{ width: "160px" }}
-                      wrapperStyle={{ width: "160px" }}
-                      showLoading={<Placeholder />}
-                      src={"/images/play_google.png"}
-                    />
-                    <Image
-                      style={{ width: "160px" }}
-                      showLoading={<Placeholder />}
-                      wrapperStyle={{ width: "160px" }}
-                      src={"/images/app_store.png"}
-                    />
+                    <a
+                      href="https://play.google.com/store/search?q=wakant&c=apps&hl=ru&gl=US"
+                      target="_blank"
+                    >
+                      <Image
+                        style={{ width: "160px" }}
+                        wrapperStyle={{ width: "160px" }}
+                        showLoading={<Placeholder />}
+                        src={"/images/play_google.png"}
+                      />
+                    </a>
+                    <a href="">
+                      <Image
+                        style={{ width: "160px" }}
+                        showLoading={<Placeholder />}
+                        wrapperStyle={{ width: "160px" }}
+                        src={"/images/app_store.png"}
+                      />
+                    </a>
                   </Stack>
                 </Stack>
               </Grid>
+
               <Grid
                 item
                 xs={12}
@@ -431,8 +487,9 @@ const Home = (props) => {
               </Grid>
             </Grid>
           </Box>
-          {/*  Apps section  */}
-          {/* Jobs section */}
+          {/*  ---------------------------Apps section end---------------------------  */}
+
+          {/* ---------------------------Jobs section start--------------------------- */}
           <Box
             mt={top}
             mb={bottom}
@@ -458,7 +515,15 @@ const Home = (props) => {
                       value={t("immediately")}
                       sx={{ fontSize: isMobile ? "25px" : "34px" }}
                     />
-                    <JobsContainer />
+                    <JobsContainer // shugunkilerden props alyp goydym
+                      list={
+                        data
+                          ? data.submittedToday
+                            ? data.submittedToday
+                            : []
+                          : []
+                      }
+                    />
                   </Stack>
                   <Button
                     variant={"contained"}
@@ -490,8 +555,9 @@ const Home = (props) => {
               </Grid>
             </Grid>
           </Box>
-          {/*  Jobs section  */}
-          {/* Features */}
+          {/*  ---------------------------Jobs section end---------------------------  */}
+
+          {/* ---------------------------Features start--------------------------- */}
           {isMobile ? null : (
             <Box
               mt={top}
@@ -503,7 +569,7 @@ const Home = (props) => {
                 {/*    width:''*/}
                 {/*}}/>*/}
                 <Stack
-                  style={{ zIndex: 9 }}
+                  // style={{ zIndex: 9 }}
                   sx={{
                     width: "100%",
                     backgroundImage: `url(/images/line.svg)`,
@@ -535,7 +601,7 @@ const Home = (props) => {
               </div>
             </Box>
           )}
-          {/* Features */}
+          {/* ---------------------------Features end--------------------------- */}
 
           {/* Sponsered By ............................................................ */}
           {/* <Stack direction="row" justifyContent="center">
@@ -572,14 +638,17 @@ const Home = (props) => {
           >
             {t("sponseredByText")}
           </Typography>*/}
+          {/* <br />
           <br />
           <br />
           <br />
-          <br />
-          <br />
+          <br /> */}
 
-          {/*  Comments  */}
-          <Box mb={bottom}>
+          {/*  ---------------------------Comments start---------------------------  */}
+          <Box
+            top={top}
+            mb={bottom}
+          >
             <Stack
               spacing={3}
               alignItems={"center"}
@@ -612,13 +681,14 @@ const Home = (props) => {
                 autoplay={true}
               >
                 {new Array(16).fill(0).map((item, i) => {
-                  return <Comment key={`comment-${i}`} />;
+                  return <Comment key={`comment-${i}`} />; //backend-a birikdirmeli(backend-a yok entak)
                 })}
               </OwlCarousel>
             </Stack>
           </Box>
-          {/*  Comments  */}
-          {/*  Contact us  */}
+          {/*  ---------------------------Comments end--------------------------- */}
+
+          {/*  ---------------------------Contact us start---------------------------  */}
           <Box
             mt={top}
             mb={bottom}
@@ -629,7 +699,7 @@ const Home = (props) => {
                 sx={{ fontSize: isMobile ? "25px" : "34px" }}
               />
               <Text
-                value={t("lorem ipsum")}
+                value={t("home_contact_desc")}
                 sx={{
                   width: isMobile ? "100%" : "70%",
                   fontSize: isMobile ? "16px" : "20px",
@@ -660,11 +730,27 @@ const Home = (props) => {
                         sm={12}
                         md={6}
                       >
+                        {/* ------------------------------------------------------------------------ */}
                         <input
                           placeholder={t("fullname")}
+                          name="fullName"
                           type={"text"}
                           style={{ ...inputStyle }}
+                          onChange={formik.handleChange}
+                          value={formik.values.fullName}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.fullName && formik.errors.fullName ? (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: isMobile ? "12px" : "14px",
+                              fontWeight: "lighter",
+                            }}
+                          >
+                            {formik.errors.fullName}
+                          </p>
+                        ) : null}
                       </Grid>
                       <Grid
                         item
@@ -674,8 +760,11 @@ const Home = (props) => {
                       >
                         <input
                           placeholder={t("company")}
+                          name="companyName"
                           type={"text"}
                           style={{ ...inputStyle }}
+                          onChange={formik.handleChange}
+                          value={formik.values.companyName}
                         />
                       </Grid>
                       <Grid
@@ -687,8 +776,23 @@ const Home = (props) => {
                         <input
                           placeholder={t("email")}
                           type={"email"}
+                          name="email"
                           style={{ ...inputStyle }}
+                          onChange={formik.handleChange}
+                          value={formik.values.email}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.email && formik.errors.email ? (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: isMobile ? "12px" : "14px",
+                              fontWeight: "lighter",
+                            }}
+                          >
+                            {formik.errors.email}
+                          </p>
+                        ) : null}
                       </Grid>
                       <Grid
                         item
@@ -698,9 +802,25 @@ const Home = (props) => {
                       >
                         <input
                           placeholder={t("phone_number")}
-                          type={"phone"}
+                          type={"tel"}
+                          name="phoneNumber"
                           style={{ ...inputStyle }}
+                          onChange={formik.handleChange}
+                          value={formik.values.phoneNumber}
+                          onBlur={formik.handleBlur}
                         />
+                        {formik.touched.phoneNumber &&
+                        formik.errors.phoneNumber ? (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: isMobile ? "12px" : "14px",
+                              fontWeight: "lighter",
+                            }}
+                          >
+                            {formik.errors.phoneNumber}
+                          </p>
+                        ) : null}
                       </Grid>
                       <Grid
                         item
@@ -828,7 +948,11 @@ const Home = (props) => {
               </Grid>
             </Stack>
           </Box>
-          {/*  Contact us  */}
+          {/*  ---------------------------Contact us end---------------------------  */}
+          <SignIn
+            open={signInState}
+            onClose={() => setSignInState(false)}
+          />
         </div>
       )}
     </div>

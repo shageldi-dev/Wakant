@@ -19,7 +19,7 @@ const CategoryContainer = (props) => {
           dots={true}
           items={1}
           autoplay={true}
-        >
+        > 
           {new Array(parseInt(Math.ceil(props.list.length / 4)))
             .fill(0)
             .map((it, index) => {

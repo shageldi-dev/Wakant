@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { colors } from "../../common/theme.mjs";
 import { Fonts } from "../../common/fonts.mjs";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -16,13 +16,19 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { AppContext } from "../../App";
 
 const JobComment = () => {
+  const { t } = useContext(AppContext);
   const [showAnswer, setShowAnswer] = useState(false);
 
   const [addComment, setAddComment] = useState(false);
 
   const [commentList, setCommentList] = useState([]);
+
+  // like
+  const [like, setLike] = useState(0);
+  const [disLike, setDisLike] = useState(0);
 
   const handleClick = () => {
     setAddComment(!addComment);
@@ -36,7 +42,7 @@ const JobComment = () => {
     AxiosInstance.get("users/comments/my-comments").then((response) => {
       setCommentList(response.data.comments);
       const expoList = response.data.comments;
-      console.log(expoList);
+      // console.log(expoList);
     });
   };
 
@@ -54,7 +60,12 @@ const JobComment = () => {
           mt: 3,
         }}
       >
-        <Stack direction="row" justifyContent="space-between" mt={3}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          mt={3}
+        >
+          {/* ----------------------------------------seretmeli shuna */}
           <Typography
             sx={{
               color: colors.BLACK,
@@ -64,6 +75,7 @@ const JobComment = () => {
           >
             123 teswir
           </Typography>
+          {/* ----------------------------------------seretmeli shuna */}
           <Button
             onClick={handleClick}
             sx={{
@@ -74,16 +86,20 @@ const JobComment = () => {
             }}
             variant="contained"
           >
-            Teswir gosmak
+            {t("add_comment")}
           </Button>
         </Stack>
         {addComment && (
           <>
-            <Stack width="50%" mt={2} mb={2}>
+            <Stack
+              width="50%"
+              mt={2}
+              mb={2}
+            >
               <TextField
                 fullWidth
                 id="outlined-multiline-static"
-                label="Teswir gosmak"
+                label={t("add_comment")}
                 multiline
                 rows={4}
               />
@@ -103,8 +119,9 @@ const JobComment = () => {
                   }}
                   variant="outlined"
                 >
-                  Yatyrmak
+                  {t("remove_comment")}
                 </Button>
+                {/* saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */}
                 <Button
                   sx={{
                     textTransform: "none",
@@ -114,16 +131,23 @@ const JobComment = () => {
                   }}
                   variant="contained"
                 >
-                  Gosmak
+                  {t("just_add_comment")}
                 </Button>
               </Stack>
             </Stack>
           </>
         )}
         <Divider sx={{ marginBottom: "30px", marginTop: "5px" }} />
-        <Stack direction="row" spacing={4}>
+        <Stack
+          direction="row"
+          spacing={4}
+        >
           <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUNhsanZkJgCLmoyeX9auEbmxDcq0olt5xw&usqp=CAU" />
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+          >
             <Typography
               sx={{
                 color: colors.BLACK,
@@ -145,21 +169,30 @@ const JobComment = () => {
             </Typography>
           </Stack>
         </Stack>
-        <Stack spacing={2} mt={3} mb={7}>
+        <Stack
+          spacing={2}
+          mt={3}
+          mb={7}
+        >
           <Typography>
             This is amazing. I am incredibly grateful for the effort you placed
             into this project. Almost 3 hours in and have already learned a lot.
             It's so good I just bought the extended edition. Keep it up bro!!.
             Greetings from Costa Rica.
           </Typography>
-          <Stack direction="row" alignItems="center">
-            <IconButton>
-              <ThumbUpIcon />
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+          >
+            <IconButton onClick={() => setLike(like + 1)}>
+              <ThumbUpIcon sx={{ color: "green" }} />
             </IconButton>
-            <Typography>77</Typography>
-            <IconButton>
-              <ThumbDownIcon />
+            <Typography sx={{ color: "green" }}>{like}</Typography>
+            <IconButton onClick={() => setDisLike(disLike + 1)}>
+              <ThumbDownIcon sx={{ color: "red" }} />
             </IconButton>
+            <Typography sx={{ color: "red" }}>{disLike}</Typography>
             <Button
               sx={{
                 textTransform: "none",
@@ -168,7 +201,7 @@ const JobComment = () => {
                 marginLeft: "30px",
               }}
             >
-              Jogaplamak
+              {t("response_comment")}
             </Button>
           </Stack>
           <Button
@@ -192,12 +225,19 @@ const JobComment = () => {
           </Button>
           {showAnswer && (
             <>
-              <Stack direction="row" spacing={2}>
+              <Stack
+                direction="row"
+                spacing={2}
+              >
                 <Avatar
                   sx={{ width: "30px", height: "30px" }}
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUNhsanZkJgCLmoyeX9auEbmxDcq0olt5xw&usqp=CAU"
                 />
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                >
                   <Typography
                     sx={{
                       color: colors.BLACK,
@@ -219,12 +259,18 @@ const JobComment = () => {
                   </Typography>
                 </Stack>
               </Stack>
-              <Stack spacing={2} mt={3}>
+              <Stack
+                spacing={2}
+                mt={3}
+              >
                 <Typography>
                   This is amazing. I am incredibly grateful for the effort you
                   placed into this project.
                 </Typography>
-                <Stack direction="row" alignItems="center">
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                >
                   <IconButton>
                     <ThumbUpIcon />
                   </IconButton>

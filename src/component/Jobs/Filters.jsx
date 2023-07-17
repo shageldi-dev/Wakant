@@ -91,7 +91,10 @@ const Filters = (props) => {
   return loading ? (
     <Loading />
   ) : (
-    <Stack spacing={3} sx={{ position: "sticky", top: 100 }}>
+    <Stack
+      spacing={3}
+      sx={{ position: "sticky", top: 100 }}
+    >
       {isMobile ? null : (
         <div>
           <Bold
@@ -148,7 +151,7 @@ const Filters = (props) => {
         })}
       </Stack>
 
-      {/*<Divider color={colors.PRIMARY}/>*/}
+      <Divider color={colors.PRIMARY}/>
 
       {/*<Bold value={t('job_price')}*/}
       {/*      sx={{*/}
@@ -156,39 +159,77 @@ const Filters = (props) => {
       {/*          mb: 1*/}
       {/*      }}/>*/}
 
-      {/*<Stack spacing={2} sx={{width: '100%'}} direction={'row'} alignItems={'center'}*/}
-      {/*       justifyContent={'space-between'}>*/}
-      {/*    <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto"/>*/}
-      {/*    <input*/}
-      {/*        value={'4000'}*/}
-      {/*        placeholder={'0'}*/}
-      {/*        style={{*/}
-      {/*            width: '30%',*/}
-      {/*            borderRadius: '5px',*/}
-      {/*            border: '1px solid rgba(0, 0, 0, 0.23)',*/}
-      {/*            padding: '5px',*/}
-      {/*            fontFamily: Fonts.REGULAR,*/}
-      {/*            color: colors.TEXT_COLOR,*/}
-      {/*            textAlign: 'center',*/}
-      {/*            fontSize: '16px'*/}
-      {/*        }}/>*/}
-      {/*</Stack>*/}
+      {/* <Stack
+        spacing={2}
+        sx={{ width: "100%" }}
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Slider
+          defaultValue={50}
+          aria-label="Default"
+          valueLabelDisplay="auto"
+        />
+        <input
+          value={"4000"}
+          placeholder={"0"}
+          style={{
+            width: "30%",
+            borderRadius: "5px",
+            border: "1px solid rgba(0, 0, 0, 0.23)",
+            padding: "5px",
+            fontFamily: Fonts.REGULAR,
+            color: colors.TEXT_COLOR,
+            textAlign: "center",
+            fontSize: "16px",
+          }}
+        />
+      </Stack> */}
 
-      {/*<Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>*/}
-      {/*    <Text value={'0 manat'} sx={{fontSize: '18px'}}/>*/}
-      {/*    <Text value={'10000 manat'} sx={{fontSize: '18px'}}/>*/}
-      {/*</Stack>*/}
+      {/* <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Text
+          value={"0 manat"}
+          sx={{ fontSize: "18px" }}
+        />
+        <Text
+          value={"10000 manat"}
+          sx={{ fontSize: "18px" }}
+        />
+      </Stack> */}
 
-      {/*<Divider color={colors.PRIMARY}/>*/}
+      {/* <Divider color={colors.PRIMARY} /> */}
 
-      {/*<Stack spacing={1}>*/}
-      {/*    <FilterCheck count={99} label={t('all')}/>*/}
-      {/*    <FilterCheck count={10} label={'0m - 200m'}/>*/}
-      {/*    <FilterCheck count={5} label={'200m - 500m'}/>*/}
-      {/*    <FilterCheck count={7} label={'500m - 1,000m'}/>*/}
-      {/*    <FilterCheck count={55} label={'1,000m - 2,000m'}/>*/}
-      {/*    <FilterCheck count={55} label={'2,000m - 4,000m'}/>*/}
-      {/*</Stack>*/}
+      {/* <Stack spacing={1}>
+        <FilterCheck
+          count={99}
+          label={t("all")}
+        />
+        <FilterCheck
+          count={10}
+          label={"0m - 200m"}
+        />
+        <FilterCheck
+          count={5}
+          label={"200m - 500m"}
+        />
+        <FilterCheck
+          count={7}
+          label={"500m - 1,000m"}
+        />
+        <FilterCheck
+          count={55}
+          label={"1,000m - 2,000m"}
+        />
+        <FilterCheck
+          count={55}
+          label={"2,000m - 4,000m"}
+        />
+      </Stack> */}
 
       <Bold
         value={t("job_gender")}

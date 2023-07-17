@@ -112,7 +112,7 @@ const ItemMobile = (props) => {
 
         <Text
           value={item.conditions}
-          sx={{ fontSize: "16px", color: "custom.notActive", height: "10px" }}
+          sx={{ fontSize: "16px", color: "custom.notActive", height: "100%" }}
         />
         <br />
         <Stack
