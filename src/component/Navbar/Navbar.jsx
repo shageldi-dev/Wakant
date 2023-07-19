@@ -29,6 +29,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
 
 export const activeNavStyle = {
   fontFamily: Fonts.BOLD,
@@ -71,6 +72,8 @@ const Navbar = (props) => {
   const { t, changeLanguage, isLogin } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [signInState, setSignInState] = React.useState(false);
+  const [me, setMe] = useState();
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -118,6 +121,29 @@ const Navbar = (props) => {
 
   function More() {
     return <div></div>;
+  }
+
+  function getMyData() {
+    AxiosInstance.get("/users/my-accaunt")
+      .then((response) => {
+        setMe(response.data);
+      })
+      .catch((err) => {});
+  }
+
+  useEffect(() => {
+    getMyData();
+  }, []);
+
+  function logOut() {
+    AxiosInstance.post("/users/logout", { phone_number: me.phone_number })
+      .then((response) => {
+      })
+      .catch((err) => {
+        alert("sth went wrong");
+      });
+    window.localStorage.removeItem("token");
+    window.location.reload()
   }
 
   return (
@@ -178,7 +204,10 @@ const Navbar = (props) => {
                 {isLogin ? t("anceta") : t("sign_in")}
               </Button>
 
-              <MobileDrawer more={<More />} click={showSignIn} />
+              <MobileDrawer
+                more={<More />}
+                click={showSignIn}
+              />
             </Stack>
           </Stack>
         ) : (
@@ -297,7 +326,7 @@ const Navbar = (props) => {
                 endIcon={<KeyboardArrowDownIcon />}
               >
                 {/* {changeLang === "tm" ? t("ru") : t("tm")} */}
-                {t('lng')}
+                {t("lng")}
               </Button>
               <Menu
                 id="basic-menu"
@@ -360,6 +389,7 @@ const Navbar = (props) => {
                       fontFamily: Fonts.REGULAR,
                     }}
                     startIcon={<LogoutIcon />}
+                    onClick={logOut}
                   >
                     Logout
                   </Button>
@@ -370,7 +400,10 @@ const Navbar = (props) => {
         )}
       </Container>
 
-      <SignIn open={signInState} onClose={() => setSignInState(false)} />
+      <SignIn
+        open={signInState}
+        onClose={() => setSignInState(false)}
+      />
     </Paper>
   );
 };

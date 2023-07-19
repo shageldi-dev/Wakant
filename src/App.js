@@ -32,6 +32,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Resume from "./page/Profile/Resume";
 
 const lightTheme = createTheme({
   components: {
@@ -150,10 +151,10 @@ export function useWidth() {
 
 function App() {
   // console.log = () => {};
-  console.error = () => {};
-  console.warning = () => {};
-  console.warn = () => {};
-  console.info = () => {};
+  console.error = () => { };
+  console.warning = () => { };
+  console.warn = () => { };
+  console.info = () => { };
   const wwidth = useWidth();
   const checker = (w) => {
     return phoneSizes.includes(w);
@@ -167,33 +168,33 @@ function App() {
       .then((response) => {
         setParams(response.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }
 
   useEffect(() => {
     getParams();
   }, []);
 
-   function getAddressById(id) {
-    try{
-      let found = params.addressList.find(it=>it.id == id);
-      if(appLanguage=='ru'){
+  function getAddressById(id) {
+    try {
+      let found = params.addressList.find(it => it.id == id);
+      if (appLanguage == 'ru') {
         return found.nameRu;
       }
       return found.name;
-    } catch(err){
+    } catch (err) {
       return "";
     }
   }
 
   function getGenderById(id) {
-    try{
-      let found = params.genderList.find(it=>it.id == id);
-      if(appLanguage=='ru'){
+    try {
+      let found = params.genderList.find(it => it.id == id);
+      if (appLanguage == 'ru') {
         return found.nameRu;
       }
       return found.name;
-    } catch(err){
+    } catch (err) {
       return "";
     }
   }
@@ -262,6 +263,7 @@ function App() {
                   <Route path="anceta" element={<ProfileStepper />} />
                 </Route>
               </Route>
+              {/* <Route path="/resume" element={<Resume />} /> */}
             </Routes>
           </BrowserRouter>
         </Box>

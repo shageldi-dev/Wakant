@@ -83,7 +83,7 @@ const JobsContainer = (props) => {
                         sm={12}
                         md={6}
                       >
-                        <ItemMobile item={item} />
+                        <ItemMobile item={item}/>
                       </Grid>
                     );
                   })}

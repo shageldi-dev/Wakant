@@ -78,7 +78,7 @@ const NewCardAddJob = () => {
   const [anotherExperienceText, setAnotherExperienceText] = useState("");
   const [registrationPlace, setRegistrationPlace] = useState("");
   const [about_employer, setAboutEmployer] = useState("");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState();
   const [phone_number_visible, setPhoneNumberVisible] = useState(true);
   const [locationId, setLocationId] = useState(5);
   const [comments, setComments] = useState(true);
@@ -142,18 +142,15 @@ const NewCardAddJob = () => {
   };
 
   const fetchAgencyList = () => {
-    AxiosInstance.get('web/agencies')
-      .then(response => {
-        setAgency(response.data.data);
-      })
-  }
+    AxiosInstance.get("web/agencies").then((response) => {
+      setAgency(response.data.data);
+    });
+  };
 
   useEffect(() => {
     fetchExperienceList();
     fetchAgencyList();
   }, []);
-
-
 
   function addData() {
     const body = {
@@ -260,7 +257,7 @@ const NewCardAddJob = () => {
     }
   }
 
-  const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState([20, 40]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -289,8 +286,18 @@ const NewCardAddJob = () => {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={3} mt={12} mb={4}>
-          <Grid item xs={12} sm={6} md={4}>
+        <Grid
+          container
+          spacing={3}
+          mt={12}
+          mb={4}
+        >
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             {i18n.language === "tm" ? (
               <>
                 <AppSelect
@@ -299,7 +306,10 @@ const NewCardAddJob = () => {
                 >
                   {categoryList.map((item, i) => {
                     return (
-                      <option value={item.id} key={`get_category_id_${i}`}>
+                      <option
+                        value={item.id}
+                        key={`get_category_id_${i}`}
+                      >
                         {item.name}
                       </option>
                     );
@@ -314,7 +324,10 @@ const NewCardAddJob = () => {
                 >
                   {categoryList.map((item, i) => {
                     return (
-                      <option value={item.id} key={`get_category_id_${i}`}>
+                      <option
+                        value={item.id}
+                        key={`get_category_id_${i}`}
+                      >
                         {item.nameRu}
                       </option>
                     );
@@ -324,7 +337,12 @@ const NewCardAddJob = () => {
             )}
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={saturday_hours}
               onChange={(e) => setSaturdayHours(e.target.value)}
@@ -335,7 +353,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={e_mail}
               onChange={(e) => setEmail(e.target.value)}
@@ -344,7 +367,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={profession}
               onChange={(e) => setProfession(e.target.value)}
@@ -353,7 +381,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={sunday_hours}
               onChange={(e) => setSundayHours(e.target.value)}
@@ -364,7 +397,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             {i18n.language === "tm" ? (
               <AppSelect
                 value={experience}
@@ -372,7 +410,10 @@ const NewCardAddJob = () => {
               >
                 {experienceList.map((item, i) => {
                   return (
-                    <option value={item.id} key={`experince_list_key${i}`}>
+                    <option
+                      value={item.id}
+                      key={`experince_list_key${i}`}
+                    >
                       {item.name}
                     </option>
                   );
@@ -385,7 +426,10 @@ const NewCardAddJob = () => {
               >
                 {experienceList.map((item, i) => {
                   return (
-                    <option value={item.id} key={`experince_list_key${i}`}>
+                    <option
+                      value={item.id}
+                      key={`experince_list_key${i}`}
+                    >
                       {item.nameRu}
                     </option>
                   );
@@ -393,8 +437,13 @@ const NewCardAddJob = () => {
               </AppSelect>
             )}
           </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
+          {/* ----------------------------------------------------------GEREK BOLUP BILER */}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <Typography>{t("job_age")}</Typography>
             <Slider
               getAriaLabel={() => t("job_age")}
@@ -404,8 +453,14 @@ const NewCardAddJob = () => {
               getAriaValueText={valuetext}
             />
           </Grid>
+          {/* ----------------------------------------------------------GEREK BOLUP BILER */}
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               placeholder={t("job_phone")}
               value={phone_number}
@@ -414,7 +469,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             {i18n.language === "tm" ? (
               <AppSelect
                 value={locationId}
@@ -422,7 +482,10 @@ const NewCardAddJob = () => {
               >
                 {addressList.map((item, i) => {
                   return (
-                    <option value={item.id} key={`address_list_key${i}`}>
+                    <option
+                      value={item.id}
+                      key={`address_list_key${i}`}
+                    >
                       {item.name}
                     </option>
                   );
@@ -435,7 +498,10 @@ const NewCardAddJob = () => {
               >
                 {addressList.map((item, i) => {
                   return (
-                    <option value={item.id} key={`address_list_key${i}`}>
+                    <option
+                      value={item.id}
+                      key={`address_list_key${i}`}
+                    >
                       {item.nameRu}
                     </option>
                   );
@@ -444,7 +510,12 @@ const NewCardAddJob = () => {
             )}
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={workday_hours}
               onChange={(e) => setWorkdayHours(e.target.value)}
@@ -455,7 +526,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -464,34 +540,50 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextField
               value={salary}
               onChange={(e) => setSalary(e.target.value)}
-              placeholder={t("job_salary")}
               type={"number"}
+              placeholder={t("job_salary")}
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppSelect
               value={agenstwoId}
               onChange={(e) => setAgenstwoId(e.target.value)}
             >
-              <option value={null}>
-                {t('no_selection')}
-              </option>
+              <option value={null}>{t("no_selection")}</option>
               {agency.map((item, i) => {
                 return (
-                  <option value={item.id} key={`agency_list_key${i}`}>
-                    {i18n.language === 'ru' ? item.nameRu : item.name}
+                  <option
+                    value={item.id}
+                    key={`agency_list_key${i}`}
+                  >
+                    {i18n.language === "ru" ? item.nameRu : item.name}
                   </option>
                 );
               })}
             </AppSelect>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             {i18n.language === "tm" ? (
               <AppTextArea
                 value={conditions}
@@ -519,7 +611,12 @@ const NewCardAddJob = () => {
             )}
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <AppTextArea
               value={about_employer}
               onChange={(e) => setAboutEmployer(e.target.value)}
@@ -533,7 +630,12 @@ const NewCardAddJob = () => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <FormControl>
               <FormLabel
                 id="demo-radio-buttons-group-label"
@@ -545,7 +647,7 @@ const NewCardAddJob = () => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="female"
                 name="radio-buttons-group"
-                onChange={e => setGender(e.target.value)}
+                onChange={(e) => setGender(e.target.value)}
               >
                 {i18n.language === "tm" ? (
                   <>
@@ -555,7 +657,9 @@ const NewCardAddJob = () => {
                           key={`gender_lest_key${i}`}
                           value={item.id}
                           control={<Radio />}
-                          label={i18n.language === 'ru' ? item.nameRu : item.name}
+                          label={
+                            i18n.language === "ru" ? item.nameRu : item.name
+                          }
                         />
                       );
                     })}
@@ -578,7 +682,12 @@ const NewCardAddJob = () => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+          >
             <FormControlLabel
               control={
                 <Checkbox
@@ -620,6 +729,7 @@ const NewCardAddJob = () => {
         </LoadingButton>
 
         <Stack sx={{ mb: 4 }}></Stack>
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -627,10 +737,17 @@ const NewCardAddJob = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+            >
               {t(getJobTimeTitle())}
             </Typography>
-            <Stack spacing={1} sx={{ mt: 2 }}>
+            <Stack
+              spacing={1}
+              sx={{ mt: 2 }}
+            >
               <Typography>{t("start_date")}</Typography>
               <AppTextField
                 type={"time"}

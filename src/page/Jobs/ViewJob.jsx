@@ -71,6 +71,16 @@ const ViewJob = (props) => {
     getData();
   }, []);
 
+  function makeFav() {
+    AxiosInstance.post("/users/favorites/add", { jobId: data?.id })
+      .then((response) => {
+        alert('Succes')
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   function changeRoute(path) {
     navigate(path);
   }
@@ -213,6 +223,7 @@ const ViewJob = (props) => {
                     color: colors.WHITE,
                     textTransform: "none",
                   }}
+                  onClick={makeFav}
                 >
                   {t("one_bt")}
                 </Button>

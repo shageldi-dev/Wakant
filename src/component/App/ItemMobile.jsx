@@ -9,12 +9,13 @@ import { Card, CardContent, Grid, Stack } from "@mui/material";
 import { useContext } from "react";
 import { AppContext } from "../../App";
 import { colors } from "../../common/theme.mjs";
-
 import {
   convertTimeStampToDate,
   getImageFullUrl,
   setMaxLengthLines,
 } from "../../common/utils.mjs";
+import { AxiosInstance } from "../../api/AxiosInstance.mjs";
+import { useNavigate } from "react-router-dom";
 
 const cardStyle = {
   background: colors.NOT_ACTIVE_BLUE,
@@ -27,6 +28,13 @@ const cardStyle = {
 const ItemMobile = (props) => {
   const { isMobile, t, appLanguage, getAddressById } = useContext(AppContext);
   const { item } = props;
+  const navigate = useNavigate();
+
+
+  function changeRoute(path) {
+    navigate(path);
+  }
+
   return (
     <Card
       sx={{ ...cardStyle }}
@@ -124,8 +132,7 @@ const ItemMobile = (props) => {
               fontSize: "16px",
               color: "custom.notActive",
               height: "5px",
-            //   ...setMaxLengthLines(1),
-              
+              //   ...setMaxLengthLines(1),
             }}
           />
         </Stack>

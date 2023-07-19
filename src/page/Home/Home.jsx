@@ -59,9 +59,7 @@ const Home = (props) => {
   const [signInState, setSignInState] = React.useState(false);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
 
-  const navigate = useNavigate()
-
-
+  const navigate = useNavigate();
 
   function getData() {
     setLoading(true);
@@ -315,7 +313,10 @@ const Home = (props) => {
                 alignItems={"center"}
                 justifyContent={"flex-end"}
               >
-                <Button sx={{ ...regularButton, color: "primary" }} onClick={() => navigate('/category')}>
+                <Button
+                  sx={{ ...regularButton, color: "primary" }}
+                  onClick={() => navigate("/category")}
+                >
                   {t("see_all")}
                 </Button>
               </Stack>
@@ -387,6 +388,7 @@ const Home = (props) => {
                       fontSize: "16px",
                       mt: 5,
                     }}
+                    onClick={() => navigate("/jobs")}
                   >
                     {t("more")}
                   </Button>
@@ -534,6 +536,7 @@ const Home = (props) => {
                       fontSize: "16px",
                       mt: 5,
                     }}
+                    onClick={() => navigate("/jobs")}
                   >
                     {t("more")}
                   </Button>
